@@ -1,0 +1,206 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-18 11:57-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ default
+#: skt-nurc-admin.php:15
+msgid "Options saved."
+msgstr "Opções Salvas"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:26
+msgid "Skt NURCaptcha Settings"
+msgstr "Skt NURCaptcha - Configurações"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:30
+msgid "NURCaptcha has blocked"
+msgstr "NURCaptcha já bloqueou"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:30
+msgid "suspect register attempts on this site."
+msgstr "tentativas suspeitas de registro neste site."
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:31
+msgid "NURCaptcha stands for <strong>New User Register Captcha</strong>."
+msgstr "NURCaptcha é a abreviação de <strong>New User Register Captcha</strong>."
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:32
+msgid "It uses Google's reCaptcha tools to protect your site against spammer bots, "
+msgstr "Este plugin usa as ferramentas do reCAPTCHA da Google para proteger seu site contra os spammer bots,"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:33
+msgid "adding security to the WP Register Form. You can learn more"
+msgstr "acrescentando uma segurança adicional ao formulário de registro de novo usuário no WordPress. Você pode obter mais informações"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:34
+#: skt-nurc-admin.php:51
+msgid "here"
+msgstr "aqui"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:34
+msgid "about reCAPTCHA Security"
+msgstr "sobre a segurança oferecida pelo reCAPTCHA"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:36
+msgid "To enable this plugin's functionality, please enter your reCAPTCHA keys here:"
+msgstr "Para habilitar a funcionalidade deste plugin, registre abaixo as suas chaves do reCAPTCHA:"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:37
+msgid "You can sign up for reCaptcha <strong>free</strong> keys here: "
+msgstr "Você pode registrar-se <strong>gratuitamente</strong> para obter as chaves aqui: "
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:45
+msgid "reCaptcha Public Key: "
+msgstr "reCaptcha Public Key: "
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:46
+msgid "reCaptcha Private Key: "
+msgstr "reCaptcha Private Key: "
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:47
+#: skt-nurc-admin.php:93
+msgid "Update Options"
+msgstr "Atualizar opções"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:51
+msgid "Style your reCaptcha:"
+msgstr "Estilize o seu reCAPTCHA:"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:51
+msgid "Click"
+msgstr "Clique"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:51
+msgid "for examples"
+msgstr "para ver exemplos"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:54
+msgid "reCAPTCHA theme:"
+msgstr "Tema do reCAPTCHA:"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:70
+msgid "reCAPTCHA language:"
+msgstr "Linguagem do reCAPTCHA:"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:86
+msgid "This is the look of your captcha"
+msgstr "Esta é a aparência de seu captcha"
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:102
+msgid "Make me happy:"
+msgstr "Me deixe feliz:"
+
+# @ default
+#: skt-nurcaptcha.php:81
+msgid "Registration Form"
+msgstr "Formulário de Registro"
+
+# @ default
+#: skt-nurcaptcha.php:81
+msgid "Register For This Site"
+msgstr "Registre-se para este Site"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:85
+#, php-format
+msgid "There is a problem with your response: %s"
+msgstr "Há um problema com a sua resposta: %s"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:91
+msgid "Username"
+msgstr "Nome de Usuário"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:92
+msgid "E-mail"
+msgstr "E-mail"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:93
+msgid "Fill the Captcha below"
+msgstr "Preencha o Captcha abaixo"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:111
+msgid "A password will be e-mailed to you."
+msgstr "Uma senha será enviada para o seu e-mail."
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:114
+msgid "Subscribe me"
+msgstr "Registre-me"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:117
+msgid "Log in"
+msgstr "Log in"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:118
+msgid "Password Lost and Found"
+msgstr "Senhas achadas e perdidas"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:118
+msgid "Lost your password?"
+msgstr "Perdeu a sua senha?"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:153
+msgid "Could not open socket - server communication failed - try again later."
+msgstr "Não foi possível abrir a conexão - falha na comunicação com o servidor - tente novamente mais tarde."
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:206
+#, php-format
+msgid "To use reCAPTCHA you must get an API key from %s"
+msgstr "Para usar reCAPTCHA você precisa obter uma chave API em %s"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:211
+msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
+msgstr "Por razões de segurança, você precisa passar o ip remoto para o reCAPTCHA"
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:216
+msgid "Inconsistency detected - try again later."
+msgstr "Inconsistência detectada - tente novamente mais tarde."
+
+# @ Skt_nurcaptcha
+#: skt-nurcaptcha.php:222
+msgid "Response field was empty!"
+msgstr "O campo de resposta estava em branco!"
+
