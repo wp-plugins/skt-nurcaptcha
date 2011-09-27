@@ -3,7 +3,7 @@ Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA
 Requires at least: 3.0
-Tested up to: 3.2
+Tested up to: 3.2.1
 Stable tag: 1.0
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
@@ -56,9 +56,13 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 1.0.1 = 
+* Counting of attemptives gets more real figures
 = 1.0 =
 * First version.
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+* The counting of attemptives has been improved to deal with bots giving up the form
 

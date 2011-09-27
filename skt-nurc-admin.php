@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 	if($_POST['sktnurc_hidden'] == 'Y') {
 		//Form data sent

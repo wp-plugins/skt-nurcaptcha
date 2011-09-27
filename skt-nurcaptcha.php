@@ -39,9 +39,13 @@ function skt_nurc_admin_page() {
 	add_options_page("Skt NURCaptcha", "Skt NURCaptcha", 'manage_options', "skt_nurcaptcha", "skt_nurc_admin");
 }
 
+add_action( 'admin_init', 'skt_nurc_admin_init' );
 add_action('admin_menu', 'skt_nurc_admin_page');
 add_action ('login_form_register', 'skt_nurCaptcha');
 
+function skt_nurc_admin_init() {
+    wp_register_script( 'sktNURCScript', plugins_url('/js/skt-nurc-functions.js', __FILE__) );
+	}
 function skt_nurc_admin() {
 	include('skt-nurc-admin.php');
 }
