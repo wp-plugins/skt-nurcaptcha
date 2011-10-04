@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 1.0
+	Version: 1.1
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -31,21 +31,21 @@
     
 */
 
-	
 
 load_plugin_textdomain('Skt_nurcaptcha', false, basename( dirname( __FILE__ ) ) . '/languages' );
-
-function skt_nurc_admin_page() {
-	add_options_page("Skt NURCaptcha", "Skt NURCaptcha", 'manage_options', "skt_nurcaptcha", "skt_nurc_admin");
-}
-
-add_action( 'admin_init', 'skt_nurc_admin_init' );
 add_action('admin_menu', 'skt_nurc_admin_page');
 add_action ('login_form_register', 'skt_nurCaptcha');
 
+
+function skt_nurc_admin_page() {
+	$hook_suffix = add_options_page("Skt NURCaptcha", "Skt NURCaptcha", 'manage_options', "skt_nurcaptcha", "skt_nurc_admin");
+	add_action( "admin_print_scripts-".$hook_suffix, 'skt_nurc_admin_init' );
+}
+
 function skt_nurc_admin_init() {
-    wp_register_script( 'sktNURCScript', plugins_url('/js/skt-nurc-functions.js', __FILE__) );
-	}
+    wp_register_script( 'sktNURCScript', plugins_url('/js/skt-nurc-functions.js', __FILE__), array('jquery') );
+	wp_enqueue_script('sktNURCScript');
+}
 function skt_nurc_admin() {
 	include('skt-nurc-admin.php');
 }
@@ -63,22 +63,22 @@ function skt_nurCaptcha() {
 		exit();
 	}
 	if ((get_option('sktnurc_publkey')=='')||(get_option('sktnurc_privtkey')=='')) {return false;} // Plugin is disabled if no key is found
-    $result = new ReCaptchaResponse();
+    $result = new ReCaptchaResponse(); // sets $result as a class variable
 	$user_login = '';
 	$user_email = '';
-	if ( $http_post ) {
+	if ( $http_post ) { // if we have a response, let's check it
 		$user_login = $_POST['user_login'];
 		$user_email = $_POST['user_email'];
 
 		$result = recaptcha_check_answer(get_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
 
 	}
-		if ($result->is_valid) {
+		if ($result->is_valid) { // captcha passed, so let's see the rest...
 			$errors = register_new_user($user_login, $user_email);
 			if ( !is_wp_error($errors) ) {
 				$redirect_to = !empty( $_POST['redirect_to'] ) ? $_POST['redirect_to'] : 'wp-login.php?checkemail=registered';
 				wp_safe_redirect( $redirect_to );
-				exit();
+				exit(); // end of all procedures - job done!
 			} 
 		}
 

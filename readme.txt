@@ -4,7 +4,7 @@ Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -33,6 +33,12 @@ and e-mail addresses of those who failed registration and were kept outside.
 
 == Frequently Asked Questions ==
 
+= The number of blocked attemptives is growing too slowly. Does that mean that the plugin is not working?
+
+If you was facing a greater number of spambot registrations than the figures you see now in the counter, that means 
+the plugin is doing its job perfectly. Many of the spambots give up the attack when confronted to the reCaptcha challenge, 
+so they come and go silently. These bots may not trigger the counter, but they will not get inside your site walls, either.
+
 = Does NURCaptcha blocks spambots only? =
 
 That is the main target of any captcha plugin: to catch bots and allow human beings to pass by. So it 
@@ -41,7 +47,7 @@ challenge presented by the plugin.
 
 = Why doesn't my registration form shake anymore when an Error message is displayed? =
 
-This first version of the plugin has no javaScript modules. Ok, we will add it in the next version!
+This feature will be added soon, so your form will shake pretty well on errors.
 
 = Why there are only four style options for the reCAPTCHA box? =
 
@@ -56,13 +62,13 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
-= 1.0.1 = 
-* Counting of attemptives gets more real figures
+= 1.1 = 
+* Admin Page upgraded with javascript. No critical changes.
 = 1.0 =
 * First version.
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-* The counting of attemptives has been improved to deal with bots giving up the form
+= 1.1 =
+* Some Javascript added to admin page. Visual help to change options improved.
 

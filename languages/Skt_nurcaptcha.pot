@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Skt_nurcaptcha 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-18 11:57-0300\n"
+"POT-Creation-Date: 2011-10-04 20:11-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
 "Language-Team: \n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Poedit-Language: english\n"
 "X-Poedit-Country: United States\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
 # @ default
@@ -55,7 +55,7 @@ msgstr ""
 
 # @ Skt_nurcaptcha
 #: skt-nurc-admin.php:34
-#: skt-nurc-admin.php:51
+#: skt-nurc-admin.php:54
 msgid "here"
 msgstr ""
 
@@ -85,125 +85,130 @@ msgid "reCaptcha Private Key: "
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurc-admin.php:47
-#: skt-nurc-admin.php:93
+#: skt-nurc-admin.php:48
+#: skt-nurc-admin.php:99
 msgid "Update Options"
 msgstr ""
 
-# @ Skt_nurcaptcha
-#: skt-nurc-admin.php:51
-msgid "Style your reCaptcha:"
-msgstr ""
-
-# @ Skt_nurcaptcha
-#: skt-nurc-admin.php:51
-msgid "Click"
-msgstr ""
-
-# @ Skt_nurcaptcha
-#: skt-nurc-admin.php:51
-msgid "for examples"
+#: skt-nurc-admin.php:49
+#: skt-nurc-admin.php:100
+msgid "Remember to save your changes before leaving this page!"
 msgstr ""
 
 # @ Skt_nurcaptcha
 #: skt-nurc-admin.php:54
+msgid "Style your reCaptcha:"
+msgstr ""
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:54
+msgid "Click"
+msgstr ""
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:54
+msgid "for examples"
+msgstr ""
+
+# @ Skt_nurcaptcha
+#: skt-nurc-admin.php:57
 msgid "reCAPTCHA theme:"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurc-admin.php:70
+#: skt-nurc-admin.php:73
 msgid "reCAPTCHA language:"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurc-admin.php:86
+#: skt-nurc-admin.php:90
 msgid "This is the look of your captcha"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurc-admin.php:102
+#: skt-nurc-admin.php:110
 msgid "Make me happy:"
 msgstr ""
 
 # @ default
-#: skt-nurcaptcha.php:81
+#: skt-nurcaptcha.php:86
 msgid "Registration Form"
 msgstr ""
 
 # @ default
-#: skt-nurcaptcha.php:81
+#: skt-nurcaptcha.php:86
 msgid "Register For This Site"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:85
+#: skt-nurcaptcha.php:90
 #, php-format
 msgid "There is a problem with your response: %s"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:91
+#: skt-nurcaptcha.php:96
 msgid "Username"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:92
+#: skt-nurcaptcha.php:97
 msgid "E-mail"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:93
+#: skt-nurcaptcha.php:98
 msgid "Fill the Captcha below"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:111
+#: skt-nurcaptcha.php:116
 msgid "A password will be e-mailed to you."
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:114
+#: skt-nurcaptcha.php:119
 msgid "Subscribe me"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:117
+#: skt-nurcaptcha.php:122
 msgid "Log in"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:118
+#: skt-nurcaptcha.php:123
 msgid "Password Lost and Found"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:118
+#: skt-nurcaptcha.php:123
 msgid "Lost your password?"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:153
+#: skt-nurcaptcha.php:158
 msgid "Could not open socket - server communication failed - try again later."
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:206
+#: skt-nurcaptcha.php:211
 #, php-format
 msgid "To use reCAPTCHA you must get an API key from %s"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:211
+#: skt-nurcaptcha.php:216
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:216
+#: skt-nurcaptcha.php:221
 msgid "Inconsistency detected - try again later."
 msgstr ""
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:222
+#: skt-nurcaptcha.php:227
 msgid "Response field was empty!"
 msgstr ""
 

@@ -42,9 +42,12 @@
 		<form name="sktnurc_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 				<input type="hidden" name="sktnurc_hidden" value="Y">
 				
-				<p><?php _e("reCaptcha Public Key: ", 'Skt_nurcaptcha' ); ?><input type="text" name="sktnurc_publkey" value="<?php echo $sktnurc_pubkey; ?>" size="46"></p>
-				<p><?php _e("reCaptcha Private Key: ", 'Skt_nurcaptcha' ); ?><input type="text" name="sktnurc_privtkey" value="<?php echo $sktnurc_privkey; ?>" size="46"></p>
-		<p class="submit" ><input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" /></p>
+				<p><?php _e("reCaptcha Public Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_publkey" name="sktnurc_publkey" value="<?php echo $sktnurc_pubkey; ?>" size="46"></p>
+				<p><?php _e("reCaptcha Private Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_privtkey" name="sktnurc_privtkey" value="<?php echo $sktnurc_privkey; ?>" size="46"></p>
+		<p class="submit" >
+		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
+		<span class="save-advert" style="visibility:hidden;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?> --> </strong></span>
+		</p>
 	</div>
 	
 	<div style="position:relative;width:680px;padding:12px 0 12px 24px">
@@ -79,18 +82,23 @@
 			</select>
 		</div>
 	</div>
+		<div class="captcha-img" style="position:relative;width:460px;padding-bottom:12px">
 <?php
 			foreach ($plugin_img_path as $k => $v) {
 ?>
-		<div id="sktnurc-display-<?php echo $k; ?>" style="float:right;width:460px;padding-top:8px<?php if ($k != $def_img) { echo ';display:none';} ?>">
-			<img src="<?php echo $plugin_img_path[$k]; ?>" title="<?php _e('This is the look of your captcha','Skt_nurcaptcha') ?>" />
-		</div>
+			<div id="sktnurc-display-<?php echo $k; ?>" style="position:absolute;margin-left:232px<?php if ($k != $def_img) { echo ';display:none';} ?>">
+				<img src="<?php echo $plugin_img_path[$k]; ?>" title="<?php _e('This is the look of your captcha','Skt_nurcaptcha'); ?>" />
+			</div>
 <?php
 			}
 ?>
+		</div>
 
 		<div style="clear:both"></div>
-		<p class="submit" ><input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" /></p>
+		<p class="submit" >
+		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
+		<span class="save-advert" style="visibility:hidden;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?> --> </strong></span>
+		</p>
 	</div>
 
 	</form>
