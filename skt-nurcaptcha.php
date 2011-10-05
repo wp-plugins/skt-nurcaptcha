@@ -34,6 +34,7 @@
 
 load_plugin_textdomain('Skt_nurcaptcha', false, basename( dirname( __FILE__ ) ) . '/languages' );
 add_action('admin_menu', 'skt_nurc_admin_page');
+add_action( 'login_enqueue_scripts', 'skt_nurc_login_init' );
 add_action ('login_form_register', 'skt_nurCaptcha');
 
 
@@ -45,6 +46,10 @@ function skt_nurc_admin_page() {
 function skt_nurc_admin_init() {
     wp_register_script( 'sktNURCScript', plugins_url('/js/skt-nurc-functions.js', __FILE__), array('jquery') );
 	wp_enqueue_script('sktNURCScript');
+}
+function skt_nurc_login_init() {
+    wp_register_script( 'NURCloginscript', plugins_url('/js/skt-nurc-login.js', __FILE__), array('jquery','scriptaculous') );
+	wp_enqueue_script('NURCloginscript');
 }
 function skt_nurc_admin() {
 	include('skt-nurc-admin.php');
@@ -85,14 +90,16 @@ function skt_nurCaptcha() {
 	$redirect_to = apply_filters( 'registration_redirect', !empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '' );
 	login_header(__('Registration Form'), '<p class="message register">' . __('Register For This Site') . '</p>', $errors);
 	if (get_option('sktnurc_theme')!="clean"){$form_width ='320';}else{$form_width ='448';}
+	
 	if ((!$result->is_valid)and($result->error != '')) {
+		
 		echo '<div id="login_error"><strong>reCaptcha ERROR</strong>';
 		echo ': '.sprintf( __("There is a problem with your response: %s", 'Skt_nurcaptcha'),$result->error);
 		echo '<br></div>';
 	}
 		echo $redirect_to;
 ?> 
-<form method="post" style="width:<?php echo $form_width ?>px">
+<form id="nurc_form" method="post" style="width:<?php echo $form_width ?>px">
 <p><label><?php _e('Username', 'Skt_nurcaptcha') ?><br /><input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(stripslashes($user_login)) ?>" size="20" tabindex="10" /></label></p>
 <p><label><?php _e('E-mail', 'Skt_nurcaptcha') ?><br /><input type="text" name="user_email" id="user_email" class="input" value="<?php echo esc_attr(stripslashes($user_email)) ?>" size="25" tabindex="20" /></label></p>
 <p><label><?php _e('Fill the Captcha below', 'Skt_nurcaptcha') ?></label></p>
