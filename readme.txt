@@ -34,7 +34,7 @@ which the spambot suspends its attack when confronted by the reCAPTCHA challenge
 
 == Frequently Asked Questions ==
 
-= The number of blocked attemptives is growing too slowly. Does that mean that the plugin is not working?
+= The number of blocked attemptives is growing too slowly. Does that mean that the plugin is not working? =
 
 If you was facing a greater number of spambot registrations than the figures you see now in the counter, that means 
 the plugin is doing its job perfectly. Many of the spambots give up their attack when confronted by the reCaptcha challenge, 
