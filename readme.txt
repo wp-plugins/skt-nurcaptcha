@@ -4,7 +4,7 @@ Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.13
+Stable tag: 1.3
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -19,10 +19,14 @@ just at the moment the "Register for This Site" form is requested. It creates a 
 checks the response given. If it is not valid, new user registration fails. If the response is 
 valid, NURCaptcha leaves the scene and your site runs as if it was not there.
 
-NURCaptcha also counts each blocked attemptive. To this moment it just displays how many attemptives 
-have been blocked by the plugin's action. We plan to add a log archive so you can check out usernames 
-and e-mail addresses of those who failed registration and were kept outside. Please note that attemptives in 
-which the spambot suspends its attack when confronted by the reCAPTCHA challenge are not accounted.
+NURCaptcha also counts each blocked attemptive. A Log file may be toggled for you to see data of the 
+last attemptives blocked by the plugin. It shows date/time of trials, as well as usernames and e-mail addresses 
+of those who failed registration and were kept outside. Please note that attemptives in which the spambot 
+suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will
+never reflect the whole achievements of the plugin in securing your site.
+
+**Important**: To this moment, Skt NURCaptcha does not work with WPMU (nor bugs it either).
+
 
 == Installation ==
 
@@ -59,6 +63,8 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 1.3 = 
+* Included Log File to show data of blocked attemptives, and a few other minor code improvements.
 = 1.13 = 
 * Register Form Page upgraded with javascript. No critical changes.
 = 1.1 = 
@@ -68,6 +74,8 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 1.3 =
+* Slightly better performance and some attemptives' data at your fingertips.
 = 1.13 =
 * Added js shake effect to the error message when form fill fails.
 = 1.1 =

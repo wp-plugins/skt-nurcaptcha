@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 1.1
+	Version: 1.3
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -92,7 +92,7 @@ function skt_nurCaptcha() {
 	if (get_option('sktnurc_theme')!="clean"){$form_width ='320';}else{$form_width ='448';}
 	
 	if ((!$result->is_valid)and($result->error != '')) {
-		
+		$log_res = nurc_log_attempt();
 		echo '<div id="login_error"><strong>reCaptcha ERROR</strong>';
 		echo ': '.sprintf( __("There is a problem with your response: %s", 'Skt_nurcaptcha'),$result->error);
 		echo '<br></div>';
@@ -133,13 +133,49 @@ function skt_nurCaptcha() {
 	login_footer('user_login');
 	$file_dir = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
 ?>
-<script src="<?php echo $file_dir; ?>/sktnurc-fn.js"></script>
+<script src="<?php echo $file_dir; ?>js/sktnurc-fn.js"></script>
 <?php
 
 	exit;
 
 } 
 
+function nurc_make_path() {
+		$nurc_pathinfo = pathinfo(realpath(__FILE__)); // get array of directory realpath on server 
+		$npath = $nurc_pathinfo['dirname']."/"; // prepare realpath to base plugin directory
+		return $npath;
+}
+function nurc_make_log_path() {
+		$npath = (nurc_make_path())."nurcaptchalog.txt"; // prepare path to manage log file
+		return $npath;
+}
+
+/**
+ * Writes log on file
+ */
+function nurc_log_attempt() {
+		$ue = $_POST['user_email']; 
+		$ul = $_POST['user_login'];
+		if ($ue == '') {$ue = ' = void = ';}
+		if ($ul == '') {$ul = ' = void = ';}
+		$npath = nurc_make_log_path();
+		$logtime = current_time("mysql",0);
+		$logline = $logtime . " &raquo;&emsp; email: &lt;<strong>".$ue ."</strong>&gt; &rarr; username: <strong>". $ul . "</strong>\r\n";
+		$handle = fopen($npath, "a+t");
+		if ($handle == false) { 
+			$logline.= " - Unable to open file!";
+			return $logline;
+		}
+		if (flock($handle, LOCK_EX)) {
+			fputs($handle,$logline);
+    		flock($handle, LOCK_UN);
+			$resp = true;
+		} else {
+    		$resp = "Couldn't get the lock!";
+		}
+		fclose($handle);
+		return $resp;
+}
 /**
  * Submits an HTTP POST to a reCAPTCHA server
  * @param string $host
