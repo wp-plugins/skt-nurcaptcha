@@ -5,4 +5,5 @@ delete_option('sktnurc_publkey');
 delete_option('sktnurc_lang');
 delete_option('sktnurc_theme');
 delete_option('sktnurc_count');
+delete_option('sktnurc_keysset');
 ?>

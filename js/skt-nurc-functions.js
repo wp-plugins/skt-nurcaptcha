@@ -7,7 +7,6 @@
 		var reflang = $('#sktnurc_lang').val();
 		var preslog = 'no'; 
 		var presimg=refimg;var preslang=reflang;var preskey1=refkey1;var preskey2=refkey2;
-		
 		$('#sktnurc_theme').change( function(){
 			var antimg = presimg;
 			presimg = $('#sktnurc_theme').val();
@@ -22,18 +21,13 @@
 		$('#sktnurc_publkey').change( function(){
 			preskey1 = $('#sktnurc_publkey').val();
 			advert_check();
+			alert_check();
 		});
 		$('#sktnurc_privtkey').change( function(){
 			preskey2 = $('#sktnurc_privtkey').val();
 			advert_check();
+			alert_check();
 		});
-		window.advert_check	= function() {
-			if ((preslang == reflang) && (presimg == refimg) && (preskey1==refkey1) && (preskey2==refkey2) && (preslog == 'no')) {
-				$('.save-advert').fadeOut();
-			} else {
-				$('.save-advert').fadeIn();
-			}
-		}
 		$('.log_button').click( function(){
 			$('#log_entries').slideToggle();
 			$('#log_button').fadeToggle();
@@ -47,6 +41,22 @@
 		$('#link_log_button').click(function(){
 			logfile_manage(false);
 		});
+		window.alert_check = function() {
+			r1 = $('#sktnurc_publkey').val();
+			r2 = $('#sktnurc_privtkey').val();
+			if ((r1!='')&&(r2!='')) {
+				$('#setup_alert').fadeOut();
+			} else {
+				$('#setup_alert').fadeIn();
+			}
+		}
+		window.advert_check	= function() {
+			if ((preslang == reflang) && (presimg == refimg) && (preskey1==refkey1) && (preskey2==refkey2) && (preslog == 'no')) {
+				$('.save-advert').fadeOut();
+			} else {
+				$('.save-advert').fadeIn();
+			}
+		}
 		window.logfile_manage = function(res){
 			if (res == true) {
 					preslog = "yes";

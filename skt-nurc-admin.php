@@ -11,6 +11,7 @@
 		update_option('sktnurc_theme', $_POST['sktnurc_theme']);
 		update_option('sktnurc_lang', $_POST['sktnurc_lang']);
 		
+		
 		if ($_POST['log_clear']!= 'no') {
 			if (nurc_clear_log_file()) {
 			?>

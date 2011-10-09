@@ -2,9 +2,9 @@
 Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register
-Requires at least: 3.0
+Requires at least: 3.0.1
 Tested up to: 3.2.1
-Stable tag: 1.3
+Stable tag: 2.0
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -25,8 +25,7 @@ of those who failed registration and were kept outside. Please note that attempt
 suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will
 never reflect the whole achievements of the plugin in securing your site.
 
-**Important**: To this moment, Skt NURCaptcha does not work with WPMU (nor bugs it either).
-
+Works smoothly with Multisites (Network WP).
 
 == Installation ==
 
@@ -63,6 +62,8 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 2.0 = 
+* Added support to Multisites. 
 = 1.3 = 
 * Included Log File to show data of blocked attemptives, and a few other minor code improvements.
 = 1.13 = 
@@ -74,10 +75,12 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 2.0 =
+* Added: support to Multisites; settings link (at Plugins List); Improvements on warnings.
 = 1.3 =
-* Slightly better performance and some attemptives' data at your fingertips.
+* Added: Log data.
 = 1.13 =
-* Added js shake effect to the error message when form fill fails.
+* Added: js shake effect to the error message when form fill fails.
 = 1.1 =
 * Some Javascript added to admin page. Visual help to change options improved.
 
