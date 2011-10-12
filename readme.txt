@@ -1,7 +1,7 @@
 === Skt NURCaptha ===
 Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
-Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register
+Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register, buddypress, wpmu
 Requires at least: 3.0.1
 Tested up to: 3.2.1
 Stable tag: 2.4
@@ -25,7 +25,7 @@ of those who failed registration and were kept outside. Please note that attempt
 suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will
 never reflect the whole achievements of the plugin in securing your site.
 
-Works smoothly with Multisites (Network WP).
+Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 
 == Installation ==
 
