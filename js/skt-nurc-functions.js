@@ -7,6 +7,9 @@
 		var reflang = $('#sktnurc_lang').val();
 		var preslog = 'no'; 
 		var presimg=refimg;var preslang=reflang;var preskey1=refkey1;var preskey2=refkey2;
+		if((refkey1!='')&&(refkey2!='')){
+			$('#setup_alert').css('display','none');
+		}
 		$('#sktnurc_theme').change( function(){
 			var antimg = presimg;
 			presimg = $('#sktnurc_theme').val();
@@ -18,12 +21,12 @@
 			preslang = $('#sktnurc_lang').val();
 			advert_check();
 		});
-		$('#sktnurc_publkey').change( function(){
+		$('#sktnurc_publkey').keyup( function(){
 			preskey1 = $('#sktnurc_publkey').val();
 			advert_check();
 			alert_check();
 		});
-		$('#sktnurc_privtkey').change( function(){
+		$('#sktnurc_privtkey').keyup( function(){
 			preskey2 = $('#sktnurc_privtkey').val();
 			advert_check();
 			alert_check();

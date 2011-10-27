@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 2.4
+	Version: 2.4.2
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -32,11 +32,11 @@
 */
 
 
-load_plugin_textdomain('Skt_nurcaptcha', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_plugin_textdomain('Skt_nurcaptcha', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 add_action('admin_menu', 'skt_nurc_admin_page');
 add_action( 'login_enqueue_scripts', 'skt_nurc_login_init' );
 add_action('login_form_register', 'skt_nurCaptcha');
-add_action( 'bp_include', 'skt_nurc_bp_include_hook' );
+add_action( 'bp_include', 'skt_nurc_bp_include_hook' ); // Please, do call me, but only if BuddyPress is active...
 add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'skt_nurc_settings_link', 30, 1);
 if ( is_multisite() ) {
 	add_action('preprocess_signup_form', 'nurCaptchaMU_preprocess');
