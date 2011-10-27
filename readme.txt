@@ -1,7 +1,7 @@
 === Skt NURCaptha ===
 Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
-Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register, buddypress, wpmu
+Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe
 Requires at least: 3.0.1
 Tested up to: 3.2.1
 Stable tag: 2.4.2
