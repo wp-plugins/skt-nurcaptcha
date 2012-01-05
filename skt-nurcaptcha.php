@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 2.4.2
+	Version: 2.4.3
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -205,7 +205,7 @@ function skt_nurCaptcha() {
 	if (get_option('sktnurc_theme')!="clean"){$form_width ='320';}else{$form_width ='448';}
 	
 	if ((!$result->is_valid)and($result->error != '')) {
-		$log_res = nurc_log_attempt();
+		$log_res = nurc_log_attempt(); // register attemptive in log file
 		echo '<div id="login_error"><strong>reCaptcha ERROR</strong>';
 		echo ': '.sprintf( __("There is a problem with your response: %s", 'Skt_nurcaptcha'),$result->error);
 		echo '<br></div>';
@@ -286,7 +286,7 @@ function nurc_log_attempt() {
 		}else{
 			$ul = $_POST['user_login'];
 		}
-		if (SKTNURC_BP_ACTIVE) {
+		if (defined('SKTNURC_BP_ACTIVE')) {
 			$ue = $_POST['signup_email'];
 			$ul = $_POST['signup_username'];
 		}
@@ -294,7 +294,7 @@ function nurc_log_attempt() {
 		if ($ul == '') {$ul = '  ...  ';}
 		$npath = nurc_make_log_path();
 		$logtime = current_time("mysql",0);
-		$logline = $logtime . " &raquo;&emsp; email: &lt;<strong>".$ue ."</strong>&gt; &rarr; username: <strong>". $ul . "</strong>\r\n";
+		$logline = $logtime . " &raquo;&emsp; email: &lt;<strong>". $ue ."</strong>&gt; &rarr; username: <strong>". $ul . "</strong>\r\n";
 		$handle = fopen($npath, "a+t");
 		if ($handle == false) { 
 			$logline.= " - Unable to open file!";
