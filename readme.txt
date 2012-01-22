@@ -1,4 +1,4 @@
-=== Skt NURCaptha ===
+=== Skt NURCaptcha ===
 Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register, buddypress, wpmu
