@@ -184,6 +184,7 @@ function nurc_clear_log_file() {
 		$npath = nurc_make_log_path();
 		if (file_exists($npath)) {
 			unlink($npath);
+			update_option("sktnurc_count","");
 			return true;
 		}
 	return false;

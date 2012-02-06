@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 2.4.3
+	Version: 2.4.4
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -212,23 +212,23 @@ function skt_nurCaptcha() {
 	}
 		echo $redirect_to;
 	?> 
-<form id="nurc_form" method="post" style="width:<?php echo $form_width ?>px">
-<p><label><?php _e('Username', 'Skt_nurcaptcha') ?><br /><input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(stripslashes($user_login)) ?>" size="20" tabindex="10" /></label></p>
-<p><label><?php _e('E-mail', 'Skt_nurcaptcha') ?><br /><input type="text" name="user_email" id="user_email" class="input" value="<?php echo esc_attr(stripslashes($user_email)) ?>" size="25" tabindex="20" /></label></p>
+<form id="nurc_form" method="post" style="width:<?php echo $form_width; ?>px">
+<p><label><?php _e('Username', 'Skt_nurcaptcha'); ?><?php nurc_username_help(); ?><input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(stripslashes($user_login)); ?>" size="20" tabindex="10" /></label></p>
+<p><label><?php _e('E-mail', 'Skt_nurcaptcha'); ?><?php nurc_email_help(); ?><input type="text" name="user_email" id="user_email" class="input" value="<?php echo esc_attr(stripslashes($user_email)); ?>" size="25" tabindex="20" /></label></p>
 
 	<?php 
 		nurc_recaptcha_challenge(); 
 		do_action('register_form'); 
 	?>
     
-	<p id="reg_passmail"><?php _e('A password will be e-mailed to you.', 'Skt_nurcaptcha') ?></p>
+	<p id="reg_passmail"><?php _e('A password will be e-mailed to you.', 'Skt_nurcaptcha'); ?></p>
 	<br class="clear" />
 	<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
-<p class="submit"><input class="button-primary" type="submit" id="wp-submit" value="<?php _e("Subscribe me", 'Skt_nurcaptcha') ?>" tabindex="100" /></p></form>
+<p class="submit"><input class="button-primary" type="submit" id="wp-submit" value="<?php _e("Subscribe me", 'Skt_nurcaptcha'); ?>" tabindex="100" /></p></form>
 
 	<p id="nav">
-		<a href="<?php echo site_url('wp-login.php', 'login') ?>"><?php _e('Log in', 'Skt_nurcaptcha') ?></a> |
-		<a href="<?php echo site_url('wp-login.php?action=lostpassword', 'login') ?>" title="<?php _e('Password Lost and Found', 'Skt_nurcaptcha') ?>"><?php _e('Lost your password?', 'Skt_nurcaptcha') ?></a>
+		<a href="<?php echo site_url('wp-login.php', 'login'); ?>"><?php _e('Log in', 'Skt_nurcaptcha'); ?></a> |
+		<a href="<?php echo site_url('wp-login.php?action=lostpassword', 'login'); ?>" title="<?php _e('Password Lost and Found', 'Skt_nurcaptcha'); ?>"><?php _e('Lost your password?', 'Skt_nurcaptcha'); ?></a>
 	</p>
 <?php
 	login_footer('user_login');
@@ -246,6 +246,36 @@ function skt_nurCaptcha() {
 *
 **/
 
+function nurc_username_help() {
+	?>
+    <span id="username-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
+    <div id="username-help" style="position:relative;display:none;">
+    	<p class="message register" style="float:left">
+    		<?php _e('Use only non-accented alphanumeric characters plus these: _ [underscore], [space], . [dot], - [hyphen], * [asterisk], and @ [at]', 'Skt_nurcaptcha'); ?>
+        </p>
+    </div>
+    <?php 
+}
+function nurc_email_help() {
+	?>
+    <span id="email-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
+    <div id="email-help" style="position:relative;display:none;">
+    	<p class="message register" style="float:left">
+    		<?php _e('Use a functional email address, as your temporary password will be sent to that email', 'Skt_nurcaptcha'); ?>
+        </p>
+    </div>
+    <?php 
+}
+function nurc_reCaptcha_help() {
+	?>
+    <span id="recaptcha-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
+    <div id="recaptcha-help" style="position:relative;display:none;">
+    	<p class="message register" style="float:left">
+    		<?php _e('To get registered, just transcribe both the words, numbers and signs you see in the box below, to the small text field under it, no matter how absurd they look like, just to make clear you are a human being trying to register to this site. We welcome you, but we must keep out all spambots.', 'Skt_nurcaptcha'); ?>
+        </p>
+    </div>
+    <?php 
+}
 function nurc_make_path() {
 		$nurc_pathinfo = pathinfo(realpath(__FILE__)); // get array of directory realpath on server 
 		$npath = $nurc_pathinfo['dirname']."/"; // prepare realpath to base plugin directory
@@ -257,7 +287,7 @@ function nurc_make_log_path() {
 }
 function nurc_recaptcha_challenge() {
 		?>
-		<p><label><?php _e('Fill the Captcha below', 'Skt_nurcaptcha') ?></label></p>
+		<p><label><?php _e('Fill the Captcha below', 'Skt_nurcaptcha') ?><?php nurc_reCaptcha_help(); ?></label></p>
 
 		<script type="text/javascript">
 		 var RecaptchaOptions = {

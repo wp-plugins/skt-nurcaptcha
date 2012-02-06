@@ -4,7 +4,7 @@ Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe
 Requires at least: 3.0.1
 Tested up to: 3.3
-Stable tag: 2.4.3
+Stable tag: 2.4.4
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -19,13 +19,17 @@ just at the moment the "Register for This Site" form is requested. It creates a 
 checks the response given. If it is not valid, new user registration fails. If the response is 
 valid, NURCaptcha leaves the scene and your site runs as if it was not there.
 
-NURCaptcha also counts each blocked attemptive. A Log file may be toggled for you to see data of the 
+NURCaptcha also shows you each blocked attemptive. A Log file may be toggled for you to see data of the 
 last attemptives blocked by the plugin. It shows date/time of trials, as well as usernames and e-mail addresses 
 of those who failed registration and were kept outside. Please note that attemptives in which the spambot 
-suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will
+suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will 
 never reflect the whole achievements of the plugin in securing your site.
 
 Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
+
+**Languages included**.
+
+* Brazilian Portuguese pt_BR - by [the author](http://profiles.wordpress.org/users/Sanskritforum/ "Carlos E. G. Barbosa").
 
 == Installation ==
 
@@ -37,17 +41,26 @@ Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 
 == Frequently Asked Questions ==
 
-= The number of blocked attemptives is growing too slowly. Does that mean that the plugin is not working? =
+= The number of blocked attemptives is growing too slowly on the log. Does that mean that the plugin is not working? =
 
-If you was facing a greater number of spambot registrations than the figures you see now in the counter, that means 
-the plugin is doing its job perfectly. Many of the spambots give up their attack when confronted by the reCaptcha challenge, 
-so they come and go silently. These bots may not trigger the counter, but they will not get inside your site walls, either.
+If you was facing a greater number of spambot registrations than the figures you see now in the log counter, that means 
+the plugin is doing its job perfectly. Almost all the spambots give up their attack when confronted by the reCaptcha challenge, 
+so they come and go silently. These bots may not trigger the counter, but they will not get inside your site walls, either. 
 
 = Does NURCaptcha blocks spambots only? =
 
 That is the main target of any captcha plugin: to catch bots and allow human beings to pass by. So it 
 wont prevent you against badly mooded human intruders, as they can read and respond perfectly the 
 challenge presented by the plugin.
+
+= How can I help people who for any reason were not able to fill the captcha challenge? =
+
+These people will leave their track on the log file. So check the log file regularly to see 
+if there is someone you'd like to bring into your subscribers database. The log will give you 
+that person's username, email and date/time when he tried to register and failed. Then 
+it's up to you to add that user manually or send him an email with directions for an effective registration. 
+The most common problem that keeps good people outside is not due to the reCaptcha, but 
+illegal (non ASCII) characters in usernames. That is why we added a help box to the register form.
 
 = Why there are only four style options for the reCAPTCHA box? =
 
@@ -62,6 +75,9 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 2.4.4 =
+* Added: help on register form; 
+* Fixed: logfile deletion drops log count to zero.
 = 2.4.3 =
 * Fixed: wrong data writing on logfile
 = 2.4.2 =
@@ -83,6 +99,8 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 2.4.4 =
+* Added: help on register form; Fixed: logfile deletion drops log count to zero.
 = 2.4.3 =
 * Fixed: wrong data writing on logfile
 = 2.4.2 =
@@ -97,4 +115,3 @@ customization tools on a future version of the plugin.
 * Added: js shake effect to the error message when form fill fails.
 = 1.1 =
 * Some Javascript added to admin page. Visual help to change options improved.
-

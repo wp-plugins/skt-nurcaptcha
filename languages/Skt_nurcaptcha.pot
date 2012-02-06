@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Skt_nurcaptcha 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-09 18:47-0300\n"
+"POT-Creation-Date: 2012-02-06 17:43-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgid "Options saved."
 msgstr ""
 
 #: skt-nurc-admin.php:36
-#: skt-nurcaptcha.php:75
+#: skt-nurcaptcha.php:117
 msgid "Skt NURCaptcha Settings"
 msgstr ""
 
@@ -140,93 +140,113 @@ msgstr ""
 msgid "Make me happy:"
 msgstr ""
 
-#: skt-nurcaptcha.php:45
+#: skt-nurcaptcha.php:80
 msgid "Settings"
 msgstr ""
 
-#: skt-nurcaptcha.php:71
+#: skt-nurcaptcha.php:113
 msgid "Skt NURCaptcha Warning"
 msgstr ""
 
-#: skt-nurcaptcha.php:73
+#: skt-nurcaptcha.php:115
 msgid "You must register your reCAPTCHA keys to have Skt NURCaptcha protection enabled."
 msgstr ""
 
-#: skt-nurcaptcha.php:75
+#: skt-nurcaptcha.php:117
 msgid "Go to"
 msgstr ""
 
-#: skt-nurcaptcha.php:75
+#: skt-nurcaptcha.php:117
 msgid "and save your keys to the appropriate fields"
 msgstr ""
 
-#: skt-nurcaptcha.php:77
+#: skt-nurcaptcha.php:119
 msgid "Be sure your keys are saved to the appropriate fields down here"
 msgstr ""
 
-#: skt-nurcaptcha.php:114
+#: skt-nurcaptcha.php:137
+msgid "reCAPTCHA error"
+msgstr ""
+
+#: skt-nurcaptcha.php:204
 msgid "Registration Form"
 msgstr ""
 
-#: skt-nurcaptcha.php:114
+#: skt-nurcaptcha.php:204
 msgid "Register For This Site"
 msgstr ""
 
-#: skt-nurcaptcha.php:120
+#: skt-nurcaptcha.php:210
 #, php-format
 msgid "There is a problem with your response: %s"
 msgstr ""
 
-#: skt-nurcaptcha.php:126
+#: skt-nurcaptcha.php:216
 msgid "Username"
 msgstr ""
 
-#: skt-nurcaptcha.php:127
+#: skt-nurcaptcha.php:217
 msgid "E-mail"
 msgstr ""
 
-#: skt-nurcaptcha.php:128
-msgid "Fill the Captcha below"
-msgstr ""
-
-#: skt-nurcaptcha.php:146
+#: skt-nurcaptcha.php:224
 msgid "A password will be e-mailed to you."
 msgstr ""
 
-#: skt-nurcaptcha.php:149
+#: skt-nurcaptcha.php:227
 msgid "Subscribe me"
 msgstr ""
 
-#: skt-nurcaptcha.php:152
+#: skt-nurcaptcha.php:230
 msgid "Log in"
 msgstr ""
 
-#: skt-nurcaptcha.php:153
+#: skt-nurcaptcha.php:231
 msgid "Password Lost and Found"
 msgstr ""
 
-#: skt-nurcaptcha.php:153
+#: skt-nurcaptcha.php:231
 msgid "Lost your password?"
 msgstr ""
 
-#: skt-nurcaptcha.php:224
+#: skt-nurcaptcha.php:254
+msgid "Use only non-accented alphanumeric characters plus these: _ [underscore], [space], . [dot], - [hyphen], * [asterisk], and @ [at]"
+msgstr ""
+
+#: skt-nurcaptcha.php:264
+msgid "Use a functional email address, as your temporary password will be sent to that email"
+msgstr ""
+
+#: skt-nurcaptcha.php:274
+msgid "To get registered, just transcribe both the words, numbers and signs you see in the box below, to the small text field under it, no matter how absurd they look like, just to make clear you are a human being trying to register to this site. We welcome you, but we must keep out all spambots."
+msgstr ""
+
+#: skt-nurcaptcha.php:290
+msgid "Fill the Captcha below"
+msgstr ""
+
+#: skt-nurcaptcha.php:365
 msgid "Could not open socket - server communication failed - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:277
+#: skt-nurcaptcha.php:418
 #, php-format
 msgid "To use reCAPTCHA you must get an API key from %s"
 msgstr ""
 
-#: skt-nurcaptcha.php:282
+#: skt-nurcaptcha.php:423
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
 msgstr ""
 
-#: skt-nurcaptcha.php:287
+#: skt-nurcaptcha.php:428
 msgid "Inconsistency detected - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:293
+#: skt-nurcaptcha.php:436
 msgid "Response field was empty!"
+msgstr ""
+
+#: skt-nurcaptcha.php:468
+msgid "Incorrect Captcha solution - please try again."
 msgstr ""
 
