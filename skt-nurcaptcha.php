@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 2.4.4
+	Version: 2.4.5
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -267,6 +267,8 @@ function nurc_email_help() {
     <?php 
 }
 function nurc_reCaptcha_help() {
+	if ( is_multisite() ) return;
+	if (defined('SKTNURC_BP_ACTIVE')) return;
 	?>
     <span id="recaptcha-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
     <div id="recaptcha-help" style="position:relative;display:none;">
