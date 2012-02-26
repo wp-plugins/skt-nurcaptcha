@@ -6,4 +6,5 @@ delete_option('sktnurc_lang');
 delete_option('sktnurc_theme');
 delete_option('sktnurc_count');
 delete_option('sktnurc_keysset');
+delete_option('sktnurc_regbutton');
 ?>
