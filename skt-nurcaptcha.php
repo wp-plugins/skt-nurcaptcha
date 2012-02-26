@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 2.4.5
+	Version: 2.4.6
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -224,7 +224,13 @@ function skt_nurCaptcha() {
 	<p id="reg_passmail"><?php _e('A password will be e-mailed to you.', 'Skt_nurcaptcha'); ?></p>
 	<br class="clear" />
 	<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
-<p class="submit"><input class="button-primary" type="submit" id="wp-submit" value="<?php _e("Subscribe me", 'Skt_nurcaptcha'); ?>" tabindex="100" /></p></form>
+	<p class="submit"><input class="button-primary" type="submit" id="wp-submit" value="<?php 
+	if (get_option('sktnurc_regbutton')==""){
+		_e("Register", 'Skt_nurcaptcha'); 
+	} else {
+		echo get_option('sktnurc_regbutton');
+	}
+	?>" tabindex="100" /></p></form>
 
 	<p id="nav">
 		<a href="<?php echo site_url('wp-login.php', 'login'); ?>"><?php _e('Log in', 'Skt_nurcaptcha'); ?></a> |

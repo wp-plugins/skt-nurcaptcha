@@ -10,8 +10,8 @@
 
 		update_option('sktnurc_theme', $_POST['sktnurc_theme']);
 		update_option('sktnurc_lang', $_POST['sktnurc_lang']);
-		
-		
+		update_option('sktnurc_regbutton', $_POST['sktnurc_regbutton']);
+
 		if ($_POST['log_clear']!= 'no') {
 			if (nurc_clear_log_file()) {
 			?>
@@ -127,6 +127,8 @@
 				}
 				?>
 			</select>
+				<p><?php _e("Customize text to appear in Submit Button (register form): ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_regbutton" name="sktnurc_regbutton" value="<?php echo get_option('sktnurc_regbutton'); ?>" size="26"><br /><?php echo "[ default: <strong>'". __('Register', 'Skt_nurcaptcha' )."'</strong> ]"; ?></p>
+
 		</div>
 	</div>
 		<div class="captcha-img" style="position:relative;width:460px;padding-bottom:12px">
@@ -184,9 +186,9 @@ function nurc_clear_log_file() {
 		$npath = nurc_make_log_path();
 		if (file_exists($npath)) {
 			unlink($npath);
-			update_option("sktnurc_count","");
 			return true;
 		}
+		update_option("sktnurc_count","");
 	return false;
 }
 function nurc_get_version() {

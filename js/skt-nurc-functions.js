@@ -5,8 +5,9 @@
 		var refkey2 = $('#sktnurc_privtkey').val();
 		var refimg = $('#sktnurc_theme').val();
 		var reflang = $('#sktnurc_lang').val();
+		var refreg = $('#sktnurc_regbutton').val();
 		var preslog = 'no'; 
-		var presimg=refimg;var preslang=reflang;var preskey1=refkey1;var preskey2=refkey2;
+		var presimg=refimg;var preslang=reflang;var preskey1=refkey1;var preskey2=refkey2;var presreg=refreg;
 		if((refkey1!='')&&(refkey2!='')){
 			$('#setup_alert').css('display','none');
 		}
@@ -31,6 +32,10 @@
 			advert_check();
 			alert_check();
 		});
+		$('#sktnurc_regbutton').keyup( function(){
+			presreg = $('#sktnurc_regbutton').val();
+			advert_check();
+		});
 		$('.log_button').click( function(){
 			$('#log_entries').slideToggle();
 			$('#log_button').fadeToggle();
@@ -54,7 +59,7 @@
 			}
 		}
 		window.advert_check	= function() {
-			if ((preslang == reflang) && (presimg == refimg) && (preskey1==refkey1) && (preskey2==refkey2) && (preslog == 'no')) {
+			if ((preslang == reflang) && (presimg == refimg) && (presreg==refreg) && (preskey1==refkey1) && (preskey2==refkey2) && (preslog == 'no')) {
 				$('.save-advert').fadeOut();
 			} else {
 				$('.save-advert').fadeIn();

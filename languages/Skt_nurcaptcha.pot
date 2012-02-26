@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Skt_nurcaptcha 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-06 17:43-0300\n"
+"POT-Creation-Date: 2012-02-26 18:26-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
 "Language-Team: \n"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: skt-nurc-admin.php:56
 #: skt-nurc-admin.php:95
-#: skt-nurc-admin.php:146
+#: skt-nurc-admin.php:148
 msgid "Update Options"
 msgstr ""
 
@@ -116,7 +116,7 @@ msgid "reCaptcha Private Key: "
 msgstr ""
 
 #: skt-nurc-admin.php:96
-#: skt-nurc-admin.php:147
+#: skt-nurc-admin.php:149
 msgid "Remember to save your changes before leaving this page!"
 msgstr ""
 
@@ -132,11 +132,20 @@ msgstr ""
 msgid "reCAPTCHA language:"
 msgstr ""
 
-#: skt-nurc-admin.php:137
+#: skt-nurc-admin.php:130
+msgid "Customize text to appear in Submit Button (register form): "
+msgstr ""
+
+#: skt-nurc-admin.php:130
+#: skt-nurcaptcha.php:229
+msgid "Register"
+msgstr ""
+
+#: skt-nurc-admin.php:139
 msgid "This is the look of your captcha"
 msgstr ""
 
-#: skt-nurc-admin.php:157
+#: skt-nurc-admin.php:159
 msgid "Make me happy:"
 msgstr ""
 
@@ -193,60 +202,56 @@ msgstr ""
 msgid "A password will be e-mailed to you."
 msgstr ""
 
-#: skt-nurcaptcha.php:227
-msgid "Subscribe me"
-msgstr ""
-
-#: skt-nurcaptcha.php:230
+#: skt-nurcaptcha.php:236
 msgid "Log in"
 msgstr ""
 
-#: skt-nurcaptcha.php:231
+#: skt-nurcaptcha.php:237
 msgid "Password Lost and Found"
 msgstr ""
 
-#: skt-nurcaptcha.php:231
+#: skt-nurcaptcha.php:237
 msgid "Lost your password?"
 msgstr ""
 
-#: skt-nurcaptcha.php:254
+#: skt-nurcaptcha.php:260
 msgid "Use only non-accented alphanumeric characters plus these: _ [underscore], [space], . [dot], - [hyphen], * [asterisk], and @ [at]"
 msgstr ""
 
-#: skt-nurcaptcha.php:264
+#: skt-nurcaptcha.php:270
 msgid "Use a functional email address, as your temporary password will be sent to that email"
 msgstr ""
 
-#: skt-nurcaptcha.php:274
+#: skt-nurcaptcha.php:282
 msgid "To get registered, just transcribe both the words, numbers and signs you see in the box below, to the small text field under it, no matter how absurd they look like, just to make clear you are a human being trying to register to this site. We welcome you, but we must keep out all spambots."
 msgstr ""
 
-#: skt-nurcaptcha.php:290
+#: skt-nurcaptcha.php:298
 msgid "Fill the Captcha below"
 msgstr ""
 
-#: skt-nurcaptcha.php:365
+#: skt-nurcaptcha.php:373
 msgid "Could not open socket - server communication failed - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:418
+#: skt-nurcaptcha.php:426
 #, php-format
 msgid "To use reCAPTCHA you must get an API key from %s"
 msgstr ""
 
-#: skt-nurcaptcha.php:423
+#: skt-nurcaptcha.php:431
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
 msgstr ""
 
-#: skt-nurcaptcha.php:428
+#: skt-nurcaptcha.php:436
 msgid "Inconsistency detected - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:436
+#: skt-nurcaptcha.php:444
 msgid "Response field was empty!"
 msgstr ""
 
-#: skt-nurcaptcha.php:468
+#: skt-nurcaptcha.php:476
 msgid "Incorrect Captcha solution - please try again."
 msgstr ""
 

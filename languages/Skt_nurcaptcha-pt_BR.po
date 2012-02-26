@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-06 17:43-0300\n"
+"POT-Creation-Date: 2012-02-26 18:24-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
 "Language-Team: \n"
@@ -87,7 +87,7 @@ msgstr "sobre a segurança oferecida pelo reCAPTCHA"
 # @ Skt_nurcaptcha
 #: skt-nurc-admin.php:56
 #: skt-nurc-admin.php:95
-#: skt-nurc-admin.php:146
+#: skt-nurc-admin.php:148
 msgid "Update Options"
 msgstr "Atualizar opções"
 
@@ -132,7 +132,7 @@ msgid "reCaptcha Private Key: "
 msgstr "reCaptcha Private Key: "
 
 #: skt-nurc-admin.php:96
-#: skt-nurc-admin.php:147
+#: skt-nurc-admin.php:149
 msgid "Remember to save your changes before leaving this page!"
 msgstr "Lembre-se de salvar suas alterações antes de sair desta página!"
 
@@ -151,13 +151,22 @@ msgstr "Tema do reCAPTCHA:"
 msgid "reCAPTCHA language:"
 msgstr "Linguagem do reCAPTCHA:"
 
+#: skt-nurc-admin.php:130
+msgid "Customize text to appear in Submit Button (register form): "
+msgstr "Personalize o texto que aparece no botão \"Registrar\" do Formulário de Registro:"
+
+#: skt-nurc-admin.php:130
+#: skt-nurcaptcha.php:229
+msgid "Register"
+msgstr "Registrar"
+
 # @ Skt_nurcaptcha
-#: skt-nurc-admin.php:137
+#: skt-nurc-admin.php:139
 msgid "This is the look of your captcha"
 msgstr "Esta é a aparência de seu captcha"
 
 # @ Skt_nurcaptcha
-#: skt-nurc-admin.php:157
+#: skt-nurc-admin.php:159
 msgid "Make me happy:"
 msgstr "Me deixe feliz:"
 
@@ -223,69 +232,64 @@ msgid "A password will be e-mailed to you."
 msgstr "Uma senha será enviada para o seu e-mail."
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:227
-msgid "Subscribe me"
-msgstr "Registre-me"
-
-# @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:230
+#: skt-nurcaptcha.php:236
 msgid "Log in"
 msgstr "Log in"
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:231
+#: skt-nurcaptcha.php:237
 msgid "Password Lost and Found"
 msgstr "Senhas achadas e perdidas"
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:231
+#: skt-nurcaptcha.php:237
 msgid "Lost your password?"
 msgstr "Perdeu a sua senha?"
 
-#: skt-nurcaptcha.php:254
+#: skt-nurcaptcha.php:260
 msgid "Use only non-accented alphanumeric characters plus these: _ [underscore], [space], . [dot], - [hyphen], * [asterisk], and @ [at]"
 msgstr "Utilize apenas caracteres alfanuméricos não acentuados e mais: _ [travessão baixo], [espaço], . [ponto], - [hífen], * [asterisco], e @ [arroba]"
 
-#: skt-nurcaptcha.php:264
+#: skt-nurcaptcha.php:270
 msgid "Use a functional email address, as your temporary password will be sent to that email"
 msgstr "Use um email que esteja funcional, pois sua senha de acesso temporária será enviada para esse email"
 
-#: skt-nurcaptcha.php:274
+#: skt-nurcaptcha.php:282
 msgid "To get registered, just transcribe both the words, numbers and signs you see in the box below, to the small text field under it, no matter how absurd they look like, just to make clear you are a human being trying to register to this site. We welcome you, but we must keep out all spambots."
 msgstr "Para registrar-se, apenas transcreva as duas palavras, números ou sinais que você vê na caixa abaixo para o pequeno campo de texto logo abaixo dela, não importa o quão absurdas essas palavras possam parecer, para deixar claro que você é um ser humano real tentando se registrar neste site. Você é bem-vindo, mas infelizmente precisamos nos livrar dos spambots."
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:290
+#: skt-nurcaptcha.php:298
 msgid "Fill the Captcha below"
 msgstr "Preencha o Captcha abaixo"
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:365
+#: skt-nurcaptcha.php:373
 msgid "Could not open socket - server communication failed - try again later."
 msgstr "Não foi possível abrir a conexão - falha na comunicação com o servidor - tente novamente mais tarde."
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:418
+#: skt-nurcaptcha.php:426
 #, php-format
 msgid "To use reCAPTCHA you must get an API key from %s"
 msgstr "Para usar reCAPTCHA você precisa obter uma chave API em %s"
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:423
+#: skt-nurcaptcha.php:431
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
 msgstr "Por razões de segurança, você precisa passar o ip remoto para o reCAPTCHA"
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:428
+#: skt-nurcaptcha.php:436
 msgid "Inconsistency detected - try again later."
 msgstr "Inconsistência detectada - tente novamente mais tarde."
 
 # @ Skt_nurcaptcha
-#: skt-nurcaptcha.php:436
+#: skt-nurcaptcha.php:444
 msgid "Response field was empty!"
 msgstr "O campo de resposta estava em branco!"
 
-#: skt-nurcaptcha.php:468
+#: skt-nurcaptcha.php:476
 msgid "Incorrect Captcha solution - please try again."
 msgstr "Solução do Captcha incorreta - por favor tente novamente."
 
