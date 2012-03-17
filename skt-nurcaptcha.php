@@ -299,8 +299,8 @@ function nurc_recaptcha_challenge() {
 
 		<script type="text/javascript">
 		 var RecaptchaOptions = {
- 		   theme : "<?php echo get_option('sktnurc_theme') ?>",
- 		   lang: "<?php echo get_option('sktnurc_lang') ?>"
+ 		   theme : '<?php echo get_option('sktnurc_theme') ?>',
+ 		   lang : '<?php echo get_option('sktnurc_lang') ?>'
 		 };
 		</script>	
 		<script type="text/javascript"
@@ -330,22 +330,24 @@ function nurc_log_attempt() {
 		}
 		if ($ue == '') {$ue = '  ...  ';}
 		if ($ul == '') {$ul = '  ...  ';}
-		$npath = nurc_make_log_path();
 		$logtime = current_time("mysql",0);
 		$logline = $logtime . " &raquo;&emsp; email: &lt;<strong>". $ue ."</strong>&gt; &rarr; username: <strong>". $ul . "</strong>\r\n";
-		$handle = fopen($npath, "a+t");
-		if ($handle == false) { 
-			$logline.= " - Unable to open file!";
-			return $logline;
-		}
-		if (flock($handle, LOCK_EX)) {
-			fputs($handle,$logline);
-    		flock($handle, LOCK_UN);
-			$resp = true;
-		} else {
-    		$resp = "Couldn't get the lock!";
-		}
-		fclose($handle);
+		
+			$npath = nurc_make_log_path();
+			$handle = fopen($npath, "a+t");
+			if ($handle == false) { 
+				$logline.= " - Unable to open file!";
+				return $logline;
+			}
+			if (flock($handle, LOCK_EX)) {
+				fputs($handle,$logline);
+   		 		flock($handle, LOCK_UN);
+				$resp = true;
+			} else {
+    			$resp = "Couldn't get the lock!";
+			}
+			fclose($handle);
+		
 		return $resp;
 }
 /**
