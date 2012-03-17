@@ -1,0 +1,257 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Skt_nurcaptcha 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-16 21:20-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: skt-nurc-admin.php:18
+msgid "Log File has been deleted."
+msgstr "Het logboek is verwijderd."
+
+#: skt-nurc-admin.php:23
+msgid "Options saved."
+msgstr "Opties zijn opgeslagen."
+
+#: skt-nurc-admin.php:36
+#: skt-nurcaptcha.php:117
+msgid "Skt NURCaptcha Settings"
+msgstr "Skt NURCaptcha-instellingen"
+
+#: skt-nurc-admin.php:43
+msgid "This option cannot be undone. Do you really want to erase all Log Data and restart Log File?"
+msgstr "Deze optie kan niet ongedaan worden gemaakt. Bent je zeker dat je alle logboekdata wil verwijderen en het logboek wil herstarten?"
+
+#: skt-nurc-admin.php:44
+msgid "Version: "
+msgstr "Versie:"
+
+#: skt-nurc-admin.php:47
+msgid "has blocked"
+msgstr "blokkeerde"
+
+#: skt-nurc-admin.php:47
+msgid "suspect register attempts on this site."
+msgstr "verdachte registratiepogingen op deze site."
+
+#: skt-nurc-admin.php:47
+msgid "See Log"
+msgstr "Logboek bekijken"
+
+#: skt-nurc-admin.php:47
+msgid "Hide Log"
+msgstr "Logboek verbergen"
+
+#: skt-nurc-admin.php:50
+msgid "NURCaptcha stands for <strong>New User Register Captcha</strong>."
+msgstr "NURCaptcha staat voor <strong>New User Register Captcha</strong>."
+
+#: skt-nurc-admin.php:51
+msgid "It uses Google's reCaptcha tools to protect your site against spammer bots, "
+msgstr "Het gebruikt Google's reCaptcha-tool om je site te beschermen tegen spambots,"
+
+#: skt-nurc-admin.php:52
+msgid "adding security to the WP Register Form. You can learn more"
+msgstr "waardoor het het WP-registratieformulier veiliger maakt. Lees er meer over"
+
+#: skt-nurc-admin.php:53
+msgid "here"
+msgstr "hier"
+
+#: skt-nurc-admin.php:53
+msgid "about reCAPTCHA Security"
+msgstr "over reCAPTCHA-veiligheid"
+
+#: skt-nurc-admin.php:56
+#: skt-nurc-admin.php:95
+#: skt-nurc-admin.php:148
+msgid "Update Options"
+msgstr "Opties bijwerken"
+
+#: skt-nurc-admin.php:57
+msgid "Remember to save your changes before leaving this page! "
+msgstr "Vergeet niet je wijzigingen op te slaan voor je de pagina verlaat!"
+
+#: skt-nurc-admin.php:64
+msgid "Nothing found in Log File"
+msgstr "Niets gevonden in het logboek"
+
+#: skt-nurc-admin.php:71
+msgid "Last Blocked Attemptives"
+msgstr "Laatste geblokkeerde pogingen"
+
+#: skt-nurc-admin.php:72
+msgid "Delete Log File"
+msgstr "Logboek verwijderen"
+
+#: skt-nurc-admin.php:72
+msgid "Cancel Delete Log File"
+msgstr "Logboek verwijderen annuleren"
+
+#: skt-nurc-admin.php:86
+msgid "To enable this plugin's functionality, please enter your reCAPTCHA keys here:"
+msgstr "Om de functionaliteit van deze plugin te activeren, geef hier je reCAPTCHA-sleutels in:"
+
+#: skt-nurc-admin.php:87
+msgid "You can sign up for reCaptcha <strong>free</strong> keys here: "
+msgstr "reCaptcha-sleutels kun je hier <strong>gratis</strong> aanvragen:"
+
+#: skt-nurc-admin.php:92
+msgid "reCaptcha Public Key: "
+msgstr "reCaptcha's publieke sleutel (public key):"
+
+#: skt-nurc-admin.php:93
+msgid "reCaptcha Private Key: "
+msgstr "reCaptcha's private sleute (private key):"
+
+#: skt-nurc-admin.php:96
+#: skt-nurc-admin.php:149
+msgid "Remember to save your changes before leaving this page!"
+msgstr "Vergeet niet je wijzigingen op te slaan voor je de pagina verlaat!"
+
+#: skt-nurc-admin.php:101
+msgid "Style your reCaptcha:"
+msgstr "Stijl je reCaptcha:"
+
+#: skt-nurc-admin.php:104
+msgid "reCAPTCHA theme:"
+msgstr "reCAPTCHA-thema:"
+
+#: skt-nurc-admin.php:120
+msgid "reCAPTCHA language:"
+msgstr "reCAPTCHA-taal:"
+
+#: skt-nurc-admin.php:130
+msgid "Customize text to appear in Submit Button (register form): "
+msgstr "Personaliseer de tekst van de verzendknop (registratieformulier):"
+
+#: skt-nurc-admin.php:130
+#: skt-nurcaptcha.php:229
+msgid "Register"
+msgstr "Registreer"
+
+#: skt-nurc-admin.php:139
+msgid "This is the look of your captcha"
+msgstr "Zo ziet je captcha eruit"
+
+#: skt-nurc-admin.php:159
+msgid "Make me happy:"
+msgstr "Maak me gelukkig:"
+
+#: skt-nurcaptcha.php:80
+msgid "Settings"
+msgstr "Instellingen"
+
+#: skt-nurcaptcha.php:113
+msgid "Skt NURCaptcha Warning"
+msgstr "Skt NURCaptcha-waarschuwing"
+
+#: skt-nurcaptcha.php:115
+msgid "You must register your reCAPTCHA keys to have Skt NURCaptcha protection enabled."
+msgstr "Je moet je reCAPTCHA-sleutels ingegeven hebben om de beveiliging te activeren."
+
+#: skt-nurcaptcha.php:117
+msgid "Go to"
+msgstr "Ga naar"
+
+#: skt-nurcaptcha.php:117
+msgid "and save your keys to the appropriate fields"
+msgstr "en sla je sleutels op in de juiste velden hieronder"
+
+#: skt-nurcaptcha.php:119
+msgid "Be sure your keys are saved to the appropriate fields down here"
+msgstr "Wees zeker dat je sleutels zijn opgeslagen in de juiste velden hieronder"
+
+#: skt-nurcaptcha.php:137
+msgid "reCAPTCHA error"
+msgstr "reCAPTCHA-fout"
+
+#: skt-nurcaptcha.php:204
+msgid "Registration Form"
+msgstr "Registratieformulier"
+
+#: skt-nurcaptcha.php:204
+msgid "Register For This Site"
+msgstr "Registreer voor deze site"
+
+#: skt-nurcaptcha.php:210
+#, php-format
+msgid "There is a problem with your response: %s"
+msgstr "Er is een probleem met je antwoord: %s"
+
+#: skt-nurcaptcha.php:216
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: skt-nurcaptcha.php:217
+msgid "E-mail"
+msgstr "E-mail"
+
+#: skt-nurcaptcha.php:224
+msgid "A password will be e-mailed to you."
+msgstr "Een wachtwoord zal je worden toegezonden via mail."
+
+#: skt-nurcaptcha.php:236
+msgid "Log in"
+msgstr "Inloggen"
+
+#: skt-nurcaptcha.php:237
+msgid "Password Lost and Found"
+msgstr "Wachtwoord vergeten"
+
+#: skt-nurcaptcha.php:237
+msgid "Lost your password?"
+msgstr "Je wachtwoord vergeten?"
+
+#: skt-nurcaptcha.php:260
+msgid "Use only non-accented alphanumeric characters plus these: _ [underscore], [space], . [dot], - [hyphen], * [asterisk], and @ [at]"
+msgstr "Gebruik enkel alphanumerieke karakters zonder accenten, plus deze: _ [underscore], [spatie], . [punt], - [liggend streepje], * [sterretje], and @ [at]"
+
+#: skt-nurcaptcha.php:270
+msgid "Use a functional email address, as your temporary password will be sent to that email"
+msgstr "Gebruik een werkend e-mailadres gezien je tijdelijke wachtwoord erheen wordt gezonden"
+
+#: skt-nurcaptcha.php:282
+msgid "To get registered, just transcribe both the words, numbers and signs you see in the box below, to the small text field under it, no matter how absurd they look like, just to make clear you are a human being trying to register to this site. We welcome you, but we must keep out all spambots."
+msgstr "Om te registreren, schrijf de woorden, nummers en tekens in het kader over in het tekstveld eronder. Hoe absurd het ook lijkt, het is enkel om aan te tonen dat je een echte persoon bent. Mensen zijn hier welkom, spambots niet."
+
+#: skt-nurcaptcha.php:298
+msgid "Fill the Captcha below"
+msgstr "Vul de captcha hieronder in"
+
+#: skt-nurcaptcha.php:375
+msgid "Could not open socket - server communication failed - try again later."
+msgstr "Kon socket niet openen - communicatie met de server is mislukt - probeer later opnieuw."
+
+#: skt-nurcaptcha.php:428
+#, php-format
+msgid "To use reCAPTCHA you must get an API key from %s"
+msgstr "Om reCAPTCHA te gebruiken, heb je een API-sleutel nodig van %s"
+
+#: skt-nurcaptcha.php:433
+msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
+msgstr "Om veiligheidsredenen moet je de remote IP doorgeven aan reCAPTCHA"
+
+#: skt-nurcaptcha.php:438
+msgid "Inconsistency detected - try again later."
+msgstr "Inconsistentie gedetecteerd - probeer later opnieuw."
+
+#: skt-nurcaptcha.php:446
+msgid "Response field was empty!"
+msgstr "Het antwoordveld was leeg"
+
+#: skt-nurcaptcha.php:478
+msgid "Incorrect Captcha solution - please try again."
+msgstr "Fout captcha-antwoord ingegeven - probeer het opnieuw."
+

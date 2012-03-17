@@ -30,6 +30,7 @@ Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 **Languages included**.
 
 * Brazilian Portuguese pt_BR - by [the author](http://profiles.wordpress.org/users/Sanskritforum/ "Carlos E. G. Barbosa").
+* Dutch nl_NL - by  [SalviJansen](http://wordpress.org/support/profile/salvijansen/ "SalviJansen").
 
 == Installation ==
 

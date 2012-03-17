@@ -184,11 +184,11 @@ function recaptcha_get_signup_url ($domain = null, $appname = null) {
 
 function nurc_clear_log_file() {
 		$npath = nurc_make_log_path();
+		update_option("sktnurc_count","");
 		if (file_exists($npath)) {
 			unlink($npath);
 			return true;
 		}
-		update_option("sktnurc_count","");
 	return false;
 }
 function nurc_get_version() {
@@ -196,7 +196,7 @@ function nurc_get_version() {
 		$npath .= 'skt-nurcaptcha.php';
 		$lines = file($npath);
 		$l = count($lines);
-		$version = 'versão errada';
+		$version = 'wrong version';
 		$i=0;
 		while ($i < $l):
 			if (trim($lines[$i])=='') {
