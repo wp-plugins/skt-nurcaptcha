@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>.
-	Version: 2.4.6
+	Version: 2.4.7
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -299,9 +299,32 @@ function nurc_recaptcha_challenge() {
 
 		<script type="text/javascript">
 		 var RecaptchaOptions = {
- 		   theme : '<?php echo get_option('sktnurc_theme') ?>',
- 		   lang : '<?php echo get_option('sktnurc_lang') ?>'
-		 };
+			<?php 
+				$temp = get_option('sktnurc_reclocales_lang');
+				if ($temp == ''){
+					include('skt-nurc-recaptcha-locales.php');
+					update_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
+					$sktnurc_cst_strings = $sktnurc_reclocales_strings[get_option('sktnurc_lang')];
+				}else{
+					$sktnurc_cst_strings = $temp[get_option('sktnurc_lang')];
+				}
+			?>
+                custom_translations : {
+                        visual_challenge : "<?php echo $sktnurc_cst_strings[0] ?>",
+                        audio_challenge : "<?php echo $sktnurc_cst_strings[1] ?>",
+                        refresh_btn : "<?php echo $sktnurc_cst_strings[2] ?>",
+                        instructions_visual : "<?php echo $sktnurc_cst_strings[3] ?>",
+                        instructions_context : "<?php echo $sktnurc_cst_strings[4] ?>",
+                        instructions_audio : "<?php echo $sktnurc_cst_strings[5] ?>",
+                        help_btn : "<?php echo $sktnurc_cst_strings[6] ?>",
+                        play_again : "<?php echo $sktnurc_cst_strings[7] ?>",
+                        cant_hear_this : "<?php echo $sktnurc_cst_strings[8] ?>",
+                        incorrect_try_again : "<?php echo $sktnurc_cst_strings[9] ?>",
+                        image_alt_text : "<?php echo $sktnurc_cst_strings[10] ?>",
+                },
+ 		   		lang : '<?php echo get_option('sktnurc_lang') ?>',
+ 		   		theme : '<?php echo get_option('sktnurc_theme') ?>'
+		 }
 		</script>	
 		<script type="text/javascript"
 		     src="http://www.google.com/recaptcha/api/challenge?k=<?php echo get_option('sktnurc_publkey'); ?>">
@@ -332,7 +355,11 @@ function nurc_log_attempt() {
 		if ($ul == '') {$ul = '  ...  ';}
 		$logtime = current_time("mysql",0);
 		$logline = $logtime . " &raquo;&emsp; email: &lt;<strong>". $ue ."</strong>&gt; &rarr; username: <strong>". $ul . "</strong>\r\n";
+		// ***
+		// #######  Include here: branch to options based log file
+		// ***
 		
+		// **** log file creation or update - as text file
 			$npath = nurc_make_log_path();
 			$handle = fopen($npath, "a+t");
 			if ($handle == false) { 
@@ -347,6 +374,7 @@ function nurc_log_attempt() {
     			$resp = "Couldn't get the lock!";
 			}
 			fclose($handle);
+		// **** end of text file management
 		
 		return $resp;
 }

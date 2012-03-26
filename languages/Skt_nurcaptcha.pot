@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Skt_nurcaptcha 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-26 18:26-0300\n"
+"POT-Creation-Date: 2012-03-26 15:13-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
 "Language-Team: \n"
@@ -16,136 +16,202 @@ msgstr ""
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: skt-nurc-admin.php:18
+#: skt-nurc-admin.php:4
+msgid "Get a visual challenge"
+msgstr ""
+
+#: skt-nurc-admin.php:5
+msgid "Get an audio challenge"
+msgstr ""
+
+#: skt-nurc-admin.php:6
+msgid "Get a new challenge"
+msgstr ""
+
+#: skt-nurc-admin.php:7
+msgid "Type the two words:"
+msgstr ""
+
+#: skt-nurc-admin.php:8
+msgid "Type the words in the boxes:"
+msgstr ""
+
+#: skt-nurc-admin.php:9
+msgid "Type what you hear:"
+msgstr ""
+
+#: skt-nurc-admin.php:10
+msgid "Help"
+msgstr ""
+
+#: skt-nurc-admin.php:11
+msgid "Play sound again"
+msgstr ""
+
+#: skt-nurc-admin.php:12
+msgid "Download sound as MP3"
+msgstr ""
+
+#: skt-nurc-admin.php:13
+msgid "Incorrect. Try again."
+msgstr ""
+
+#: skt-nurc-admin.php:14
+msgid "reCAPTCHA challenge image"
+msgstr ""
+
+#: skt-nurc-admin.php:75
 msgid "Log File has been deleted."
 msgstr ""
 
-#: skt-nurc-admin.php:23
+#: skt-nurc-admin.php:80
 msgid "Options saved."
 msgstr ""
 
-#: skt-nurc-admin.php:36
+#: skt-nurc-admin.php:93
 #: skt-nurcaptcha.php:117
 msgid "Skt NURCaptcha Settings"
 msgstr ""
 
-#: skt-nurc-admin.php:43
+#: skt-nurc-admin.php:100
 msgid "This option cannot be undone. Do you really want to erase all Log Data and restart Log File?"
 msgstr ""
 
-#: skt-nurc-admin.php:44
+#: skt-nurc-admin.php:101
 msgid "Version: "
 msgstr ""
 
-#: skt-nurc-admin.php:47
+#: skt-nurc-admin.php:104
 msgid "has blocked"
 msgstr ""
 
-#: skt-nurc-admin.php:47
+#: skt-nurc-admin.php:104
 msgid "suspect register attempts on this site."
 msgstr ""
 
-#: skt-nurc-admin.php:47
+#: skt-nurc-admin.php:104
 msgid "See Log"
 msgstr ""
 
-#: skt-nurc-admin.php:47
+#: skt-nurc-admin.php:104
 msgid "Hide Log"
 msgstr ""
 
-#: skt-nurc-admin.php:50
+#: skt-nurc-admin.php:107
 msgid "NURCaptcha stands for <strong>New User Register Captcha</strong>."
 msgstr ""
 
-#: skt-nurc-admin.php:51
+#: skt-nurc-admin.php:108
 msgid "It uses Google's reCaptcha tools to protect your site against spammer bots, "
 msgstr ""
 
-#: skt-nurc-admin.php:52
+#: skt-nurc-admin.php:109
 msgid "adding security to the WP Register Form. You can learn more"
 msgstr ""
 
-#: skt-nurc-admin.php:53
+#: skt-nurc-admin.php:110
 msgid "here"
 msgstr ""
 
-#: skt-nurc-admin.php:53
+#: skt-nurc-admin.php:110
 msgid "about reCAPTCHA Security"
 msgstr ""
 
-#: skt-nurc-admin.php:56
-#: skt-nurc-admin.php:95
-#: skt-nurc-admin.php:148
+#: skt-nurc-admin.php:113
+#: skt-nurc-admin.php:152
+#: skt-nurc-admin.php:302
 msgid "Update Options"
 msgstr ""
 
-#: skt-nurc-admin.php:57
+#: skt-nurc-admin.php:114
 msgid "Remember to save your changes before leaving this page! "
 msgstr ""
 
-#: skt-nurc-admin.php:64
+#: skt-nurc-admin.php:121
 msgid "Nothing found in Log File"
 msgstr ""
 
-#: skt-nurc-admin.php:71
+#: skt-nurc-admin.php:128
 msgid "Last Blocked Attemptives"
 msgstr ""
 
-#: skt-nurc-admin.php:72
+#: skt-nurc-admin.php:129
 msgid "Delete Log File"
 msgstr ""
 
-#: skt-nurc-admin.php:72
+#: skt-nurc-admin.php:129
 msgid "Cancel Delete Log File"
 msgstr ""
 
-#: skt-nurc-admin.php:86
+#: skt-nurc-admin.php:143
 msgid "To enable this plugin's functionality, please enter your reCAPTCHA keys here:"
 msgstr ""
 
-#: skt-nurc-admin.php:87
+#: skt-nurc-admin.php:144
 msgid "You can sign up for reCaptcha <strong>free</strong> keys here: "
 msgstr ""
 
-#: skt-nurc-admin.php:92
+#: skt-nurc-admin.php:149
 msgid "reCaptcha Public Key: "
 msgstr ""
 
-#: skt-nurc-admin.php:93
+#: skt-nurc-admin.php:150
 msgid "reCaptcha Private Key: "
 msgstr ""
 
-#: skt-nurc-admin.php:96
-#: skt-nurc-admin.php:149
+#: skt-nurc-admin.php:153
+#: skt-nurc-admin.php:303
 msgid "Remember to save your changes before leaving this page!"
 msgstr ""
 
-#: skt-nurc-admin.php:101
+#: skt-nurc-admin.php:158
 msgid "Style your reCaptcha:"
 msgstr ""
 
-#: skt-nurc-admin.php:104
+#: skt-nurc-admin.php:161
 msgid "reCAPTCHA theme:"
 msgstr ""
 
-#: skt-nurc-admin.php:120
+#: skt-nurc-admin.php:185
+msgid "This is the look of your captcha"
+msgstr ""
+
+#: skt-nurc-admin.php:198
 msgid "reCAPTCHA language:"
 msgstr ""
 
-#: skt-nurc-admin.php:130
+#: skt-nurc-admin.php:202
+msgid "use reCAPTCHA native languages"
+msgstr ""
+
+#: skt-nurc-admin.php:205
+msgid "Choose a language on the selector below"
+msgstr ""
+
+#: skt-nurc-admin.php:212
+msgid "use custom strings set"
+msgstr ""
+
+#: skt-nurc-admin.php:215
+#: skt-nurc-admin.php:238
+msgid "Save this choice before making changes on the strings"
+msgstr ""
+
+#: skt-nurc-admin.php:251
+msgid "Customize reCAPTCHA strings at will by changing the texts in the eleven fields below:"
+msgstr ""
+
+#: skt-nurc-admin.php:283
 msgid "Customize text to appear in Submit Button (register form): "
 msgstr ""
 
-#: skt-nurc-admin.php:130
+#: skt-nurc-admin.php:286
+#: skt-nurc-admin.php:293
 #: skt-nurcaptcha.php:229
 msgid "Register"
 msgstr ""
 
-#: skt-nurc-admin.php:139
-msgid "This is the look of your captcha"
-msgstr ""
-
-#: skt-nurc-admin.php:159
+#: skt-nurc-admin.php:313
 msgid "Make me happy:"
 msgstr ""
 
@@ -230,28 +296,28 @@ msgstr ""
 msgid "Fill the Captcha below"
 msgstr ""
 
-#: skt-nurcaptcha.php:373
+#: skt-nurcaptcha.php:403
 msgid "Could not open socket - server communication failed - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:426
+#: skt-nurcaptcha.php:456
 #, php-format
 msgid "To use reCAPTCHA you must get an API key from %s"
 msgstr ""
 
-#: skt-nurcaptcha.php:431
+#: skt-nurcaptcha.php:461
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
 msgstr ""
 
-#: skt-nurcaptcha.php:436
+#: skt-nurcaptcha.php:466
 msgid "Inconsistency detected - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:444
+#: skt-nurcaptcha.php:474
 msgid "Response field was empty!"
 msgstr ""
 
-#: skt-nurcaptcha.php:476
+#: skt-nurcaptcha.php:506
 msgid "Incorrect Captcha solution - please try again."
 msgstr ""
 

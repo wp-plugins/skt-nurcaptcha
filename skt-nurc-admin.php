@@ -1,5 +1,34 @@
 ﻿<?php
 
+	$sktnurc_ref_strings = array(
+		__('Get a visual challenge','Skt_nurcaptcha'),
+		__('Get an audio challenge','Skt_nurcaptcha'),
+		__('Get a new challenge','Skt_nurcaptcha'),
+		__('Type the two words:','Skt_nurcaptcha'),
+		__('Type the words in the boxes:','Skt_nurcaptcha'),
+		__('Type what you hear:','Skt_nurcaptcha'),
+		__('Help','Skt_nurcaptcha'),
+		__('Play sound again','Skt_nurcaptcha'),
+		__('Download sound as MP3','Skt_nurcaptcha'),
+		__('Incorrect. Try again.','Skt_nurcaptcha'),
+		__('reCAPTCHA challenge image','Skt_nurcaptcha')
+		); 
+
+	include('skt-nurc-recaptcha-locales.php');
+	if (get_option('sktnurc_reclocales_lang')=="") {
+		update_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
+	}else{
+		$sktnurc_temp_reclocales_strings=get_option('sktnurc_reclocales_lang');
+		foreach($sktnurc_reclocales_strings as $lg => $strlg){
+			if($sktnurc_temp_reclocales_strings[$lg]==''){
+				$sktnurc_temp_reclocales_strings[$lg]=$strlg;
+			}
+		}
+		update_option('sktnurc_reclocales_lang',$sktnurc_temp_reclocales_strings);
+		$sktnurc_reclocales_strings=$sktnurc_temp_reclocales_strings;
+	}
+	$sktnurc_en_strings = $sktnurc_reclocales_strings["en"];
+
 	if($_POST['sktnurc_hidden'] == 'Y') {
 		//Form data sent
 		$sktnurc_pubkey = $_POST['sktnurc_publkey'];
@@ -9,9 +38,37 @@
 		update_option('sktnurc_privtkey', $sktnurc_privkey);
 
 		update_option('sktnurc_theme', $_POST['sktnurc_theme']);
-		update_option('sktnurc_lang', $_POST['sktnurc_lang']);
 		update_option('sktnurc_regbutton', $_POST['sktnurc_regbutton']);
-
+		if('custom'== $_POST['sktnurc_lang_set']) {
+			update_option('sktnurc_lang', $_POST['sktnurc_lang_set']);
+		}else{
+			update_option('sktnurc_lang', $_POST['sktnurc_lang']);
+		}
+		update_option('sktnurc_lang_set', $_POST['sktnurc_lang_set']);
+		if($_POST['sktnurc_lang']==$_POST['sktnurc_hidden_lang']) {
+			$temp = $sktnurc_reclocales_strings[ $_POST['sktnurc_lang']];
+			$sktnurc_cst_strings = array(
+				0 => $_POST['visual_challenge'],
+				1 => $_POST['audio_challenge'],
+				2 => $_POST['refresh_btn'],
+				3 => $_POST['instructions_visual'],
+				4 => $_POST['instructions_context'],
+				5 => $_POST['instructions_audio'],
+				6 => $_POST['help_btn'],
+				7 => $_POST['play_again'],
+				8 => $_POST['cant_hear_this'],
+				9 => $_POST['incorrect_try_again'],
+				10 => $_POST['image_alt_text'],
+				11 => $temp[11]
+				);
+			for ($i=0; $i <= 11; $i++){
+				if ($sktnurc_cst_strings[$i]=='') {
+						$sktnurc_cst_strings[$i]=' ';
+				}
+			}
+			$sktnurc_reclocales_strings[ $_POST['sktnurc_lang']]=$sktnurc_cst_strings;
+			update_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
+		}
 		if ($_POST['log_clear']!= 'no') {
 			if (nurc_clear_log_file()) {
 			?>
@@ -99,8 +156,8 @@
 	
 	<div style="position:relative;width:680px;padding:12px 0 12px 24px">
 		<p style="padding: .5em; background-color: #666666; color: #fff;"><?php echo __( 'Style your reCaptcha:', 'Skt_nurcaptcha' ) ?></p>
-		<div style="float:left;width:180px;padding-left:24px;margin:12px 0 12px 0">
-		<div id="sktth">
+		<div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
+		<div id="sktth" style="position:relative">
 			<span><?php  _e('reCAPTCHA theme:', 'Skt_nurcaptcha'); ?></span><br />
 			&nbsp;&nbsp;&nbsp;&nbsp;<select id="sktnurc_theme" name="sktnurc_theme">
 				<?php
@@ -115,35 +172,132 @@
 				$def_img = ( "" == get_option('sktnurc_theme') ) ? 'red' : get_option('sktnurc_theme');
 				?>
 			</select><br />
-		</div>
-		<div id="sktlg" style="padding-top:12px;">
-			<span><?php _e('reCAPTCHA language:', 'Skt_nurcaptcha') ?></span><br />
-			&nbsp;&nbsp;&nbsp;&nbsp;<select id="sktnurc_lang" name="sktnurc_lang">
+			<!-- reCAPTCHA images --> 
+			<div class="captcha-img" style="float:left;width:460px; margin:-42px 0 110px 0; padding:0 0 12px 0">
 				<?php
-				$rc_langs = array('en' => 'English (default)', 'nl' => 'Dutch', 'fr' => 'French', 'de' => 'German', 'pt' => 'Portuguese', 'ru' => 'Russian', 'es' => 'Spanish', 'tr' => 'Turkish');
-				foreach( $rc_langs as $k => $v ) {
-					$selected = ( $k == get_option('sktnurc_lang') ) ? 'selected="selected"' : '';
-					echo "<option value='$k' $selected>$v</option>";
+				foreach ($plugin_img_path as $k => $v) {
+				?>
+				<div id="sktnurc-display-<?php 
+					echo $k; 
+					?>" style="position:absolute;margin-left:232px<?php 
+					if ($k != $def_img) { echo ';display:none';} ?>">
+					<img src="<?php echo $plugin_img_path[$k]; ?>" title="<?php 
+					_e('This is the look of your captcha','Skt_nurcaptcha'); ?>" />
+				</div>
+				<?php
 				}
 				?>
-			</select>
-				<p><?php _e("Customize text to appear in Submit Button (register form): ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_regbutton" name="sktnurc_regbutton" value="<?php echo get_option('sktnurc_regbutton'); ?>" size="26"><br /><?php echo "[ default: <strong>'". __('Register', 'Skt_nurcaptcha' )."'</strong> ]"; ?></p>
-
-		</div>
-	</div>
-		<div class="captcha-img" style="position:relative;width:460px;padding-bottom:12px">
-<?php
-			foreach ($plugin_img_path as $k => $v) {
-?>
-			<div id="sktnurc-display-<?php echo $k; ?>" style="position:absolute;margin-left:232px<?php if ($k != $def_img) { echo ';display:none';} ?>">
-				<img src="<?php echo $plugin_img_path[$k]; ?>" title="<?php _e('This is the look of your captcha','Skt_nurcaptcha'); ?>" />
 			</div>
-<?php
-			}
-?>
+			<!-- end of reCAPTCHA images --> 
 		</div>
+		<!-- end of reCAPTCHA style block -->
+        </div>
+		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div> <!-- separator -->
+        <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
+        <div style="padding:4px 0 4px 0;">
+				<span><?php _e('reCAPTCHA language:', 'Skt_nurcaptcha') ?></span><br /><br />
+        	<input class="sktlg_radio" type="radio" name="sktnurc_lang_set" id="sktlg_radio1" value="basic" 
+				<?php if (((get_option('sktnurc_lang_set')=='') or (get_option('sktnurc_lang_set')=='basic')) and (get_option('sktnurc_lang')!='custom')) 
+							{ ?>checked<?php } ?> />
+				<?php _e('use reCAPTCHA native languages', 'Skt_nurcaptcha') ?>
+                <span id="save-advert-lang1" style="display:none;color:#ff2200;margin-right:8px">
+                        <strong>&nbsp;&nbsp;&nbsp;&nbsp;[<?php 
+							_e('Choose a language on the selector below','Skt_nurcaptcha'); ?>]
+                        </strong>
+                </span>
+                <br />
+        	<input class="sktlg_radio" type="radio" name="sktnurc_lang_set" id="sktlg_radio2" value="custom" 
+				<?php if ((get_option('sktnurc_lang_set')=='custom') or (get_option('sktnurc_lang')=='custom'))
+							{ ?>checked<?php } ?> />
+				<?php _e('use custom strings set', 'Skt_nurcaptcha') ?>
+                <span id="save-advert-lang2" style="display:none;color:#ff2200;margin-right:8px">
+                        <strong>&nbsp;&laquo;&nbsp;&laquo;&nbsp;&laquo;&nbsp;<?php 
+							_e('Save this choice before making changes on the strings','Skt_nurcaptcha'); ?>
+                        </strong>
+                </span>
+                <br />
 
+			<!-- *****  languages dropbox ... -->
+			<div id="sktlg" style="<?php if (get_option('sktnurc_lang_set')=='custom') 
+							{ ?>display:none;<?php } ?>padding:12px 0 16px 0;">
+				&nbsp;&nbsp;&nbsp;&nbsp;<select id="sktnurc_lang" name="sktnurc_lang">
+					<?php
+					$lang_display = array();
+					foreach( $sktnurc_reclocales_strings as $k => $v ) {
+						$lang_display[$v[11]]=$k;
+					}
+					ksort($lang_display);
+					foreach( $lang_display as $v => $k ) {
+						$selected = ( $k == get_option('sktnurc_lang') ) ? 'selected="selected"' : '';
+						echo "<option value='$k' $selected>$v</option>";
+					}
+					?>
+				</select>
+                <span id="save-advert-lang" style="display:none;color:#ff2200;margin-right:8px">
+                        <strong>&nbsp;&laquo;&nbsp;&laquo;&nbsp;&laquo;&nbsp;<?php 
+							_e('Save this choice before making changes on the strings','Skt_nurcaptcha'); ?>
+                        </strong>
+                </span>
+				<input type="hidden" name="sktnurc_hidden_lang" value="<?php echo get_option('sktnurc_lang'); ?>" />
+			</div> <!--  *****  end of div "sktlg" (languages dropbox) -->
+            
+            <div id="sktcstlg" style="position:relative; float:left;padding:12px 0 16px 0;">
+            <?php 
+				$sktnurc_cst_strings = $sktnurc_reclocales_strings[get_option('sktnurc_lang')];  
+			
+			?>
+            	
+<span><strong>
+<?php _e('Customize reCAPTCHA strings at will by changing the texts in the eleven fields below:','Skt_nurcaptcha'); ?> 
+</strong></span><br /><br />
+"<?php echo $sktnurc_ref_strings[0]; ?>" <input 
+type="text" id ="visual_challenge" name="visual_challenge" value="<?php echo $sktnurc_cst_strings[0]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[1]; ?>" <input 
+type="text" id ="audio_challenge" name="audio_challenge" value="<?php echo $sktnurc_cst_strings[1]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[2]; ?>" <input 
+type="text" id ="refresh_btn" name="refresh_btn" value="<?php echo $sktnurc_cst_strings[2]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[3]; ?>" <input 
+type="text" id ="instructions_visual" name="instructions_visual" value="<?php echo $sktnurc_cst_strings[3]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[4]; ?>" <input 
+type="text" id ="instructions_context" name="instructions_context" value="<?php echo $sktnurc_cst_strings[4]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[5]; ?>" <input 
+type="text" id ="instructions_audio" name="instructions_audio" value="<?php echo $sktnurc_cst_strings[5]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[6]; ?>" <input 
+type="text" id ="help_btn" name="help_btn" value="<?php echo $sktnurc_cst_strings[6]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[7]; ?>" <input 
+type="text" id ="play_again" name="play_again" value="<?php echo $sktnurc_cst_strings[7]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[8]; ?>" <input 
+type="text" id ="cant_hear_this" name="cant_hear_this" value="<?php echo $sktnurc_cst_strings[8]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[9]; ?>" <input type="text" id ="incorrect_try_again" name="incorrect_try_again" value="<?php echo $sktnurc_cst_strings[9]; ?>" size="40" /><br />
+"<?php echo $sktnurc_ref_strings[10]; ?>" <input 
+type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnurc_cst_strings[10]; ?>" size="40" /><br />
+
+
+            </div> <!--  end of div "sktcstlg"  -->
+        </div>
+	</div>
+
+		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div>
+		<div style="float:left;width:180px;padding-left:24px;margin:12px 0 12px 0;">
+				<p style="position:relative">
+				<?php _e("Customize text to appear in Submit Button (register form): ", 'Skt_nurcaptcha' ); ?>
+                <input type="text" id="sktnurc_regbutton" name="sktnurc_regbutton" 
+                value="<?php echo get_option('sktnurc_regbutton'); ?>" size="26"><br />
+				<?php echo "[ default: <strong><span id='sktnurc_regbutton_text' >". __('Register', 'Skt_nurcaptcha' )."</span></strong> ]"; ?>
+
+    			</p>
+        </div>
+		<div class="regbutton-mock-up" style="margin-left:232px;position:absolute;width:312px;padding:24px 0 12px 0">
+				<input style="float:left;margin-right:12px; border:1px solid #fff" type="submit" size="auto" class="button-primary" id="sktnurc-mockup-wp-submit" value="<?php 
+					if (get_option('sktnurc_regbutton')==""){
+						_e("Register", 'Skt_nurcaptcha'); 
+					} else {
+						echo get_option('sktnurc_regbutton');
+					}
+				?>" />
+		</div>
 		<div style="clear:both"></div>
+
 		<p class="submit" >
 		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
 		<span class="save-advert" style="display:none;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?>&nbsp;&raquo;&nbsp;&raquo;&nbsp;&raquo;&nbsp;</strong></span>
