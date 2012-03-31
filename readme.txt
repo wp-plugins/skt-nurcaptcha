@@ -78,6 +78,7 @@ customization tools on a future version of the plugin.
 
 = 2.4.7 =
 * Added: user customization of reCAPTCHA strings.
+* Improved: better UI to choose native language for reCAPTCHA.
 = 2.4.6 =
 * Added: customized text for submit button on register form.
 = 2.4.5 =
@@ -108,6 +109,7 @@ customization tools on a future version of the plugin.
 
 = 2.4.7 =
 * Added: user customization of reCAPTCHA strings.
+* Improved: better UI to choose native language for reCAPTCHA.
 = 2.4.6 =
 * Added: customized text for submit button on register form.
 = 2.4.5 =
