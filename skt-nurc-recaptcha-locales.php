@@ -51,7 +51,7 @@
 				"重新播放",
 				"以 MP3 格式下载声音",
 				"不正确，请重试。",
-				"reCAPTCHA 验证图片"
+				"reCAPTCHA 验证图片",
 				"Chinese - Mainland"),
 		"zh_hk"=> array(
 				"回答圖像驗證問題",
