@@ -42,6 +42,14 @@ Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 
 == Frequently Asked Questions ==
 
+= I've installed and activated the plugin, but at the new user register form the reCAPTCHA doesn't show up. =
+
+A defective version of a file called 'skt-nurc-recaptcha-locales.php' was mistakenly uploaded on march, 31st, 2012, 
+by around 4:00 PM GMT.
+If by chance you have downloaded the plugin during the few minutes when this file was in the WP Plugins repository,
+you may experiment that kind of problem. If that is your case, just deactivate and delete the plugin and then 
+proceed to a new, clean, installation.
+
 = The number of blocked attemptives is growing too slowly on the log. Does that mean that the plugin is not working? =
 
 If you was facing a greater number of spambot registrations than the figures you see now in the log counter, that means 
