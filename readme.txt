@@ -20,7 +20,8 @@ checks the response given. If it is not valid, new user registration fails. If t
 valid, NURCaptcha leaves the scene and your site runs as if it was not there.
 
 Data is kept by the plugin about blocked attemptives that may have occurred when a trustable visitor failed 
-the reCaptcha challenge. It shows date/time of trials, as well as usernames and e-mail addresses 
+the reCaptcha challenge. There are very few occurrences like that, mainly because for some people it is not  
+so easy to deal with such visual challenges. The log shows date/time of trials, as well as usernames and e-mail addresses 
 of those who failed registration and were kept outside. Attemptives made by spambots in which the bot 
 suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will 
 never reflect the whole achievements of the plugin in securing your site, but mostly the unsuccessful 
