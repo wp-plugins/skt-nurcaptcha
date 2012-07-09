@@ -19,11 +19,13 @@ just at the moment the "Register for This Site" form is requested. It creates a 
 checks the response given. If it is not valid, new user registration fails. If the response is 
 valid, NURCaptcha leaves the scene and your site runs as if it was not there.
 
-NURCaptcha also shows you each blocked attemptive. A Log file may be toggled for you to see data of the 
-last attemptives blocked by the plugin. It shows date/time of trials, as well as usernames and e-mail addresses 
-of those who failed registration and were kept outside. Please note that attemptives in which the spambot 
+Data is kept by the plugin about blocked attemptives that may have occurred when a trustable visitor failed 
+the reCaptcha challenge. It shows date/time of trials, as well as usernames and e-mail addresses 
+of those who failed registration and were kept outside. Attemptives made by spambots in which the bot 
 suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will 
-never reflect the whole achievements of the plugin in securing your site.
+never reflect the whole achievements of the plugin in securing your site, but mostly the unsuccessful 
+registration tries of real human beings. The log data may be helpful in case you want to get in touch with 
+those people and have them registered by your staff, instead of by themselves.
 
 Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 
