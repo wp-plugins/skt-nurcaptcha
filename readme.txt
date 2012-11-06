@@ -120,7 +120,7 @@ customization tools on a future version of the plugin.
 
 = 3.0.0 =
 * Added: StopForumSpam and BotScout databases assessment for extra security.
-* Alert: we strongly recommend users to upgrade to version 3, as there are some evidences of spammers making a way through reCAPTCHA challenges - probably by solving them personally, or by tricking someone else to solve it for their bots.
+* Alert: we strongly recommend users to upgrade to version 3, as there are some evidences of spammers making a way through reCAPTCHA challenges - probably by tricking someone else to solve it for their bots.
 = 2.4.7 =
 * Added: user customization of reCAPTCHA strings.
 * Improved: better UI to choose native language for reCAPTCHA.
