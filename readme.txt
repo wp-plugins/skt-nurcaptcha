@@ -3,8 +3,8 @@ Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register
 Requires at least: 3.0.1
-Tested up to: 3.4.1
-Stable tag: 2.4.7
+Tested up to: 3.4.2
+Stable tag: 3.0.0
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -19,14 +19,13 @@ just at the moment the "Register for This Site" form is requested. It creates a 
 checks the response given. If it is not valid, new user registration fails. If the response is 
 valid, NURCaptcha leaves the scene and your site runs as if it was not there.
 
-Data is kept by the plugin about blocked attemptives that may have occurred when a trustable visitor failed 
-the reCaptcha challenge. There are very few occurrences like that, mainly because for some people it is not  
-so easy to deal with such visual challenges. The log shows date/time of trials, as well as usernames and e-mail addresses 
-of those who failed registration and were kept outside. Attemptives made by spambots in which the bot 
+Skt NURCaptcha adds (form Version 3 on) extra security by querying trustable databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
+
+NURCaptcha also shows you each blocked attemptive. A Log file may be toggled for you to see data of the 
+last attemptives blocked by the plugin. It shows date/time of trials, as well as usernames and e-mail addresses 
+of those who failed registration and were kept outside. Please note that attemptives in which the spambot 
 suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will 
-never reflect the whole achievements of the plugin in securing your site, but mostly the unsuccessful 
-registration tries of real human beings. The log data may be helpful in case you want to get in touch with 
-those people and have them registered by your staff, instead of by themselves.
+never reflect the whole achievements of the plugin in securing your site.
 
 Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 
@@ -86,6 +85,8 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 3.0.0 =
+* Added: StopForumSpam and BotScout databases assessment for extra security.
 = 2.4.7 =
 * Added: user customization of reCAPTCHA strings.
 * Improved: better UI to choose native language for reCAPTCHA.
@@ -117,6 +118,9 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 3.0.0 =
+* Added: StopForumSpam and BotScout databases assessment for extra security.
+* Alert: we strongly recommend users to upgrade to version 3, as there are some evidences of spammers making a way through reCAPTCHA challenges - probably by solving them personally, or by tricking someone else to solve it for their bots.
 = 2.4.7 =
 * Added: user customization of reCAPTCHA strings.
 * Improved: better UI to choose native language for reCAPTCHA.

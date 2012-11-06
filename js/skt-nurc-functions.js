@@ -25,15 +25,20 @@
 		var prestring10 = refstring10;
 		var refkey1 = $('#sktnurc_publkey').val();
 		var refkey2 = $('#sktnurc_privtkey').val();
+		var refkey3 = $('#sktnurc_botscoutkey').val();
 		var refimg = $('#sktnurc_theme').val();
 		var reflang = $('#sktnurc_lang').val();
 		var precustom = $('#sktnurc_lang option:selected').val();
 		var refreg = $('#sktnurc_regbutton').val();
 		var textreg = $('#sktnurc_regbutton_text').text();
+		var refspam0 = $('#sktSpam_check0').is(":checked");
+		var refspam1 = $('#sktSpam_check1').is(":checked");
+		var refspam2 = $('#sktSpam_check2').is(":checked");
 		var refcstlang = $('.sktlg_radio:checked').val();
 		var preslog = 'no'; 
-		var presimg=refimg;var preslang=reflang;var preskey1=refkey1;var preskey2=refkey2;var presreg=refreg;
-		var prescstlang=refcstlang;
+		var presimg=refimg;var preskey1=refkey1;var preskey2=refkey2;var preskey3=refkey3;
+		var preslang=reflang;var prescstlang=refcstlang;var presreg=refreg;
+		var presspam0 = refspam0;var presspam1 = refspam1;var presspam2 = refspam2;
 		if((refkey1!='')&&(refkey2!='')){
 			$('#setup_alert').css('display','none');
 		}
@@ -75,6 +80,18 @@
 			}
 			advert_check();
 		});
+		$('#sktSpam_check0').change(function() {
+			presspam0 = $('#sktSpam_check0').is(":checked");
+			advert_check();
+		});
+		$('#sktSpam_check1').change(function() {
+			presspam1 = $('#sktSpam_check1').is(":checked");
+			advert_check();
+		});
+		$('#sktSpam_check2').change(function() {
+			presspam2 = $('#sktSpam_check2').is(":checked");
+			advert_check();
+		});
 		$('#sktnurc_publkey').keyup( function(){
 			preskey1 = $('#sktnurc_publkey').val();
 			advert_check();
@@ -84,6 +101,10 @@
 			preskey2 = $('#sktnurc_privtkey').val();
 			advert_check();
 			alert_check();
+		});
+		$('#sktnurc_botscoutkey').keyup( function(){
+			preskey3 = $('#sktnurc_botscoutkey').val();
+			advert_check();
 		});
 		$('#sktnurc_regbutton').keyup( function(){
 			presreg = $('#sktnurc_regbutton').val();
@@ -160,7 +181,7 @@
 			}
 		}
 		window.advert_check	= function() {
-			if ((prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preslog == 'no')) {
+			if ((prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no')) {
 				$('.save-advert').fadeOut();
 			} else {
 				$('.save-advert').fadeIn();

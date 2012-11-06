@@ -28,6 +28,10 @@
 		$sktnurc_reclocales_strings=$sktnurc_temp_reclocales_strings;
 	}
 	$sktnurc_en_strings = $sktnurc_reclocales_strings["en"];
+	// activate StopForumSpan queries by default
+	if (get_option('sktnurc_stopforumspam_active')=='') {
+		update_option('sktnurc_stopforumspam_active',true);
+		} 
 
 	if($_POST['sktnurc_hidden'] == 'Y') {
 		//Form data sent
@@ -36,7 +40,17 @@
 
 		$sktnurc_privkey = $_POST['sktnurc_privtkey'];	
 		update_option('sktnurc_privtkey', $sktnurc_privkey);
-
+		
+		$sktnurc_botscoutkey = $_POST['sktnurc_botscoutkey'];
+		if($sktnurc_botscoutkey !== get_option('sktnurc_botscoutkey')){
+			$botscoutkey_verified = skt_nurc_verify_botscoutkey($sktnurc_botscoutkey);	
+		}
+		update_option('sktnurc_botscoutkey', $sktnurc_botscoutkey);
+		if($_POST['sktnurc_theme']=='true'){
+			update_option('sktnurc_botscoutTestMode', true);
+		}else{
+			update_option('sktnurc_botscoutTestMode', false);
+		}
 		update_option('sktnurc_theme', $_POST['sktnurc_theme']);
 		update_option('sktnurc_regbutton', $_POST['sktnurc_regbutton']);
 		if('custom'== $_POST['sktnurc_lang_set']) {
@@ -79,10 +93,14 @@
 		?>
 			<div class="updated"><p><strong><?php _e('Options saved.', 'Skt_nurcaptcha' ); ?></strong></p></div>
 		<?php
+		if ($botscoutkey_verified == false) {
+			settings_errors( 'botscoutkey' );
+			}
 	} else {
 		//Normal page display
 		$sktnurc_pubkey = get_option('sktnurc_publkey');
 		$sktnurc_privkey = get_option('sktnurc_privtkey');
+		$sktnurc_botscoutkey = get_option('sktnurc_botscoutkey');
 	}
 		$npath = nurc_make_log_path();
 ?>
@@ -304,9 +322,48 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
 		</p>
 	</div>
 
-	</form>
 <?php
-			/* PayPal Donation Button */
+
+/********************* AntiSpamDatabases query config */
+			
+?>
+	<div style="position:relative;width:680px;padding:8px 0 12px 24px">
+		<p style="padding: .6em; background-color: #666; color: #fff;">
+			<?php echo __( 'Configure Anti Spam Databases options:', 'Skt_nurcaptcha' ) ?>
+		</p><br />
+    <span>
+    <?php _e('Skt NURCaptcha adds extra security by checking new user\'s username, email and ip against trustable databases all around. By default, a search in \'Stop Forum Spam\'s\' database is always done after reCAPTCHA challenge is correctly filled. You may also choose to search up in BotScout\'s, also.','Skt_nurcaptcha'); ?> 
+    </span><br /><br />
+    <a href="http://www.stopforumspam.com/" target="_blank" title="<?php _e("Visit Stop Forum Spam site", 'Skt_nurcaptcha' ); ?>">
+    <img src="<?php echo plugin_dir_url(dirname(__FILE__).'/skt-nurcaptcha.php'); ?>img/sfs_banner.jpg" /></a><br />
+	<input class="sktSpam_check" type="checkbox" name="sktnurc_stopforumspam_active" id="sktSpam_check0" value="true" 
+	<?php if (get_option('sktnurc_stopforumspam_active')==true) { ?>checked<?php } ?> /> <?php _e('Activate StopForumSpam check for spammer signature (maximum of 20,000 lookups per day)','Skt_nurcaptcha'); ?><br /><br />
+    <a href="http://www.botscout.com/getkey.htm" target="_blank" title="<?php _e("Get an API Key at BotScout", 'Skt_nurcaptcha' ); ?>">
+    <img src="<?php echo plugin_dir_url(dirname(__FILE__).'/skt-nurcaptcha.php'); ?>img/bs_logo_msmall.gif" /></a><br />
+	<input class="sktSpam_check" type="checkbox" name="sktnurc_botscout_active" id="sktSpam_check1" value="true" 
+	<?php if (get_option('sktnurc_botscout_active')==true) { ?>checked<?php } ?> /> <?php _e('Activate BotScout (maximum of 20 lookups per day without a free BotScout API Key, or 300 with it)','Skt_nurcaptcha'); ?><br /><br />
+<?php                
+ 	if(get_option('sktnurc_botscoutTestMode')==''){update_option('sktnurc_botscoutTestMode',true);}
+?>               
+	<input class="sktSpam_check" type="checkbox" name="sktnurc_botscoutTestMode" id="sktSpam_check2" value="true" 
+	<?php if (get_option('sktnurc_botscoutTestMode')==true) { ?>checked<?php } ?> /> <?php _e('Leave BotScout in Test Mode (it will not check user\'s IP).','Skt_nurcaptcha'); ?> <span style="font-style:italic;"><?php _e('If you uncheck this box, BotScout will understand that any query you submit that matches an email or username in its database is not only a search, but also a submission. This means that even if you are just testing a suspect email, your own IP will be added to the database as a spammer if any record of that email exists in the BotScout files.','Skt_nurcaptcha'); ?></span>
+                <br />
+				<p><?php _e("BotScout API Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_botscoutkey" name="sktnurc_botscoutkey" value="<?php echo $sktnurc_botscoutkey; ?>" size="46"></p>
+		<div style="clear:both"></div>
+
+		<p class="submit" >
+		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
+		<span class="save-advert" style="display:none;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?>&nbsp;&raquo;&nbsp;&raquo;&nbsp;&raquo;&nbsp;</strong></span>
+		</p>
+	</div>
+
+
+	</form>
+
+<?php
+
+/********************* PayPal Donation Button */
+			
 ?>
 	<div style="position:relative;width:680px;padding:8px 0 12px 24px">
 		<p style="padding: .6em; background-color: #666; color: #fff;">
@@ -367,4 +424,25 @@ function nurc_get_version() {
 		return $version;
 		
 }
+
+function skt_nurc_verify_botscoutkey($sktnurc_botscoutkey){
+	$test_string = "http://botscout.com/test/?mail=jayzers16@aol.com&key=" . $sktnurc_botscoutkey;
+	if(function_exists('file_get_contents')){
+		$returned_data = file_get_contents($test_string);
+	}else{
+		$ch = curl_init($test_string);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$returned_data = curl_exec($ch);
+		curl_close($ch);
+	}
+	if(substr($returned_data, 0,1) == '!'){
+		$warning_message = __('Skt NURCaptcha Warning :: BotScout key seems to be incorrect. Retype it and try again.', 'Skt_nurcaptcha' );
+		add_settings_error( "botscoutkey", "botscoutkey", $warning_message );
+		return false;
+	}else{
+		return true;
+	}
+}
+
 ?>
