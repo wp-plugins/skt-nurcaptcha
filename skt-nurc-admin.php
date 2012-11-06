@@ -30,7 +30,7 @@
 	$sktnurc_en_strings = $sktnurc_reclocales_strings["en"];
 	// activate StopForumSpan queries by default
 	if (get_option('sktnurc_stopforumspam_active')=='') {
-		update_option('sktnurc_stopforumspam_active',true);
+		update_option('sktnurc_stopforumspam_active','true');
 		} 
 
 	if($_POST['sktnurc_hidden'] == 'Y') {
@@ -41,15 +41,28 @@
 		$sktnurc_privkey = $_POST['sktnurc_privtkey'];	
 		update_option('sktnurc_privtkey', $sktnurc_privkey);
 		
+		if($_POST['sktnurc_stopforumspam_active'] == 'true'){
+			update_option('sktnurc_stopforumspam_active', 'true');
+		}else{
+			update_option('sktnurc_stopforumspam_active', 'false');
+		}
+
+		if($_POST['sktnurc_botscout_active'] == 'true'){
+			update_option('sktnurc_botscout_active', 'true');
+		}else{
+			update_option('sktnurc_botscout_active', 'false');
+		}
+
 		$sktnurc_botscoutkey = $_POST['sktnurc_botscoutkey'];
 		if($sktnurc_botscoutkey !== get_option('sktnurc_botscoutkey')){
 			$botscoutkey_verified = skt_nurc_verify_botscoutkey($sktnurc_botscoutkey);	
 		}
 		update_option('sktnurc_botscoutkey', $sktnurc_botscoutkey);
-		if($_POST['sktnurc_theme']=='true'){
-			update_option('sktnurc_botscoutTestMode', true);
+
+		if($_POST['sktnurc_botscoutTestMode']=='true'){
+			update_option('sktnurc_botscoutTestMode', 'true');
 		}else{
-			update_option('sktnurc_botscoutTestMode', false);
+			update_option('sktnurc_botscoutTestMode', 'false');
 		}
 		update_option('sktnurc_theme', $_POST['sktnurc_theme']);
 		update_option('sktnurc_regbutton', $_POST['sktnurc_regbutton']);
@@ -337,16 +350,16 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
     <a href="http://www.stopforumspam.com/" target="_blank" title="<?php _e("Visit Stop Forum Spam site", 'Skt_nurcaptcha' ); ?>">
     <img src="<?php echo plugin_dir_url(dirname(__FILE__).'/skt-nurcaptcha.php'); ?>img/sfs_banner.jpg" /></a><br />
 	<input class="sktSpam_check" type="checkbox" name="sktnurc_stopforumspam_active" id="sktSpam_check0" value="true" 
-	<?php if (get_option('sktnurc_stopforumspam_active')==true) { ?>checked<?php } ?> /> <?php _e('Activate StopForumSpam check for spammer signature (maximum of 20,000 lookups per day)','Skt_nurcaptcha'); ?><br /><br />
+	<?php if (get_option('sktnurc_stopforumspam_active')=='true') { ?>checked<?php } ?> /> <?php _e('Activate StopForumSpam check for spammer signature (maximum of 20,000 lookups per day)','Skt_nurcaptcha'); ?><br /><br />
     <a href="http://www.botscout.com/getkey.htm" target="_blank" title="<?php _e("Get an API Key at BotScout", 'Skt_nurcaptcha' ); ?>">
     <img src="<?php echo plugin_dir_url(dirname(__FILE__).'/skt-nurcaptcha.php'); ?>img/bs_logo_msmall.gif" /></a><br />
 	<input class="sktSpam_check" type="checkbox" name="sktnurc_botscout_active" id="sktSpam_check1" value="true" 
-	<?php if (get_option('sktnurc_botscout_active')==true) { ?>checked<?php } ?> /> <?php _e('Activate BotScout (maximum of 20 lookups per day without a free BotScout API Key, or 300 with it)','Skt_nurcaptcha'); ?><br /><br />
+	<?php if (get_option('sktnurc_botscout_active')=='true') { ?>checked<?php } ?> /> <?php _e('Activate BotScout (maximum of 20 lookups per day without a free BotScout API Key, or 300 with it)','Skt_nurcaptcha'); ?><br /><br />
 <?php                
- 	if(get_option('sktnurc_botscoutTestMode')==''){update_option('sktnurc_botscoutTestMode',true);}
+ 	if(get_option('sktnurc_botscoutTestMode')==''){update_option('sktnurc_botscoutTestMode','true');}
 ?>               
 	<input class="sktSpam_check" type="checkbox" name="sktnurc_botscoutTestMode" id="sktSpam_check2" value="true" 
-	<?php if (get_option('sktnurc_botscoutTestMode')==true) { ?>checked<?php } ?> /> <?php _e('Leave BotScout in Test Mode (it will not check user\'s IP).','Skt_nurcaptcha'); ?> <span style="font-style:italic;"><?php _e('If you uncheck this box, BotScout will understand that any query you submit that matches an email or username in its database is not only a search, but also a submission. This means that even if you are just testing a suspect email, your own IP will be added to the database as a spammer if any record of that email exists in the BotScout files.','Skt_nurcaptcha'); ?></span>
+	<?php if (get_option('sktnurc_botscoutTestMode')=='true') { ?>checked<?php } ?> /> <?php _e('Leave BotScout in Test Mode (it will not check user\'s IP).','Skt_nurcaptcha'); ?> <span style="font-style:italic;"><?php _e('If you uncheck this box, BotScout will understand that any query you submit that matches an email or username in its database is not only a search, but also a submission. This means that even if you are just testing a suspect email, your own IP will be added to the database as a spammer if any record of that email exists in the BotScout files.','Skt_nurcaptcha'); ?></span>
                 <br />
 				<p><?php _e("BotScout API Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_botscoutkey" name="sktnurc_botscoutkey" value="<?php echo $sktnurc_botscoutkey; ?>" size="46"></p>
 		<div style="clear:both"></div>
