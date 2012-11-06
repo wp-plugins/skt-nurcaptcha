@@ -4,9 +4,9 @@ Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register
 Requires at least: 3.0.1
 Tested up to: 3.4.2
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 
-NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
+NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots, and checks new user data against trustable databases to block suspects even though they manage to pass through the reCAPTCHA challenge. 
 
 == Description ==
 
@@ -59,9 +59,9 @@ so they come and go silently. These bots may not trigger the counter, but they w
 
 = Does NURCaptcha blocks spambots only? =
 
-That is the main target of any captcha plugin: to catch bots and allow human beings to pass by. So it 
-wont prevent you against badly mooded human intruders, as they can read and respond perfectly the 
-challenge presented by the plugin.
+That is the main target of any captcha plugin: to catch bots and allow human beings to pass by. In order for it 
+to somehow prevent you against badly mooded human intruders, their data (email & IP) are checked against trustable
+anti-spam databases (from plugin version 3.0.0 on).
 
 = How can I help people who for any reason were not able to fill the captcha challenge? =
 
@@ -85,6 +85,8 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 3.0.1 =
+* Fixed: small glitch affecting BuddyPress users only - no security issues involved.
 = 3.0.0 =
 * Added: StopForumSpam and BotScout databases assessment for extra security.
 = 2.4.7 =
@@ -118,6 +120,8 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 3.0.1 =
+* Fixed: small visual glitch affecting BuddyPress users only - no security issues involved.
 = 3.0.0 =
 * Added: StopForumSpam and BotScout databases assessment for extra security.
 * Alert: we strongly recommend users to upgrade to version 3, as there are some evidences of spammers making a way through reCAPTCHA challenges - probably by tricking someone else to solve it for their bots.
