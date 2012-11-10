@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Skt_nurcaptcha 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-30 21:50-0300\n"
+"POT-Creation-Date: 2012-11-09 22:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
 "Language-Team: \n"
@@ -62,162 +62,170 @@ msgstr ""
 msgid "reCAPTCHA challenge image"
 msgstr ""
 
-#: skt-nurc-admin.php:85
-msgid "Log File has been deleted."
+#: skt-nurc-admin.php:111
+msgid "An Error occurred: Log File deletion was not possible."
 msgstr ""
 
-#: skt-nurc-admin.php:90
+#: skt-nurc-admin.php:116
 msgid "Options saved."
 msgstr ""
 
-#: skt-nurc-admin.php:107 skt-nurcaptcha.php:123
+#: skt-nurc-admin.php:132 skt-nurcaptcha.php:129
 msgid "Skt NURCaptcha Settings"
 msgstr ""
 
-#: skt-nurc-admin.php:114
+#: skt-nurc-admin.php:139
 msgid ""
 "This option cannot be undone. Do you really want to erase all Log Data and "
 "restart Log File?"
 msgstr ""
 
-#: skt-nurc-admin.php:115
+#: skt-nurc-admin.php:140
 msgid "Version: "
 msgstr ""
 
-#: skt-nurc-admin.php:118
+#: skt-nurc-admin.php:145
 msgid "has blocked"
 msgstr ""
 
-#: skt-nurc-admin.php:118
+#: skt-nurc-admin.php:145
 msgid "suspect register attempts on this site."
 msgstr ""
 
-#: skt-nurc-admin.php:118
-msgid "See Log"
+#: skt-nurc-admin.php:145
+msgid "Toggle Log"
 msgstr ""
 
-#: skt-nurc-admin.php:118
-msgid "Hide Log"
-msgstr ""
-
-#: skt-nurc-admin.php:121
+#: skt-nurc-admin.php:148
 msgid "NURCaptcha stands for <strong>New User Register Captcha</strong>."
 msgstr ""
 
-#: skt-nurc-admin.php:122
+#: skt-nurc-admin.php:149
 msgid ""
 "It uses Google's reCaptcha tools to protect your site against spammer bots, "
 msgstr ""
 
-#: skt-nurc-admin.php:123
+#: skt-nurc-admin.php:150
 msgid "adding security to the WP Register Form. You can learn more"
 msgstr ""
 
-#: skt-nurc-admin.php:124
+#: skt-nurc-admin.php:151
 msgid "here"
 msgstr ""
 
-#: skt-nurc-admin.php:124
+#: skt-nurc-admin.php:151
 msgid "about reCAPTCHA Security"
 msgstr ""
 
-#: skt-nurc-admin.php:127 skt-nurc-admin.php:166 skt-nurc-admin.php:316
-#: skt-nurc-admin.php:351
+#: skt-nurc-admin.php:154 skt-nurc-admin.php:220 skt-nurc-admin.php:370
+#: skt-nurc-admin.php:405
 msgid "Update Options"
 msgstr ""
 
-#: skt-nurc-admin.php:128
+#: skt-nurc-admin.php:155
 msgid "Remember to save your changes before leaving this page! "
 msgstr ""
 
-#: skt-nurc-admin.php:135
-msgid "Nothing found in Log File"
-msgstr ""
-
-#: skt-nurc-admin.php:142
-msgid "Last Blocked Attemptives"
-msgstr ""
-
-#: skt-nurc-admin.php:143
+#: skt-nurc-admin.php:161
 msgid "Delete Log File"
 msgstr ""
 
-#: skt-nurc-admin.php:143
+#: skt-nurc-admin.php:161
 msgid "Cancel Delete Log File"
 msgstr ""
 
-#: skt-nurc-admin.php:157
+#: skt-nurc-admin.php:176
+msgid "Last Blocked Attemptives"
+msgstr ""
+
+#: skt-nurc-admin.php:178
+msgid "Page"
+msgstr ""
+
+#: skt-nurc-admin.php:178
+msgid "of"
+msgstr ""
+
+#: skt-nurc-admin.php:181
+msgid "occurrences per page"
+msgstr ""
+
+#: skt-nurc-admin.php:204
+msgid "No data to show"
+msgstr ""
+
+#: skt-nurc-admin.php:211
 msgid ""
 "To enable this plugin's functionality, please enter your reCAPTCHA keys here:"
 msgstr ""
 
-#: skt-nurc-admin.php:158
+#: skt-nurc-admin.php:212
 msgid "You can sign up for reCaptcha <strong>free</strong> keys here: "
 msgstr ""
 
-#: skt-nurc-admin.php:163
+#: skt-nurc-admin.php:217
 msgid "reCaptcha Public Key: "
 msgstr ""
 
-#: skt-nurc-admin.php:164
+#: skt-nurc-admin.php:218
 msgid "reCaptcha Private Key: "
 msgstr ""
 
-#: skt-nurc-admin.php:167 skt-nurc-admin.php:317 skt-nurc-admin.php:352
+#: skt-nurc-admin.php:221 skt-nurc-admin.php:371 skt-nurc-admin.php:406
 msgid "Remember to save your changes before leaving this page!"
 msgstr ""
 
-#: skt-nurc-admin.php:172
+#: skt-nurc-admin.php:226
 msgid "Style your reCaptcha:"
 msgstr ""
 
-#: skt-nurc-admin.php:175
+#: skt-nurc-admin.php:229
 msgid "reCAPTCHA theme:"
 msgstr ""
 
-#: skt-nurc-admin.php:199
+#: skt-nurc-admin.php:253
 msgid "This is the look of your captcha"
 msgstr ""
 
-#: skt-nurc-admin.php:212
+#: skt-nurc-admin.php:266
 msgid "reCAPTCHA language:"
 msgstr ""
 
-#: skt-nurc-admin.php:216
+#: skt-nurc-admin.php:270
 msgid "use reCAPTCHA native languages"
 msgstr ""
 
-#: skt-nurc-admin.php:219
+#: skt-nurc-admin.php:273
 msgid "Choose a language on the selector below"
 msgstr ""
 
-#: skt-nurc-admin.php:226
+#: skt-nurc-admin.php:280
 msgid "use custom strings set"
 msgstr ""
 
-#: skt-nurc-admin.php:229 skt-nurc-admin.php:252
+#: skt-nurc-admin.php:283 skt-nurc-admin.php:306
 msgid "Save this choice before making changes on the strings"
 msgstr ""
 
-#: skt-nurc-admin.php:265
+#: skt-nurc-admin.php:319
 msgid ""
 "Customize reCAPTCHA strings at will by changing the texts in the eleven "
 "fields below:"
 msgstr ""
 
-#: skt-nurc-admin.php:297
+#: skt-nurc-admin.php:351
 msgid "Customize text to appear in Submit Button (register form): "
 msgstr ""
 
-#: skt-nurc-admin.php:300 skt-nurc-admin.php:307 skt-nurcaptcha.php:245
+#: skt-nurc-admin.php:354 skt-nurc-admin.php:361 skt-nurcaptcha.php:256
 msgid "Register"
 msgstr ""
 
-#: skt-nurc-admin.php:328
+#: skt-nurc-admin.php:382
 msgid "Configure Anti Spam Databases options:"
 msgstr ""
 
-#: skt-nurc-admin.php:331
+#: skt-nurc-admin.php:385
 msgid ""
 "Skt NURCaptcha adds extra security by checking new user's username, email "
 "and ip against trustable databases all around. By default, a search in 'Stop "
@@ -225,31 +233,31 @@ msgid ""
 "filled. You may also choose to search up in BotScout's, also."
 msgstr ""
 
-#: skt-nurc-admin.php:333
+#: skt-nurc-admin.php:387
 msgid "Visit Stop Forum Spam site"
 msgstr ""
 
-#: skt-nurc-admin.php:336
+#: skt-nurc-admin.php:390
 msgid ""
 "Activate StopForumSpam check for spammer signature (maximum of 20,000 "
 "lookups per day)"
 msgstr ""
 
-#: skt-nurc-admin.php:337
+#: skt-nurc-admin.php:391
 msgid "Get an API Key at BotScout"
 msgstr ""
 
-#: skt-nurc-admin.php:340
+#: skt-nurc-admin.php:394
 msgid ""
 "Activate BotScout (maximum of 20 lookups per day without a free BotScout API "
 "Key, or 300 with it)"
 msgstr ""
 
-#: skt-nurc-admin.php:345
+#: skt-nurc-admin.php:399
 msgid "Leave BotScout in Test Mode (it will not check user's IP)."
 msgstr ""
 
-#: skt-nurc-admin.php:345
+#: skt-nurc-admin.php:399
 msgid ""
 "If you uncheck this box, BotScout will understand that any query you submit "
 "that matches an email or username in its database is not only a search, but "
@@ -258,100 +266,100 @@ msgid ""
 "of that email exists in the BotScout files."
 msgstr ""
 
-#: skt-nurc-admin.php:347
+#: skt-nurc-admin.php:401
 msgid "BotScout API Key: "
 msgstr ""
 
-#: skt-nurc-admin.php:366
+#: skt-nurc-admin.php:420
 msgid "Make me happy:"
 msgstr ""
 
-#: skt-nurc-admin.php:436
+#: skt-nurc-admin.php:481
 msgid ""
 "Skt NURCaptcha Warning :: BotScout key seems to be incorrect. Retype it and "
 "try again."
 msgstr ""
 
-#: skt-nurcaptcha.php:86
+#: skt-nurcaptcha.php:92
 msgid "Settings"
 msgstr ""
 
-#: skt-nurcaptcha.php:119
+#: skt-nurcaptcha.php:125
 msgid "Skt NURCaptcha Warning"
 msgstr ""
 
-#: skt-nurcaptcha.php:121
+#: skt-nurcaptcha.php:127
 msgid ""
 "You must register your reCAPTCHA keys to have Skt NURCaptcha protection "
 "enabled."
 msgstr ""
 
-#: skt-nurcaptcha.php:123
+#: skt-nurcaptcha.php:129
 msgid "Go to"
 msgstr ""
 
-#: skt-nurcaptcha.php:123
+#: skt-nurcaptcha.php:129
 msgid "and save your keys to the appropriate fields"
 msgstr ""
 
-#: skt-nurcaptcha.php:125
+#: skt-nurcaptcha.php:131
 msgid "Be sure your keys are saved to the appropriate fields down here"
 msgstr ""
 
-#: skt-nurcaptcha.php:146
+#: skt-nurcaptcha.php:153
 msgid "NURCaptcha ERROR"
 msgstr ""
 
-#: skt-nurcaptcha.php:218
+#: skt-nurcaptcha.php:229
 msgid "Registration Form"
 msgstr ""
 
-#: skt-nurcaptcha.php:218
+#: skt-nurcaptcha.php:229
 msgid "Register For This Site"
 msgstr ""
 
-#: skt-nurcaptcha.php:226
+#: skt-nurcaptcha.php:237
 #, php-format
 msgid "There is a problem with your response: %s"
 msgstr ""
 
-#: skt-nurcaptcha.php:232
+#: skt-nurcaptcha.php:243
 msgid "Username"
 msgstr ""
 
-#: skt-nurcaptcha.php:233
+#: skt-nurcaptcha.php:244
 msgid "E-mail"
 msgstr ""
 
-#: skt-nurcaptcha.php:240
+#: skt-nurcaptcha.php:251
 msgid "A password will be e-mailed to you."
 msgstr ""
 
-#: skt-nurcaptcha.php:252
+#: skt-nurcaptcha.php:263
 msgid "Log in"
 msgstr ""
 
-#: skt-nurcaptcha.php:253
+#: skt-nurcaptcha.php:264
 msgid "Password Lost and Found"
 msgstr ""
 
-#: skt-nurcaptcha.php:253
+#: skt-nurcaptcha.php:264
 msgid "Lost your password?"
 msgstr ""
 
-#: skt-nurcaptcha.php:276
+#: skt-nurcaptcha.php:287
 msgid ""
 "Use only non-accented alphanumeric characters plus these: _ [underscore], "
 "[space], . [dot], - [hyphen], * [asterisk], and @ [at]"
 msgstr ""
 
-#: skt-nurcaptcha.php:286
+#: skt-nurcaptcha.php:297
 msgid ""
 "Use a functional email address, as your temporary password will be sent to "
 "that email"
 msgstr ""
 
-#: skt-nurcaptcha.php:298
+#: skt-nurcaptcha.php:309
 msgid ""
 "To get registered, just transcribe both the words, numbers and signs you see "
 "in the box below, to the small text field under it, no matter how absurd "
@@ -359,63 +367,67 @@ msgid ""
 "to this site. We welcome you, but we must keep out all spambots."
 msgstr ""
 
-#: skt-nurcaptcha.php:314
+#: skt-nurcaptcha.php:322
 msgid "Fill the Captcha below"
 msgstr ""
 
-#: skt-nurcaptcha.php:423
+#: skt-nurcaptcha.php:413
 msgid "Could not open socket - server communication failed - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:476
+#: skt-nurcaptcha.php:466
 #, php-format
 msgid "To use reCAPTCHA you must get an API key from %s"
 msgstr ""
 
-#: skt-nurcaptcha.php:481
+#: skt-nurcaptcha.php:471
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
 msgstr ""
 
-#: skt-nurcaptcha.php:486
+#: skt-nurcaptcha.php:476
 msgid "Inconsistency detected - try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:493
+#: skt-nurcaptcha.php:480
 msgid "Response field was empty!"
 msgstr ""
 
-#: skt-nurcaptcha.php:524
+#: skt-nurcaptcha.php:508
 msgid "Incorrect Captcha solution - please try again."
 msgstr ""
 
-#: skt-nurcaptcha.php:551
+#: skt-nurcaptcha.php:528
 msgid "error: No return data from query. Try again later."
 msgstr ""
 
-#: skt-nurcaptcha.php:555
+#: skt-nurcaptcha.php:532
 msgid ""
 "says: 'Spammer signature found!' Registration will not be allowed for this "
 "user "
 msgstr ""
 
-#: skt-nurcaptcha.php:558
+#: skt-nurcaptcha.php:535
 msgid "is suspect"
 msgstr ""
 
-#: skt-nurcaptcha.php:559
+#: skt-nurcaptcha.php:536
 msgid "occurrences found"
 msgstr ""
 
-#: skt-nurcaptcha.php:604
+#: skt-nurcaptcha.php:580
 msgid "error: No return data from API query."
 msgstr ""
 
-#: skt-nurcaptcha.php:611
+#: skt-nurcaptcha.php:587
 #, php-format
 msgid "error: %s"
 msgstr ""
 
-#: skt-nurcaptcha.php:627
+#: skt-nurcaptcha.php:603
 msgid ""
 "says: 'Bot signature found!' Registration will not be allowed for this user."
+msgstr ""
+
+#: skt-nurcaptcha.php:706
+msgid "Log table successfully deleted."
 msgstr ""

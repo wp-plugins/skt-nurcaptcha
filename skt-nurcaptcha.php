@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 adds extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.0.2
+	Version: 3.1.0
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -31,7 +31,7 @@
     
 */
 
-
+global $sktnurclog_db_version; $sktnurclog_db_version = "3.1";
 load_plugin_textdomain('Skt_nurcaptcha', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 add_action('admin_menu', 'skt_nurc_admin_page');
 add_action( 'login_enqueue_scripts', 'skt_nurc_login_init' );
@@ -45,7 +45,7 @@ if ( is_multisite() ) {
 	add_filter('wpmu_validate_user_signup', 'skt_nurc_validate_captcha', 999, 1);
 		// located @ wp-includes/ms-functions.php line 519 :: WP v 3.4.2
 }
-if (( get_option('sktnurc_publkey')== '') or ( get_option('sktnurc_privtkey')== '' )) {
+if (( get_site_option('sktnurc_publkey')== '') or ( get_site_option('sktnurc_privtkey')== '' )) {
 	skt_nurc_keys_alert();
 }
 function skt_nurc_bp_include_hook() {
@@ -61,7 +61,7 @@ function skt_nurc_bp_signup_validate() {
 	$http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
 	if ( $http_post ) { // if we have a response, let's check it
 		$nurc_result = new ReCaptchaResponse();	
-		$nurc_result = recaptcha_check_answer(get_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
+		$nurc_result = recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
 		if ($nurc_result->is_valid) {
 			$usrx = ''; //$_POST['signup_username']
 			$nurc_result = skt_nurc_antispam($_POST['signup_email'], $usrx, $nurc_result);
@@ -84,7 +84,7 @@ function skt_nurc_bp_before_registration_submit_buttons() {
 	echo '</div>';
 }
 function nurCaptchaMU_preprocess() {
-	if ((get_option('sktnurc_publkey')=='')||(get_option('sktnurc_privtkey')=='')) {
+	if ((get_site_option('sktnurc_publkey')=='')||(get_site_option('sktnurc_privtkey')=='')) {
 		die('<p class="error" style="font-weight:300"><strong>Security issue detected:</strong> reCAPTCHA configuration incomplete.<br /> Sorry! Signup will not be allowed until this problem is fixed. <br />Please try again later.</p>');
 	}
 }
@@ -135,7 +135,7 @@ function skt_nurc_setup_alert() {
 
 /****
 *
-* Error box in WPMU - if reCAPTCHA is not correctly filled 
+* Error box in WPMU - if reCAPTCHA is not correctly filled or if spam signature check is positive 
 * 
 ****/
 function nurCaptchaMU_extra($errors = array()) {
@@ -162,7 +162,7 @@ function skt_nurc_validate_captcha($result) {
 	$http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
 	if ( $http_post ) { // if we have a response, let's check it
 		$nurc_result = new ReCaptchaResponse();	
-		$nurc_result = recaptcha_check_answer(get_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
+		$nurc_result = recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
 		if ($nurc_result->is_valid) {
 			$usrx = ''; //$user_name
 			$user_email = $_POST['user_email']; 
@@ -198,12 +198,12 @@ function skt_nurCaptcha() {
 		wp_redirect( apply_filters( 'wp_signup_location', site_url('wp-signup.php') ) );
 		exit();
 	}
-	if ( !get_option('users_can_register') ) {
+	if ( !get_site_option('users_can_register') ) {
 		wp_redirect( site_url('wp-login.php?registration=disabled') );
 		exit();
 	}
 		// Plugin is disabled if one or both reCaptcha keys are missing: 
-	if ((get_option('sktnurc_publkey')=='')||(get_option('sktnurc_privtkey')=='')) {return false;} 
+	if ((get_site_option('sktnurc_publkey')=='')||(get_site_option('sktnurc_privtkey')=='')) {return false;} 
     $result = new ReCaptchaResponse(); // sets $result as a class variable
 	$user_login = '';
 	$user_email = '';
@@ -211,7 +211,7 @@ function skt_nurCaptcha() {
 		$user_login = $_POST['user_login'];
 		$user_email = $_POST['user_email'];
 
-		$result = recaptcha_check_answer(get_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
+		$result = recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
 		// let's check antispammer databases, if reCAPTCHA is ok...
 			$usrx = ''; //$user_login
 		if ($result->is_valid) { $result = skt_nurc_antispam($user_email, $usrx, $result); }
@@ -227,7 +227,7 @@ function skt_nurCaptcha() {
 
 	$redirect_to = apply_filters( 'registration_redirect', !empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '' );
 	login_header(__('Registration Form'), '<p class="message register">' . __('Register For This Site') . '</p>', $errors);
-	if (get_option('sktnurc_theme')!="clean"){$form_width ='320';}else{$form_width ='448';}
+	if (get_site_option('sktnurc_theme')!="clean"){$form_width ='320';}else{$form_width ='448';}
 	
 	if ((!$result->is_valid)and($result->error != '')) {
 		
@@ -252,10 +252,10 @@ function skt_nurCaptcha() {
 	<br class="clear" />
 	<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
 	<p class="submit"><input class="button-primary" type="submit" id="wp-submit" value="<?php 
-	if (get_option('sktnurc_regbutton')==""){
+	if (get_site_option('sktnurc_regbutton')==""){
 		_e("Register", 'Skt_nurcaptcha'); 
 	} else {
-		echo get_option('sktnurc_regbutton');
+		echo get_site_option('sktnurc_regbutton');
 	}
 	?>" tabindex="100" /></p></form>
 
@@ -316,10 +316,7 @@ function nurc_make_path() {
 		$npath = $nurc_pathinfo['dirname']."/"; // prepare realpath to base plugin directory
 		return $npath;
 }
-function nurc_make_log_path() {
-		$npath = (nurc_make_path())."nurcaptchalog.txt"; // prepare path to manage log file
-		return $npath;
-}
+
 function nurc_recaptcha_challenge() {
 		?>
 		<p><label><?php _e('Fill the Captcha below', 'Skt_nurcaptcha') ?><?php nurc_reCaptcha_help(); ?></label></p>
@@ -327,13 +324,13 @@ function nurc_recaptcha_challenge() {
 		<script type="text/javascript">
 		 var RecaptchaOptions = {
 			<?php 
-				$temp = get_option('sktnurc_reclocales_lang');
+				$temp = get_site_option('sktnurc_reclocales_lang');
 				if ($temp == ''){
 					include('skt-nurc-recaptcha-locales.php');
-					update_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
-					$sktnurc_cst_strings = $sktnurc_reclocales_strings[get_option('sktnurc_lang')];
+					update_site_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
+					$sktnurc_cst_strings = $sktnurc_reclocales_strings[get_site_option('sktnurc_lang')];
 				}else{
-					$sktnurc_cst_strings = $temp[get_option('sktnurc_lang')];
+					$sktnurc_cst_strings = $temp[get_site_option('sktnurc_lang')];
 				}
 			?>
                 custom_translations : {
@@ -349,15 +346,15 @@ function nurc_recaptcha_challenge() {
                         incorrect_try_again : "<?php echo $sktnurc_cst_strings[9] ?>",
                         image_alt_text : "<?php echo $sktnurc_cst_strings[10] ?>",
                 },
- 		   		lang : '<?php echo get_option('sktnurc_lang') ?>',
- 		   		theme : '<?php echo get_option('sktnurc_theme') ?>'
+ 		   		lang : '<?php echo get_site_option('sktnurc_lang') ?>',
+ 		   		theme : '<?php echo get_site_option('sktnurc_theme') ?>'
 		 }
 		</script>	
 		<script type="text/javascript"
-		     src="http://www.google.com/recaptcha/api/challenge?k=<?php echo get_option('sktnurc_publkey'); ?>">
+		     src="http://www.google.com/recaptcha/api/challenge?k=<?php echo get_site_option('sktnurc_publkey'); ?>">
 		</script>
 		<noscript>
-			<iframe src="http://www.google.com/recaptcha/api/noscript?k=<?php echo get_option('sktnurc_publkey'); ?>" height="300" width="500" frameborder="0"></iframe><br>
+			<iframe src="http://www.google.com/recaptcha/api/noscript?k=<?php echo get_site_option('sktnurc_publkey'); ?>" height="300" width="500" frameborder="0"></iframe><br>
 			<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
 			<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
 		</noscript>
@@ -365,9 +362,12 @@ function nurc_recaptcha_challenge() {
         <?php 
 }
 /**
- * Writes log on file
+ * Writes log into db table
  */
 function nurc_log_attempt($processID = '') {
+		global $wpdb;
+		$table_name = $wpdb->prefix . "sktnurclog";
+		
 		$ue = $_POST['user_email']; 
 		if ( is_multisite() ) {		
 			$ul = $_POST['user_name'];
@@ -381,33 +381,12 @@ function nurc_log_attempt($processID = '') {
 		if ($ue == '') {$ue = '  ...  ';}
 		if ($ul == '') {$ul = '  ...  ';}
 		$logtime = current_time("mysql",0);
-		$logline = $logtime . " &raquo;&ensp; email: &lt;<strong>";
-		$logline .=  $ue ."</strong>&gt; &rarr; name: <strong>". $ul . "</strong>";
-		$logline .= " &rarr; IP: ". $_SERVER['REMOTE_ADDR'];
-		if($processID !== ''){$logline .= "&ensp;&raquo;&ensp; [" . $processID . "]";}
-		$logline .= "\r\n";
-		// ***
-		// #######  Include here: branch to options based log file
+		//
+		// ****  Insert data into database table
+		$rows_affected = $wpdb->insert( $table_name, array( 'time' => $logtime, 'username' => $ul, 'email' => $ue, 'ip' => $_SERVER['REMOTE_ADDR'], 'procid' => $processID ) );
 		// ***
 		
-		// **** log file creation or update - as text file
-			$npath = nurc_make_log_path();
-			$handle = fopen($npath, "a+t");
-			if ($handle == false) { 
-				$logline.= " - Unable to open file!";
-				return $logline;
-			}
-			if (flock($handle, LOCK_EX)) {
-				fputs($handle,$logline);
-   		 		flock($handle, LOCK_UN);
-				$resp = true;
-			} else {
-    			$resp = "Couldn't get the lock!";
-			}
-			fclose($handle);
-		// **** end of text file management
-		
-		return $resp;
+		return $rows_affected;
 }
 /**
  * Submits an HTTP POST to a reCAPTCHA server
@@ -495,16 +474,10 @@ function recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $ex
 	if ($challenge == null || strlen($challenge) == 0) {
 		$flag = true;
 		$flagged_r = __('Inconsistency detected - try again later.', 'Skt_nurcaptcha');
-				if ($add_count) {
-					skt_nurc_add_one_register_count();
-				}
     }
 	if ($response == null || strlen($response) == 0) {
 		$flag = true;
 		$flagged_r = __('Response field was empty!', 'Skt_nurcaptcha');
-				if ($add_count) {
-					skt_nurc_add_one_register_count();
-				}
     }
 	if ($flag) {
                 $recaptcha_response->is_valid = false;
@@ -533,23 +506,16 @@ function recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $ex
         }
         if ($recaptcha_response->error == 'incorrect-captcha-sol') {
         		$recaptcha_response->error = __("Incorrect Captcha solution - please try again.", 'Skt_nurcaptcha');
-				if ($add_count) {
-					skt_nurc_add_one_register_count();
-				}
         }
         return $recaptcha_response;
 
-}
-function skt_nurc_add_one_register_count(){
-		$count = intval(get_option('sktnurc_count'));
-		update_option('sktnurc_count',$count+1);
 }
 /**** 
 *
 * ***  StopForumSpam.com routine  *** 
 * 
 ****/
-function skt_nurc_check_stopforumspam($XMAIL = '', $XIP = '', $XNAME = '', $add_count = true) {
+function skt_nurc_check_stopforumspam($XMAIL = '', $XIP = '', $XNAME = '') {
     $stopforumspam_response = new ReCaptchaResponse();
 	$returned_data=''; $botdata='';
 	
@@ -571,7 +537,6 @@ function skt_nurc_check_stopforumspam($XMAIL = '', $XIP = '', $XNAME = '', $add_
 			}
 		}
 		$stopforumspam_response->error .= '</strong>';
-		if($add_count) skt_nurc_add_one_register_count();
 	} else {
     	$stopforumspam_response->is_valid = true;
 	}
@@ -584,10 +549,10 @@ function skt_nurc_check_stopforumspam($XMAIL = '', $XIP = '', $XNAME = '', $add_
 * ***  BotScout.com routine  *** 
 * 
 ****/
-function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '', $add_count = true) {
+function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '') {
     $botscout_response = new ReCaptchaResponse();
 	$returned_data=''; $botdata='';
-	$APIKEY = get_option('sktnurc_botscoutKey');
+	$APIKEY = get_site_option('sktnurc_botscoutKey');
 	
 	$XMAIL = urlencode($XMAIL); // make url compliant with urlencode()
 	if ($XNAME == ''){
@@ -595,7 +560,7 @@ function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '', $add_count
 	}else{
 		$test_string = "http://botscout.com/test/?multi&name=$XNAME&mail=$XMAIL";
 	}
-	if(get_option('sktnurc_botscoutTestMode')==false){$test_string .= "&ip=$XIP";}
+	if(get_site_option('sktnurc_botscoutTestMode')==false){$test_string .= "&ip=$XIP";}
 	if($APIKEY != ''){   // append API key.
 		$test_string .= "&key=$APIKEY";
 	}
@@ -622,7 +587,6 @@ function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '', $add_count
         $botscout_response->error = 'BotScout ' . sprintf(__("error: %s", 'Skt_nurcaptcha'),$returned_data);
 		return $botscout_response;
 	}
-
 	$botdata = explode('|', $returned_data); 
 	// $botdata[0] - 'Y' if found in database, 'N' if not found, '!' if an error occurred 
 	// $botdata[1] - type of test (will be 'MAIL', 'IP', 'NAME', or 'MULTI') 
@@ -633,10 +597,10 @@ function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '', $add_count
 	// $botdata[6] - descriptor field for item (NAME)
 	// $botdata[7] - how many times the NAME was found in the database 
 	
-	if($botdata[3] > 0 || $botdata[5] > 0 || $botdata[7] > 0){ 
+	//if($botdata[3] > 0 || $botdata[5] > 0 || $botdata[7] > 0){ 
+	if($botdata[0] == 'Y'){ 
 		$botscout_response->is_valid = false;
 		$botscout_response->error = 'BotScout ' . __("says: 'Bot signature found!' Registration will not be allowed for this user.", 'Skt_nurcaptcha');
-		if($add_count) skt_nurc_add_one_register_count();
 	} else {
     	$botscout_response->is_valid = true;
 	}
@@ -649,18 +613,18 @@ function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '', $add_count
 * ***  check antispammer databases  *** 
 * 
 ****/
-function skt_nurc_antispam($user_email, $user_login, $result, $add_count = true){
+function skt_nurc_antispam($user_email, $user_login, $result){
 
 	// activate StopForumSpan queries by default
-	if (get_option('sktnurc_stopforumspam_active')=='') {
-		update_option('sktnurc_stopforumspam_active',true);
+	if (get_site_option('sktnurc_stopforumspam_active')!='false') {
+		update_site_option('sktnurc_stopforumspam_active','true');
 		} 
 	// captcha passed, now wanna check bot-databases all around
-	if (($result->is_valid)and(get_option('sktnurc_stopforumspam_active')==true)) { 
-		$result = skt_nurc_check_stopforumspam($user_email, $_SERVER['REMOTE_ADDR'], $user_login, $add_count);
+	if (get_site_option('sktnurc_stopforumspam_active')=='true') { 
+		$result = skt_nurc_check_stopforumspam($user_email, $_SERVER['REMOTE_ADDR'], $user_login);
 	}
-	if(($result->is_valid)and(get_option('sktnurc_botscout_active')==true)){
-		$result = skt_nurc_check_botscout($user_email, $_SERVER['REMOTE_ADDR'], $user_login, $add_count);
+	if(($result->is_valid)&&(get_site_option('sktnurc_botscout_active')=='true')){
+		$result = skt_nurc_check_botscout($user_email, $_SERVER['REMOTE_ADDR'], $user_login);
 	}
 	return $result;
 }
@@ -681,6 +645,66 @@ function skt_nurc_select_procid($result){
 			$processID = 'reCAPTCHA';
 	}
 	return $processID;
+}
+
+/**** 
+*
+* ***  Log db table installing and updating  *** 
+* 
+****/
+function skt_nurc_install ($log_db_version) {
+	global $wpdb;
+	$table_name = $wpdb->prefix . "sktnurclog"; 
+	$sql = "CREATE TABLE $table_name (
+	  id mediumint(9) NOT NULL AUTO_INCREMENT,
+	  time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+	  email tinytext NOT NULL,
+	  username tinytext NOT NULL,
+	  ip tinytext NOT NULL,
+	  procid tinytext NOT NULL,
+	  UNIQUE KEY id (id)
+	);";
+	
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	dbDelta($sql);
+	update_site_option( "sktnurclog_db_version", $log_db_version );
+}
+function skt_nurc_update_db_check() {
+    global $sktnurclog_db_version;
+    if (get_site_option('sktnurclog_db_version') != $sktnurclog_db_version) {
+        skt_nurc_install($sktnurclog_db_version);
+    }
+	delete_site_option('sktnurc_count');
+}
+add_action('plugins_loaded', 'skt_nurc_update_db_check');
+
+/**** 
+*
+* ***  Log db table managing  *** 
+* 
+****/
+function skt_nurc_listlog($limit = 20, $offset = 0) {
+	global $wpdb;
+	$table_name = $wpdb->prefix . "sktnurclog"; 
+	$result = $wpdb->get_results("SELECT * FROM ". $table_name ." ORDER BY id DESC LIMIT ". $offset . ", " . $limit .";");
+	return $result;
+}
+function skt_nurc_countlog() {
+	global $wpdb;
+	$table_name = $wpdb->prefix . "sktnurclog"; 
+	$result = $wpdb->get_var("SELECT COUNT(*) FROM ". $table_name .";");
+	return $result;
+}
+function nurc_clear_log_file() {
+	global $wpdb;
+	$target = skt_nurc_countlog();
+	$table_name = $wpdb->prefix . "sktnurclog"; 
+	$result = $wpdb->query("TRUNCATE TABLE ". $table_name .";");
+	if($result === false){
+		return $result;
+	}else{
+		return __('Log table successfully deleted.', 'Skt_nurcaptcha');
+	}
 }
 
 ?>

@@ -23,6 +23,7 @@
 		var prestring8 = refstring8;
 		var prestring9 = refstring9;
 		var prestring10 = refstring10;
+		var refloglimit = $('#sktnurc_logpage_limit').val();
 		var refkey1 = $('#sktnurc_publkey').val();
 		var refkey2 = $('#sktnurc_privtkey').val();
 		var refkey3 = $('#sktnurc_botscoutkey').val();
@@ -39,6 +40,7 @@
 		var presimg=refimg;var preskey1=refkey1;var preskey2=refkey2;var preskey3=refkey3;
 		var preslang=reflang;var prescstlang=refcstlang;var presreg=refreg;
 		var presspam0 = refspam0;var presspam1 = refspam1;var presspam2 = refspam2;
+		var presloglimit = refloglimit;
 		if((refkey1!='')&&(refkey2!='')){
 			$('#setup_alert').css('display','none');
 		}
@@ -114,6 +116,10 @@
 			$('#sktnurc-mockup-wp-submit').val(presreg);									
 			advert_check();
 		});
+		$('#sktnurc_logpage_limit').keyup( function(){
+			presloglimit = $('#sktnurc_logpage_limit').val();
+			advert_check();
+		});
 		$('#visual_challenge').keyup( function(){
 			prestring0 = $('#visual_challenge').val();
 			advert_check();
@@ -181,7 +187,7 @@
 			}
 		}
 		window.advert_check	= function() {
-			if ((prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no')) {
+			if ((prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no') && (presloglimit==refloglimit)) {
 				$('.save-advert').fadeOut();
 			} else {
 				$('.save-advert').fadeIn();
