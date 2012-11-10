@@ -393,7 +393,7 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
 	<input class="sktSpam_check" type="checkbox" name="sktnurc_botscout_active" id="sktSpam_check1" value="true" 
 	<?php if (get_site_option('sktnurc_botscout_active')=='true') { ?>checked<?php } ?> /> <?php _e('Activate BotScout (maximum of 20 lookups per day without a free BotScout API Key, or 300 with it)','Skt_nurcaptcha'); ?><br /><br />
 <?php                
- 	if(get_site_option('sktnurc_botscoutTestMode')==''){update_site_option('sktnurc_botscoutTestMode','true');}
+ 	if(get_site_option('sktnurc_botscoutTestMode')!='false'){update_site_option('sktnurc_botscoutTestMode','true');}
 ?>               
 	<input class="sktSpam_check" type="checkbox" name="sktnurc_botscoutTestMode" id="sktSpam_check2" value="true" 
 	<?php if (get_site_option('sktnurc_botscoutTestMode')=='true') { ?>checked<?php } ?> /> <?php _e('Leave BotScout in Test Mode (it will not check user\'s IP).','Skt_nurcaptcha'); ?> <span style="font-style:italic;"><?php _e('If you uncheck this box, BotScout will understand that any query you submit that matches an email or username in its database is not only a search, but also a submission. This means that even if you are just testing a suspect email, your own IP will be added to the database as a spammer if any record of that email exists in the BotScout files.','Skt_nurcaptcha'); ?></span>
