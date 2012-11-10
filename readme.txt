@@ -6,7 +6,7 @@ Requires at least: 3.0.1
 Tested up to: 3.4.2
 Stable tag: 3.0.2
 
-NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots, and checks new user data against trustable databases to block suspects even though they manage to pass through the reCAPTCHA challenge. 
+NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
 == Description ==
 
