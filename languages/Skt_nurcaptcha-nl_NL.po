@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-09 22:32-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Carlos Eduardo G. Barbosa <carlos.eduardo@mais.com>\n"
+"Last-Translator: Salvi Jansen <salvi.jansen@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +64,7 @@ msgstr "reCAPTCHA-uitdagingsafbeelding"
 
 #: skt-nurc-admin.php:111
 msgid "An Error occurred: Log File deletion was not possible."
-msgstr ""
+msgstr "Er trad een fout op: het logboek kon niet verwijderd worden."
 
 #: skt-nurc-admin.php:116
 msgid "Options saved."
@@ -79,7 +79,7 @@ msgid ""
 "This option cannot be undone. Do you really want to erase all Log Data and "
 "restart Log File?"
 msgstr ""
-"Deze optie kan niet ongedaan worden gemaakt. Bent je zeker dat je alle "
+"Deze optie kan niet ongedaan worden gemaakt. Bent u zeker dat je alle "
 "logboekdata wil verwijderen en het logboek wil herstarten?"
 
 #: skt-nurc-admin.php:140
@@ -96,7 +96,7 @@ msgstr "verdachte registratiepogingen op deze site."
 
 #: skt-nurc-admin.php:145
 msgid "Toggle Log"
-msgstr ""
+msgstr "Het logboek uitklappen/opklappen"
 
 #: skt-nurc-admin.php:148
 msgid "NURCaptcha stands for <strong>New User Register Captcha</strong>."
@@ -128,7 +128,7 @@ msgstr "Opties bijwerken"
 
 #: skt-nurc-admin.php:155
 msgid "Remember to save your changes before leaving this page! "
-msgstr "Vergeet niet je wijzigingen op te slaan voor je de pagina verlaat!"
+msgstr "Vergeet niet je wijzigingen op te slaan voor u de pagina verlaat!"
 
 #: skt-nurc-admin.php:161
 msgid "Delete Log File"
@@ -144,19 +144,19 @@ msgstr "Laatste geblokkeerde pogingen"
 
 #: skt-nurc-admin.php:178
 msgid "Page"
-msgstr ""
+msgstr "Pagina"
 
 #: skt-nurc-admin.php:178
 msgid "of"
-msgstr ""
+msgstr "van"
 
 #: skt-nurc-admin.php:181
 msgid "occurrences per page"
-msgstr ""
+msgstr "vermeldingen per pagina"
 
 #: skt-nurc-admin.php:204
 msgid "No data to show"
-msgstr ""
+msgstr "Geen data om weer te geven"
 
 #: skt-nurc-admin.php:211
 msgid ""
@@ -167,7 +167,7 @@ msgstr ""
 
 #: skt-nurc-admin.php:212
 msgid "You can sign up for reCaptcha <strong>free</strong> keys here: "
-msgstr "reCaptcha-sleutels kun je hier <strong>gratis</strong> aanvragen:"
+msgstr "reCaptcha-sleutels kunt u hier <strong>gratis</strong> aanvragen:"
 
 #: skt-nurc-admin.php:217
 msgid "reCaptcha Public Key: "
@@ -183,7 +183,7 @@ msgstr "Vergeet niet je wijzigingen op te slaan voor je de pagina verlaat!"
 
 #: skt-nurc-admin.php:226
 msgid "Style your reCaptcha:"
-msgstr "Stijl je reCaptcha:"
+msgstr "Stijl uw reCaptcha:"
 
 #: skt-nurc-admin.php:229
 msgid "reCAPTCHA theme:"
@@ -199,25 +199,27 @@ msgstr "reCAPTCHA-taal:"
 
 #: skt-nurc-admin.php:270
 msgid "use reCAPTCHA native languages"
-msgstr ""
+msgstr "gebruik reCAPTCHA's ingebouwde talen"
 
 #: skt-nurc-admin.php:273
 msgid "Choose a language on the selector below"
-msgstr ""
+msgstr "Kies een taal uit de selectie hieronder"
 
 #: skt-nurc-admin.php:280
 msgid "use custom strings set"
-msgstr ""
+msgstr "gebruik een aangepaste set woorden"
 
 #: skt-nurc-admin.php:283 skt-nurc-admin.php:306
 msgid "Save this choice before making changes on the strings"
-msgstr ""
+msgstr "Sla deze keuze op alvorens veranderingen aan de woorden aan te brengen"
 
 #: skt-nurc-admin.php:319
 msgid ""
 "Customize reCAPTCHA strings at will by changing the texts in the eleven "
 "fields below:"
 msgstr ""
+"Pas de reCAPTCHA aan naar keuze door onderstaande elf tekstvelden aan te "
+"passen:"
 
 #: skt-nurc-admin.php:351
 msgid "Customize text to appear in Submit Button (register form): "
@@ -229,7 +231,7 @@ msgstr "Registreer"
 
 #: skt-nurc-admin.php:382
 msgid "Configure Anti Spam Databases options:"
-msgstr ""
+msgstr "Configureer de Anti-Spam databaseopties:"
 
 #: skt-nurc-admin.php:385
 msgid ""
@@ -238,30 +240,40 @@ msgid ""
 "Forum Spam's' database is always done after reCAPTCHA challenge is correctly "
 "filled. You may also choose to search up in BotScout's, also."
 msgstr ""
+"Skt NURCaptcha voegt extra veiligheid toe door de gebruikersnaam, e-mail en "
+"IP af te toetsen met betrouwbare databases. Standaard wordt er altijd een "
+"opzoeking in de \"Stop Forum Spam\" database gedaan nadat de reCAPTCHA "
+"correct is ingevuld. U kunt verder aangeven om ook te zoeken in de BotScout-"
+"database."
 
 #: skt-nurc-admin.php:387
 msgid "Visit Stop Forum Spam site"
-msgstr ""
+msgstr "Bezoek de Stop Forum Spam website"
 
 #: skt-nurc-admin.php:390
 msgid ""
 "Activate StopForumSpam check for spammer signature (maximum of 20,000 "
 "lookups per day)"
 msgstr ""
+"Activeer de StopForumSpam-controle voor een spamhandtekening (maximum van 20 "
+"000 opzoekingen per dag)"
 
 #: skt-nurc-admin.php:391
 msgid "Get an API Key at BotScout"
-msgstr ""
+msgstr "Verkrijg een API-sleutel bij BotScout"
 
 #: skt-nurc-admin.php:394
 msgid ""
 "Activate BotScout (maximum of 20 lookups per day without a free BotScout API "
 "Key, or 300 with it)"
 msgstr ""
+"Activeer BotScout (maximum van 20 opzoekingen per dag zonder een gratis "
+"BotScout API-sleutel, 300 indien wel)"
 
 #: skt-nurc-admin.php:399
 msgid "Leave BotScout in Test Mode (it will not check user's IP)."
 msgstr ""
+"Houd BotScout in testmodus (het zal geen IP's van gebruikers controleren)"
 
 #: skt-nurc-admin.php:399
 msgid ""
@@ -271,10 +283,16 @@ msgid ""
 "email, your own IP will be added to the database as a spammer if any record "
 "of that email exists in the BotScout files."
 msgstr ""
+"Als u dit veld uitvinkt, zal BotScout elke aanvraag die u indient en die "
+"overeenkomt met een email of gebruikersnaam in de database niet enkel "
+"aanzien als een opzoeking, maar ook als een toevoeging. Dit wil zeggen dat "
+"als u een verdachte e-mail aftoetst met uw eigen IP-adres, en het e-"
+"mailadres is bekend in de database, uw IP-adres zal worden aanzien als een "
+"spammer."
 
 #: skt-nurc-admin.php:401
 msgid "BotScout API Key: "
-msgstr ""
+msgstr "BotScout API-sleutel:"
 
 #: skt-nurc-admin.php:420
 msgid "Make me happy:"
@@ -285,6 +303,8 @@ msgid ""
 "Skt NURCaptcha Warning :: BotScout key seems to be incorrect. Retype it and "
 "try again."
 msgstr ""
+"Skt NURCaptcha-waarschuwing: de BotScout-sleutel blijkt onjuist te zijn. "
+"Geef deze opnieuw in en probeer nog eens."
 
 #: skt-nurcaptcha.php:92
 msgid "Settings"
@@ -317,7 +337,7 @@ msgstr ""
 
 #: skt-nurcaptcha.php:153
 msgid "NURCaptcha ERROR"
-msgstr ""
+msgstr "NURCaptcha FOUT"
 
 #: skt-nurcaptcha.php:229
 msgid "Registration Form"
@@ -330,7 +350,7 @@ msgstr "Registreer voor deze site"
 #: skt-nurcaptcha.php:237
 #, php-format
 msgid "There is a problem with your response: %s"
-msgstr "Er is een probleem met je antwoord: %s"
+msgstr "Er is een probleem met uw antwoord: %s"
 
 #: skt-nurcaptcha.php:243
 msgid "Username"
@@ -342,7 +362,7 @@ msgstr "E-mail"
 
 #: skt-nurcaptcha.php:251
 msgid "A password will be e-mailed to you."
-msgstr "Een wachtwoord zal je worden toegezonden via mail."
+msgstr "Een wachtwoord zal u worden toegezonden via mail."
 
 #: skt-nurcaptcha.php:263
 msgid "Log in"
@@ -354,7 +374,7 @@ msgstr "Wachtwoord vergeten"
 
 #: skt-nurcaptcha.php:264
 msgid "Lost your password?"
-msgstr "Je wachtwoord vergeten?"
+msgstr "Uw wachtwoord vergeten?"
 
 #: skt-nurcaptcha.php:287
 msgid ""
@@ -370,7 +390,7 @@ msgid ""
 "Use a functional email address, as your temporary password will be sent to "
 "that email"
 msgstr ""
-"Gebruik een werkend e-mailadres gezien je tijdelijke wachtwoord erheen wordt "
+"Gebruik een werkend e-mailadres gezien uw tijdelijke wachtwoord erheen wordt "
 "gezonden"
 
 #: skt-nurcaptcha.php:309
@@ -381,8 +401,8 @@ msgid ""
 "to this site. We welcome you, but we must keep out all spambots."
 msgstr ""
 "Om te registreren, schrijf de woorden, nummers en tekens in het kader over "
-"in het tekstveld eronder. Hoe absurd het ook lijkt, het is enkel om aan te "
-"tonen dat je een echte persoon bent. Mensen zijn hier welkom, spambots niet."
+"in het tekstveld eronder. Hoe absurd deze ook lijken, het is enkel om aan te "
+"tonen dat u een echte persoon bent. Mensen zijn hier welkom, spambots niet."
 
 #: skt-nurcaptcha.php:322
 msgid "Fill the Captcha below"
@@ -397,11 +417,11 @@ msgstr ""
 #: skt-nurcaptcha.php:466
 #, php-format
 msgid "To use reCAPTCHA you must get an API key from %s"
-msgstr "Om reCAPTCHA te gebruiken, heb je een API-sleutel nodig van %s"
+msgstr "Om reCAPTCHA te gebruiken, heeft u een API-sleutel nodig van %s"
 
 #: skt-nurcaptcha.php:471
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA"
-msgstr "Om veiligheidsredenen moet je de remote IP doorgeven aan reCAPTCHA"
+msgstr "Om veiligheidsredenen moet u de remote IP doorgeven aan reCAPTCHA"
 
 #: skt-nurcaptcha.php:476
 msgid "Inconsistency detected - try again later."
@@ -417,35 +437,39 @@ msgstr "Fout captcha-antwoord ingegeven - probeer het opnieuw."
 
 #: skt-nurcaptcha.php:528
 msgid "error: No return data from query. Try again later."
-msgstr ""
+msgstr "fout: Geen data teruggekregen na de opzoeking. Probeer later nog eens."
 
 #: skt-nurcaptcha.php:532
 msgid ""
 "says: 'Spammer signature found!' Registration will not be allowed for this "
 "user "
 msgstr ""
+"zegt: 'Spamhandtekening gevonden!' De registratie zal niet worden toegestaan "
+"aan deze gebruiker."
 
 #: skt-nurcaptcha.php:535
 msgid "is suspect"
-msgstr ""
+msgstr "is verdacht"
 
 #: skt-nurcaptcha.php:536
 msgid "occurrences found"
-msgstr ""
+msgstr "vermeldingen gevonden"
 
 #: skt-nurcaptcha.php:580
 msgid "error: No return data from API query."
-msgstr ""
+msgstr "fout: Geen data teruggekregen van de API-opzoeking"
 
 #: skt-nurcaptcha.php:587
 #, php-format
 msgid "error: %s"
-msgstr ""
+msgstr "fout: %s"
 
 #: skt-nurcaptcha.php:603
 msgid ""
 "says: 'Bot signature found!' Registration will not be allowed for this user."
 msgstr ""
+"zegt: 'Bothandtekening gevonden!' De registratie zal niet worden toegestaan "
+"aan deze gebruiker."
 
 #: skt-nurcaptcha.php:706
 #, fuzzy
