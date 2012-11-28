@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 adds extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.1.0
+	Version: 3.1.1
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -522,7 +522,9 @@ function skt_nurc_check_stopforumspam($XMAIL = '', $XIP = '', $XNAME = '') {
 	$XMAIL = urlencode($XMAIL); // make url compliant with urlencode()
 	$test_string = "http://www.stopforumspam.com/api?ip=$XIP&email=$XMAIL&username=$XNAME";
 	
-	$xml = simplexml_load_file($test_string);
+	$xmlstr = skt_nurc_get_page($test_string);
+	$xml = simplexml_load_string($xmlstr);
+	
 	if($xml->appears[0] == '' || $xml->appears[1] == '' || $xml->appears[2] == ''){ 
 		$stopforumspam_response->is_valid = false;
 		$stopforumspam_response->error = 'StopForumSpam '. __("error: No return data from query. Try again later.", 'Skt_nurcaptcha').'<strong>';
@@ -565,15 +567,7 @@ function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '') {
 		$test_string .= "&key=$APIKEY";
 	}
 	
-	if(function_exists('file_get_contents')){
-		$returned_data = file_get_contents($test_string);
-	}else{
-		$ch = curl_init($test_string);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$returned_data = curl_exec($ch);
-		curl_close($ch);
-	}
+	$returned_data = skt_nurc_get_page($test_string);
 
 	if($returned_data==''){ 
         $botscout_response->is_valid = false;
@@ -706,5 +700,26 @@ function nurc_clear_log_file() {
 		return __('Log table successfully deleted.', 'Skt_nurcaptcha');
 	}
 }
-
+/************
+* This method solves the problem of server restrictions on getting external url contents
+* such as the responses given by antispam databases
+* Thanks to Greg on (http://www.bugz.com.br/2011/09/file_get_contents/) [pt_BR]
+*************/
+function skt_nurc_get_page($url, $referer='', $timeout=30, $header=''){
+		if ($referer=='') $referer='http://'.$_SERVER['HTTP_HOST'];
+		if(!isset($timeout)) $timeout=30;
+		$curl = curl_init();
+		if(strstr($referer,"://")){
+			curl_setopt ($curl, CURLOPT_REFERER, $referer);
+		}
+		curl_setopt ($curl, CURLOPT_URL, $url);
+		curl_setopt ($curl, CURLOPT_TIMEOUT, $timeout);
+		curl_setopt ($curl, CURLOPT_USERAGENT, sprintf("Mozilla/%d.0",rand(4,5)));
+		curl_setopt ($curl, CURLOPT_HEADER, (int)$header);
+		curl_setopt ($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
+		$html = curl_exec ($curl);
+		curl_close ($curl);
+		return $html;
+    }
 ?>

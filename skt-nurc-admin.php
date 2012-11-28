@@ -468,15 +468,7 @@ function nurc_get_version() {
 
 function skt_nurc_verify_botscoutkey($sktnurc_botscoutkey){
 	$test_string = "http://botscout.com/test/?mail=jayzers16@aol.com&key=" . $sktnurc_botscoutkey;
-	if(function_exists('file_get_contents')){
-		$returned_data = file_get_contents($test_string);
-	}else{
-		$ch = curl_init($test_string);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$returned_data = curl_exec($ch);
-		curl_close($ch);
-	}
+	$returned_data = skt_nurc_get_page($test_string);
 	if(substr($returned_data, 0,1) == '!'){
 		$warning_message = __('Skt NURCaptcha Warning :: BotScout key seems to be incorrect. Retype it and try again.', 'Skt_nurcaptcha' );
 		add_settings_error( "botscoutkey", "botscoutkey", $warning_message );
