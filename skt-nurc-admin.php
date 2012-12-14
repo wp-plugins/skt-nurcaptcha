@@ -173,7 +173,7 @@
 			'current' => $pagenum
 		) );
 		
-		echo "<h3>". __('Last Blocked Attemptives','Skt_nurcaptcha')."</h3>";
+		echo "<h3>". __('Last Blocked Attemptives','Skt_nurcaptcha')." (".$total.")</h3>";
 		if ($num_of_pages > 1) 
 			echo "<strong>". __('Page','Skt_nurcaptcha'). " ".$pagenum." ".__('of','Skt_nurcaptcha')." ".$num_of_pages. "</strong> -> ";
 		echo " (";
@@ -210,7 +210,7 @@
 		<?php    echo "<br />"; ?>
 		<?php    echo "<p style=\"padding: .5em; background-color: #666666; color: #fff;\">" . __( 'To enable this plugin\'s functionality, please enter your reCAPTCHA keys here:', 'Skt_nurcaptcha' ) . "</p><br />"; ?>
 		<?php    echo "<small>[". __( 'You can sign up for reCaptcha <strong>free</strong> keys here: ', 'Skt_nurcaptcha' );
-				 echo '<a href="'.recaptcha_get_signup_url().'"><strong>reCAPTCHA API Signup Page</strong></a>]</small>'; ?>
+				 echo '<a href="'.nurc_recaptcha_get_signup_url().'"><strong>reCAPTCHA API Signup Page</strong></a>]</small>'; ?>
 	</div>	
 	
 	<div style="width:680px;padding:12px 0 12px 24px">
@@ -439,8 +439,8 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
  * @param string $domain The domain where the page is hosted
  * @param string $appname The name of your application
  */
-function recaptcha_get_signup_url ($domain = null, $appname = null) {
-	return "https://www.google.com/recaptcha/admin/create?" .  _recaptcha_qsencode (array ('domains' => $domain, 'app' => $appname));
+function nurc_recaptcha_get_signup_url ($domain = null, $appname = null) {
+	return "https://www.google.com/recaptcha/admin/create?" .  nurc__recaptcha_qsencode (array ('domains' => $domain, 'app' => $appname));
 }
 
 function nurc_get_version() {

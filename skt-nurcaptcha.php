@@ -60,8 +60,8 @@ function skt_nurc_bp_signup_validate() {
     global $bp;
 	$http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
 	if ( $http_post ) { // if we have a response, let's check it
-		$nurc_result = new ReCaptchaResponse();	
-		$nurc_result = recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
+		$nurc_result = new nurc_ReCaptchaResponse();	
+		$nurc_result = nurc_recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
 		if ($nurc_result->is_valid) {
 			$usrx = ''; //$_POST['signup_username']
 			$nurc_result = skt_nurc_antispam($_POST['signup_email'], $usrx, $nurc_result);
@@ -161,8 +161,8 @@ function nurCaptchaMU_extra_output($error_msg = '') {
 function skt_nurc_validate_captcha($result) {  
 	$http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
 	if ( $http_post ) { // if we have a response, let's check it
-		$nurc_result = new ReCaptchaResponse();	
-		$nurc_result = recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
+		$nurc_result = new nurc_ReCaptchaResponse();	
+		$nurc_result = nurc_recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
 		if ($nurc_result->is_valid) {
 			$usrx = ''; //$user_name
 			$user_email = $_POST['user_email']; 
@@ -204,14 +204,14 @@ function skt_nurCaptcha() {
 	}
 		// Plugin is disabled if one or both reCaptcha keys are missing: 
 	if ((get_site_option('sktnurc_publkey')=='')||(get_site_option('sktnurc_privtkey')=='')) {return false;} 
-    $result = new ReCaptchaResponse(); // sets $result as a class variable
+    $result = new nurc_ReCaptchaResponse(); // sets $result as a class variable
 	$user_login = '';
 	$user_email = '';
 	if ( $http_post ) { // if we have a response, let's check it
 		$user_login = $_POST['user_login'];
 		$user_email = $_POST['user_email'];
 
-		$result = recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
+		$result = nurc_recaptcha_check_answer(get_site_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
 		// let's check antispammer databases, if reCAPTCHA is ok...
 			$usrx = ''; //$user_login
 		if ($result->is_valid) { $result = skt_nurc_antispam($user_email, $usrx, $result); }
@@ -317,6 +317,13 @@ function nurc_make_path() {
 		return $npath;
 }
 
+/************ for your custom code *****
+ *
+ * This function is used to display the reCAPTCHA challenge
+ * You may call it from anywhere, including other plugins or theme pages
+ * To check the results, you may use class nurcResponse below 
+ *
+ *************/
 function nurc_recaptcha_challenge() {
 		?>
 		<p><label><?php _e('Fill the Captcha below', 'Skt_nurcaptcha') ?><?php nurc_reCaptcha_help(); ?></label></p>
@@ -361,6 +368,30 @@ function nurc_recaptcha_challenge() {
 		<br />
         <?php 
 }
+
+/************ for your custom code *****
+ * class nurcResponse
+ *
+ * This class is used to get the results of a reCAPTCHA challenge posted
+ * you may call it from another plugin or custom code on your template.
+ * just place a code like this on the landing page to where the form data 
+ * is sent after being posted:
+ *
+ *         $result = new nurcResponse();
+ *         if ($result->check->is_valid){
+ *             // answer is correct - so let's do something else...
+ *         }else{
+ *             // answer is incorrect - show error message and block the way out...
+ *         }
+ ************/
+class nurcResponse {
+        var $check;
+		function __construct(){
+			$check = new nurc_ReCaptchaResponse();
+			$check = nurc_recaptcha_check_answer(get_option('sktnurc_privtkey'), $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
+		}
+}
+
 /**
  * Writes log into db table
  */
@@ -396,9 +427,9 @@ function nurc_log_attempt($processID = '') {
  * @param int port
  * @return array response
  */
-function _recaptcha_http_post($host, $path, $data, $port = 80) {
+function nurc_recaptcha_http_post($host, $path, $data, $port = 80) {
 
-        $req = _recaptcha_qsencode ($data);
+        $req = nurc__recaptcha_qsencode ($data);
 
         $http_request  = "POST $path HTTP/1.0\r\n";
         $http_request .= "Host: $host\r\n";
@@ -427,7 +458,7 @@ function _recaptcha_http_post($host, $path, $data, $port = 80) {
  * @param $data - array of string elements to be encoded
  * @return string - encoded request
  */
-function _recaptcha_qsencode ($data) {
+function nurc__recaptcha_qsencode ($data) {
         $req = "";
         foreach ( $data as $key => $value )
                 $req .= $key . '=' . urlencode( stripslashes($value) ) . '&';
@@ -437,11 +468,10 @@ function _recaptcha_qsencode ($data) {
         return $req;
 }
 
-
 /**
- * A ReCaptchaResponse is returned from recaptcha_check_answer()
+ * A nurc_ReCaptchaResponse is returned from nurc_recaptcha_check_answer()
  */
-class ReCaptchaResponse {
+class nurc_ReCaptchaResponse {
         var $is_valid;
         var $error;
 }
@@ -454,11 +484,11 @@ class ReCaptchaResponse {
   * @param string $challenge
   * @param string $response
   * @param array $extra_params an array of extra variables to post to the server
-  * @return ReCaptchaResponse
+  * @return nurc_ReCaptchaResponse
   */
-function recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $extra_params = array(), $add_count = true)
+function nurc_recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $extra_params = array(), $add_count = true)
 {
-    $recaptcha_response = new ReCaptchaResponse();
+    $recaptcha_response = new nurc_ReCaptchaResponse();
 	
 	$flag = false;
 	if ($privkey == null || $privkey == '') {
@@ -486,7 +516,7 @@ function recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $ex
 	}
 	
 
-        $response = _recaptcha_http_post ("www.google.com", "/recaptcha/api/verify",
+        $response = nurc_recaptcha_http_post ("www.google.com", "/recaptcha/api/verify",
                                           array (
                                                  'privatekey' => $privkey,
                                                  'remoteip' => $remoteip,
@@ -516,7 +546,7 @@ function recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $ex
 * 
 ****/
 function skt_nurc_check_stopforumspam($XMAIL = '', $XIP = '', $XNAME = '') {
-    $stopforumspam_response = new ReCaptchaResponse();
+    $stopforumspam_response = new nurc_ReCaptchaResponse();
 	$returned_data=''; $botdata='';
 	
 	$XMAIL = urlencode($XMAIL); // make url compliant with urlencode()
@@ -552,7 +582,7 @@ function skt_nurc_check_stopforumspam($XMAIL = '', $XIP = '', $XNAME = '') {
 * 
 ****/
 function skt_nurc_check_botscout($XMAIL = '', $XIP = '', $XNAME = '') {
-    $botscout_response = new ReCaptchaResponse();
+    $botscout_response = new nurc_ReCaptchaResponse();
 	$returned_data=''; $botdata='';
 	$APIKEY = get_site_option('sktnurc_botscoutKey');
 	
