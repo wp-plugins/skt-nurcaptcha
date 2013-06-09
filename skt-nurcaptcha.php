@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 adds extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.1.1
+	Version: 3.1.2
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -38,7 +38,7 @@ add_action( 'login_enqueue_scripts', 'skt_nurc_login_init' );
 add_action('login_form_register', 'skt_nurCaptcha');
 add_action( 'bp_include', 'skt_nurc_bp_include_hook' ); // Please, do call me, but only if BuddyPress is active...
 add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'skt_nurc_settings_link', 30, 1);
-if ( is_multisite() ) {
+if ( is_multisite() && (! is_admin())) {
 	add_action('preprocess_signup_form', 'nurCaptchaMU_preprocess');
 	add_action('signup_extra_fields', 'nurCaptchaMU_extra',30,1);
 		// located @ wp-signup.php line 142 :: WP v 3.4.2
