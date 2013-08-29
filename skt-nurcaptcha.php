@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 adds extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.1.2
+	Version: 3.1.3
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -41,9 +41,9 @@ add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'skt_nurc_settings_
 if ( is_multisite() && (! is_admin())) {
 	add_action('preprocess_signup_form', 'nurCaptchaMU_preprocess');
 	add_action('signup_extra_fields', 'nurCaptchaMU_extra',30,1);
-		// located @ wp-signup.php line 142 :: WP v 3.4.2
+		// located @ wp-signup.php line 179 :: WP v 3.6
 	add_filter('wpmu_validate_user_signup', 'skt_nurc_validate_captcha', 999, 1);
-		// located @ wp-includes/ms-functions.php line 519 :: WP v 3.4.2
+		// located @ wp-includes/ms-functions.php line 509 :: WP v 3.6
 }
 if (( get_site_option('sktnurc_publkey')== '') or ( get_site_option('sktnurc_privtkey')== '' )) {
 	skt_nurc_keys_alert();
@@ -158,7 +158,19 @@ function nurCaptchaMU_extra_output($error_msg = '') {
 * Main routine - Multisite (WPMU) *** 
 * 
 ****/
-function skt_nurc_validate_captcha($result) {  
+function skt_nurc_validate_captcha($result) { 
+		/*  
+			we start by checking if this function has been called by function validate_blog_signup() 
+		 	-> located @ wp-signup.php line 454 :: WP v 3.6
+		 	if call is from this function, it is a second check - NURCaptcha is not needed
+		*/
+		$callerfunc = skt_nurc_getCallingFunctionName(true);
+		$pos = strpos($callerfunc, "validate_blog_signup");
+		
+		if($pos !== false) {
+			return $result;
+		} // this is a second check on username & email - so skip NURCaptcha
+	 
 	$http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
 	if ( $http_post ) { // if we have a response, let's check it
 		$nurc_result = new nurc_ReCaptchaResponse();	
@@ -752,4 +764,28 @@ function skt_nurc_get_page($url, $referer='', $timeout=30, $header=''){
 		curl_close ($curl);
 		return $html;
     }
+
+function skt_nurc_getCallingFunctionName($complete=false)
+    {
+        $trace=debug_backtrace();
+        if($complete)
+        {
+            $str = '';
+            foreach($trace as $caller)
+            {
+                $str .= " - {$caller['function']}";
+                if (isset($caller['class']))
+                    $str .= " Class {$caller['class']}";
+            }
+        }
+        else
+        {
+            $caller=$trace[2];
+            $str = "Called by {$caller['function']}";
+            if (isset($caller['class']))
+                $str .= " Class {$caller['class']}";
+        }
+        return $str;
+    }
+	
 ?>

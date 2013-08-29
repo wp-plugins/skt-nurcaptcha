@@ -4,7 +4,7 @@ Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register, anti-spam
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -85,6 +85,8 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 3.1.3 =
+* Fixed: bug in MU that blocked new site registration
 = 3.1.2 =
 * Fixed: small bug in MU that blocked new user registration from admin panel
 = 3.1.1 =
