@@ -8,6 +8,7 @@ Stable tag: 3.1.3
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
+
 == Description ==
 
 NURCaptcha stands for *New User Register Captcha*. It has been designed for anyone who wishes to allow 
