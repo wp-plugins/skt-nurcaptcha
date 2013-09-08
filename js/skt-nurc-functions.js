@@ -27,6 +27,13 @@
 		var refkey1 = $('#sktnurc_publkey').val();
 		var refkey2 = $('#sktnurc_privtkey').val();
 		var refkey3 = $('#sktnurc_botscoutkey').val();
+		var refusrhlp = $('#sktnurc_username_help').val();
+		var refemlhlp = $('#sktnurc_email_help').val();
+		var refrechlp = $('#sktnurc_reCaptcha_help').val();
+		var presusrhlp=refusrhlp;var presemlhlp=refemlhlp;var presrechlp =refrechlp;
+		var refuhop = $('#sktnurc_usrhlp_opt').is(":checked");
+		var refemop = $('#sktnurc_emlhlp_opt').is(":checked");
+		var refrcop = $('#sktnurc_rechlp_opt').is(":checked");
 		var refimg = $('#sktnurc_theme').val();
 		var reflang = $('#sktnurc_lang').val();
 		var precustom = $('#sktnurc_lang option:selected').val();
@@ -36,7 +43,8 @@
 		var refspam1 = $('#sktSpam_check1').is(":checked");
 		var refspam2 = $('#sktSpam_check2').is(":checked");
 		var refcstlang = $('.sktlg_radio:checked').val();
-		var preslog = 'no'; 
+		var preslog = 'no';
+		var presuhop = refuhop;var presemop=refemop ; var presrcop=refrcop;
 		var presimg=refimg;var preskey1=refkey1;var preskey2=refkey2;var preskey3=refkey3;
 		var preslang=reflang;var prescstlang=refcstlang;var presreg=refreg;
 		var presspam0 = refspam0;var presspam1 = refspam1;var presspam2 = refspam2;
@@ -80,6 +88,30 @@
 				$('#sktcstlg').slideUp();
 				$('#save-advert-lang2').fadeIn();
 			}
+			advert_check();
+		});
+		$('#sktnurc_username_help').keyup( function(){
+			presusrhlp = $('#sktnurc_username_help').val();
+			advert_check();
+		});
+		$('#sktnurc_email_help').keyup( function(){
+			presemlhlp = $('#sktnurc_email_help').val();
+			advert_check();
+		});
+		$('#sktnurc_reCaptcha_help').keyup( function(){
+			presrechlp = $('#sktnurc_reCaptcha_help').val();
+			advert_check();
+		});
+		$('#sktnurc_usrhlp_opt').change(function() {
+			presuhop = $('#sktnurc_usrhlp_opt').is(":checked");
+			advert_check();
+		});
+		$('#sktnurc_emlhlp_opt').change(function() {
+			presemop = $('#sktnurc_emlhlp_opt').is(":checked");
+			advert_check();
+		});
+		$('#sktnurc_rechlp_opt').change(function() {
+			presrcop = $('#sktnurc_rechlp_opt').is(":checked");
 			advert_check();
 		});
 		$('#sktSpam_check0').change(function() {
@@ -187,7 +219,7 @@
 			}
 		}
 		window.advert_check	= function() {
-			if ((prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no') && (presloglimit==refloglimit)) {
+			if ((presuhop == refuhop) && (presemop==refemop) && (presrcop==refrcop) && (presusrhlp == refusrhlp) && (presemlhlp == refemlhlp) && (presrechlp == refrechlp) && (prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no') && (presloglimit==refloglimit)) {
 				$('.save-advert').fadeOut();
 			} else {
 				$('.save-advert').fadeIn();

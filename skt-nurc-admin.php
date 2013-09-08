@@ -41,6 +41,33 @@
 		$sktnurc_privkey = $_POST['sktnurc_privtkey'];	
 		update_site_option('sktnurc_privtkey', $sktnurc_privkey);
 		
+		// *****  update register form's help messages:	
+		update_site_option('sktnurc_username_help', $_POST['sktnurc_username_help']);
+		update_site_option('sktnurc_email_help', $_POST['sktnurc_email_help']);
+		update_site_option('sktnurc_reCaptcha_help', $_POST['sktnurc_reCaptcha_help']);
+		
+		if($_POST['sktnurc_usrhlp_opt'] == 'true'){
+			update_site_option('sktnurc_usrhlp_opt', 'true');
+		}else{
+			update_site_option('sktnurc_usrhlp_opt', 'false');
+		}
+
+		if($_POST['sktnurc_emlhlp_opt'] == 'true'){
+			update_site_option('sktnurc_emlhlp_opt', 'true');
+		}else{
+			update_site_option('sktnurc_emlhlp_opt', 'false');
+		}
+
+		if($_POST['sktnurc_rechlp_opt'] == 'true'){
+			update_site_option('sktnurc_rechlp_opt', 'true');
+		}else{
+			update_site_option('sktnurc_rechlp_opt', 'false');
+		}
+
+		// *****
+		
+		update_site_option('sktnurc_username_help', $_POST['sktnurc_username_help']);
+		
 		if($_POST['sktnurc_stopforumspam_active'] == 'true'){
 			update_site_option('sktnurc_stopforumspam_active', 'true');
 		}else{
@@ -157,8 +184,8 @@
         <div style="clear:both"></div>
 		<?php
 		if(!isset( $_GET['pagenum'] )){$display_none = "display:none";}else{$display_none = "";}
-		echo "<div id='log_entries' style='width:750px;position:relative;".$display_none."'>"; 
-		echo "<span id='unlink_log_button' class=\"button-primary\" style=\"position:absolute;cursor:pointer;color:#fff;font-weight:bold;background:#4086aa;text-decoration:none;top:2px;right:82px;".$display_none ."\">&nbsp;".__('Delete Log File', 'Skt_nurcaptcha')."&nbsp;</span><span id='link_log_button' class=\"button-primary\" style=\"display:none;position:absolute;cursor:pointer;color:#fff;font-weight:bold;background:#ff2000;text-decoration:none;top:2px;right:82px\">&nbsp;".__('Cancel Delete Log File', 'Skt_nurcaptcha')."&nbsp;</span> ";
+		echo "<div id='log_entries' style='width:800px;position:relative;".$display_none."'>"; 
+		echo "<span id='unlink_log_button' class=\"button-primary\" style=\"position:absolute;cursor:pointer;color:#fff;font-weight:bold;background:#4086aa;text-decoration:none;top:2px;right:82px;".$display_none ."\">&nbsp;".__('Delete Log File', 'Skt_nurcaptcha')."&nbsp;</span><span id='link_log_button' class=\"button-primary\" style=\"display:none;position:absolute;cursor:pointer;color:#fff;font-weight:bold;background:#ff2000;text-decoration:none;top:2px;right:132px\">&nbsp;".__('Cancel Delete Log File', 'Skt_nurcaptcha')."&nbsp;</span> ";
 
 		$pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1; // if pagenum absent, assume value 1.
 		$limit = get_site_option('sktnurc_logpage_limit',20);
@@ -407,7 +434,57 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
 		</p>
 	</div>
 
+<?php
 
+/********************* Customize register form help messages */
+			
+?>
+	<div style="position:relative;width:680px;padding:8px 0 12px 24px">
+		<p style="padding: .6em; background-color: #666; color: #fff;">
+			<?php echo __( 'Customize register form\'s help messages:', 'Skt_nurcaptcha' ) ?>
+		</p><br />
+    <span>
+    <?php _e('Use these fields to change the default help messages that Skt NURCaptcha adds to the register form. To return to default values, simply delete all content from that field and click on the save button.','Skt_nurcaptcha'); ?> 
+    </span><br /><br />
+<?php
+	$userHelp = sktnurc_username_help_text();
+	$emailHelp = sktnurc_email_help_text();
+	$recHelp = sktnurc_reCaptcha_help_text();
+			
+?>
+<strong><?php _e( 'Username:', 'Skt_nurcaptcha' ) ?></strong><br />
+<textarea id="sktnurc_username_help" name="sktnurc_username_help" cols="90" rows="5">
+<?php echo $userHelp ?>
+</textarea>
+<input class="sktSpam_check" type="checkbox" name="sktnurc_usrhlp_opt" id="sktnurc_usrhlp_opt" value="true" 
+	<?php if (get_site_option('sktnurc_usrhlp_opt')=='true') { ?>checked<?php } ?> /> 
+	<?php _e('(Hide this help)','Skt_nurcaptcha'); ?>
+<br /><br />
+<strong><?php _e( 'Email:', 'Skt_nurcaptcha' ) ?></strong><br />
+<textarea id="sktnurc_email_help" name="sktnurc_email_help" cols="90" rows="5">
+<?php echo $emailHelp ?>
+</textarea>
+<input class="sktSpam_check" type="checkbox" name="sktnurc_emlhlp_opt" id="sktnurc_emlhlp_opt" value="true" 
+	<?php if (get_site_option('sktnurc_emlhlp_opt')=='true') { ?>checked<?php } ?> /> 
+	<?php _e('(Hide this help)','Skt_nurcaptcha'); ?>
+<br /><br />
+<strong><?php _e( 'reCAPTCHA:', 'Skt_nurcaptcha' ) ?></strong><br />
+<textarea id="sktnurc_reCaptcha_help" name="sktnurc_reCaptcha_help" cols="90" rows="5">
+<?php echo $recHelp ?>
+</textarea>
+<input class="sktSpam_check" type="checkbox" name="sktnurc_rechlp_opt" id="sktnurc_rechlp_opt" value="true" 
+	<?php if (get_site_option('sktnurc_rechlp_opt')=='true') { ?>checked<?php } ?> /> 
+	<?php _e('(Hide this help)','Skt_nurcaptcha'); ?>
+<br />
+
+
+		<div style="clear:both"></div>
+
+		<p class="submit" >
+		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
+		<span class="save-advert" style="display:none;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?>&nbsp;&raquo;&nbsp;&raquo;&nbsp;&raquo;&nbsp;</strong></span>
+		</p>
+	</div>
 	</form>
 
 <?php

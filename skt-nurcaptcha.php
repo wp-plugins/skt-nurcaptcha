@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 adds extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.1.3
+	Version: 3.1.5
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -207,7 +207,7 @@ function skt_nurCaptcha() {
 	$http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
 	if ( is_multisite() ) {
 		// Multisite uses wp-signup.php 
-		wp_redirect( apply_filters( 'wp_signup_location', site_url('wp-signup.php') ) );
+		wp_redirect( apply_filters( 'wp_signup_location', network_site_url('wp-signup.php') ) );
 		exit();
 	}
 	if ( !get_site_option('users_can_register') ) {
@@ -215,7 +215,8 @@ function skt_nurCaptcha() {
 		exit();
 	}
 		// Plugin is disabled if one or both reCaptcha keys are missing: 
-	if ((get_site_option('sktnurc_publkey')=='')||(get_site_option('sktnurc_privtkey')=='')) {return false;} 
+	if ((get_site_option('sktnurc_publkey')=='')||(get_site_option('sktnurc_privtkey')=='')) {return false;}
+	 
     $result = new nurc_ReCaptchaResponse(); // sets $result as a class variable
 	$user_login = '';
 	$user_email = '';
@@ -228,6 +229,11 @@ function skt_nurCaptcha() {
 			$usrx = ''; //$user_login
 		if ($result->is_valid) { $result = skt_nurc_antispam($user_email, $usrx, $result); }
 	}
+		// hook for extra checks on username and user_email, if needed
+		if ($result->is_valid) {
+			do_action('sktnurc_before_register_new_user', $result, $user_login, $user_email);
+		}
+		  
 		if ($result->is_valid) { // captcha and botscout passed, so let's see the rest...
 			$errors = register_new_user($user_login, $user_email);
 			if ( !is_wp_error($errors) ) {
@@ -292,35 +298,45 @@ function skt_nurCaptcha() {
 **/
 
 function nurc_username_help() {
+	if (get_site_option('sktnurc_usrhlp_opt')=='true') return;
 	?>
     <span id="username-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
     <div id="username-help" style="position:relative;display:none;">
     	<p class="message register" style="float:left">
-    		<?php _e('Use only non-accented alphanumeric characters plus these: _ [underscore], [space], . [dot], - [hyphen], * [asterisk], and @ [at]', 'Skt_nurcaptcha'); ?>
+    		<?php 
+			echo sktnurc_username_help_text();
+			?>
         </p>
     </div>
     <?php 
 }
 function nurc_email_help() {
+	if (get_site_option('sktnurc_emlhlp_opt')=='true') return;
 	?>
     <span id="email-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
     <div id="email-help" style="position:relative;display:none;">
     	<p class="message register" style="float:left">
-    		<?php _e('Use a functional email address, as your temporary password will be sent to that email', 'Skt_nurcaptcha'); ?>
+    		<?php 
+			echo sktnurc_email_help_text();
+			?>
         </p>
     </div>
     <?php 
 }
 function nurc_reCaptcha_help() {
+	if (get_site_option('sktnurc_rechlp_opt')=='true') return;
 	if ( is_multisite() ) return;
 	if (defined('SKTNURC_BP_ACTIVE')) return;
 	?>
     <span id="recaptcha-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
     <div id="recaptcha-help" style="position:relative;display:none;">
     	<p class="message register" style="float:left">
-    		<?php _e('To get registered, just transcribe both the words, numbers and signs you see in the box below, to the small text field under it, no matter how absurd they look like, just to make clear you are a human being trying to register to this site. We welcome you, but we must keep out all spambots.', 'Skt_nurcaptcha'); ?>
+    		<?php 
+			echo sktnurc_reCaptcha_help_text();
+			?>
         </p>
     </div>
+    <div style="clear:both"></div>
     <?php 
 }
 function nurc_make_path() {
@@ -329,6 +345,34 @@ function nurc_make_path() {
 		return $npath;
 }
 
+/************ get help text *****
+ *
+ * Next three methods get help text that is displayed at the register form
+ * They can be customized via Admin Panel
+ * You need not change these strings 
+ *
+ *************/
+function sktnurc_username_help_text(){
+	$output = stripslashes(get_site_option('sktnurc_username_help'));
+	if ($output == ""){
+		$output = __('Use only non-accented alphanumeric characters plus these: _ [underscore], [space], . [dot], - [hyphen], * [asterisk], and @ [at]', 'Skt_nurcaptcha'); 
+	}
+	return $output;
+}
+function sktnurc_email_help_text(){
+	$output = stripslashes(get_site_option('sktnurc_email_help'));
+	if ($output == ""){
+		$output = __('Use a functional email address, as your temporary password will be sent to that email', 'Skt_nurcaptcha'); 
+	}
+	return $output;
+}
+function sktnurc_reCaptcha_help_text(){
+	$output = stripslashes(get_site_option('sktnurc_reCaptcha_help'));
+	if ($output == ""){
+		$output = __('To get registered, just transcribe both the words, numbers and signs you see in the box below, to the small text field under it, no matter how absurd they look like, just to make clear you are a human being trying to register to this site. We welcome you, but we must keep out all spambots.', 'Skt_nurcaptcha'); 
+	}
+	return $output;
+}
 /************ for your custom code *****
  *
  * This function is used to display the reCAPTCHA challenge
@@ -764,7 +808,10 @@ function skt_nurc_get_page($url, $referer='', $timeout=30, $header=''){
 		curl_close ($curl);
 		return $html;
     }
-
+/***************
+* This method derived from one published by Manish Zope, as a comment at:
+* http://stackoverflow.com/questions/190421/caller-function-in-php-5/12813039#12813039
+****************/
 function skt_nurc_getCallingFunctionName($complete=false)
     {
         $trace=debug_backtrace();

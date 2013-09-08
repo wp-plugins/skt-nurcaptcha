@@ -4,7 +4,7 @@ Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register, anti-spam
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 3.1.3
+Stable tag: 3.1.5
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -20,7 +20,7 @@ just at the moment the "Register for This Site" form is requested. It creates a 
 checks the response given. If it is not valid, new user registration fails. If the response is 
 valid, NURCaptcha leaves the scene and your site runs as if it was not there.
 
-Skt NURCaptcha adds (form Version 3 on) extra security by querying trustable databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
+Skt NURCaptcha adds (from Version 3 on) extra security by querying trustable databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
 
 NURCaptcha also shows you each blocked attemptive. A Log file may be toggled for you to see data of the 
 last attemptives blocked by the plugin. It shows date/time of trials, as well as usernames and e-mail addresses 
@@ -44,13 +44,6 @@ Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 1. That's it.
 
 == Frequently Asked Questions ==
-
-= I've installed and activated the plugin, but at the new user register form the reCAPTCHA doesn't show up. =
-
-A defective version of a file called 'skt-nurc-recaptcha-locales.php' was mistakenly uploaded on march, 31st, 2012, 
-by around 4:00 PM GMT. If by chance you have downloaded the plugin during the few minutes when this file was in the WP Plugins repository,
-you may experiment that kind of problem. If that is your case, just deactivate and delete the plugin and then 
-proceed to a new, clean, installation.
 
 = The number of blocked attemptives is growing too slowly on the log. Does that mean that the plugin is not working? =
 
@@ -86,6 +79,10 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 3.1.5 =
+* Added: action hook to allow extra check on username or email by other plugin
+* Added: managing register form's help messages via Admin Panel
+* Fixed: small glitch on register form's help display code
 = 3.1.3 =
 * Fixed: bug in MU that blocked new site registration
 = 3.1.2 =
@@ -131,6 +128,12 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 3.1.5 =
+* Added: now you can manage register form's help messages via Admin Panel
+= 3.1.3 =
+* Fixed: bug in MU that blocked new site registration
+= 3.1.2 =
+* Fixed: small bug in MU that blocked new user registration from admin panel
 = 3.1.1 =
 * Improved: a server-safe procedure to load external xml contents, needed to read anti-spam databases responses.
 = 3.1.0 =

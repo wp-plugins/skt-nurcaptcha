@@ -13,4 +13,10 @@ delete_option('sktnurc_theme');
 delete_option('sktnurc_count');
 delete_option('sktnurc_keysset');
 delete_option('sktnurc_regbutton');
+delete_option('sktnurc_rechlp_opt');
+delete_option('sktnurc_emlhlp_opt');
+delete_option('sktnurc_usrhlp_opt');
+delete_option('sktnurc_username_help');
+delete_option('sktnurc_email_help');
+delete_option('sktnurc_reCaptcha_help');
 ?>
