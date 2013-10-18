@@ -2,8 +2,8 @@
 /*
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
-	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 adds extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.1.5
+	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 added extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
+	Version: 3.1.6
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -234,8 +234,13 @@ function skt_nurCaptcha() {
 			do_action('sktnurc_before_register_new_user', $result, $user_login, $user_email);
 		}
 		  
-		if ($result->is_valid) { // captcha and botscout passed, so let's see the rest...
-			$errors = register_new_user($user_login, $user_email);
+		if ($result->is_valid) { // captcha and botscout passed, so let's try to register the new user...
+			if ( !function_exists('sktnurc_register_new_user') ) { 
+				$errors = register_new_user($user_login, $user_email);
+			}else{
+				// if you want to customize registration, create a function for that with this name:
+				$errors = sktnurc_register_new_user($user_login, $user_email);				
+			}
 			if ( !is_wp_error($errors) ) {
 				$redirect_to = !empty( $_POST['redirect_to'] ) ? $_POST['redirect_to'] : 'wp-login.php?checkemail=registered';
 				wp_safe_redirect( $redirect_to );
@@ -255,7 +260,7 @@ function skt_nurCaptcha() {
 		echo ': '.sprintf( __("There is a problem with your response: %s", 'Skt_nurcaptcha'),$result->error);
 		echo '<br></div>';
 	}
-		echo $redirect_to;
+
 	?> 
 <form id="nurc_form" method="post" style="width:<?php echo $form_width; ?>px">
 <p><label><?php _e('Username', 'Skt_nurcaptcha'); ?><?php nurc_username_help(); ?><input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(stripslashes($user_login)); ?>" size="20" tabindex="10" /></label></p>
