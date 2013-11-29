@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 added extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.1.6
+	Version: 3.1.7
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -419,10 +419,10 @@ function nurc_recaptcha_challenge() {
 		 }
 		</script>	
 		<script type="text/javascript"
-		     src="http://www.google.com/recaptcha/api/challenge?k=<?php echo get_site_option('sktnurc_publkey'); ?>">
+		     src="https://www.google.com/recaptcha/api/challenge?k=<?php echo get_site_option('sktnurc_publkey'); ?>">
 		</script>
 		<noscript>
-			<iframe src="http://www.google.com/recaptcha/api/noscript?k=<?php echo get_site_option('sktnurc_publkey'); ?>" height="300" width="500" frameborder="0"></iframe><br>
+			<iframe src="https://www.google.com/recaptcha/api/noscript?k=<?php echo get_site_option('sktnurc_publkey'); ?>" height="300" width="500" frameborder="0"></iframe><br />
 			<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
 			<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
 		</noscript>
