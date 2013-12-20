@@ -307,7 +307,7 @@ function nurc_username_help() {
 	?>
     <span id="username-help-toggle" style="cursor:pointer;float:right">&nbsp;(<strong> ? </strong>)</span>
     <div id="username-help" style="position:relative;display:none;">
-    	<p class="message register" style="float:left">
+    	<p class="message register" style="float:left; font-weight:normal;">
     		<?php 
 			echo sktnurc_username_help_text();
 			?>
