@@ -3,7 +3,7 @@
 	Plugin Name: Skt NURCaptcha
 	Plugin URI: http://skt-nurcaptcha.sanskritstore.com/
 	Description: If your Blog allows new subscribers to register via the registration option at the Login page, this plugin may be useful to you. It includes a reCaptcha block to the register form, so you get rid of spambots. To use it you have to sign up for (free) public and private keys at <a href="https://www.google.com/recaptcha/admin/create" target="_blank">reCAPTCHA API Signup Page</a>. Version 3 added extra security by querying databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
-	Version: 3.1.7
+	Version: 3.1.8
 	Author: Carlos E. G. Barbosa
 	Author URI: http://www.yogaforum.org
 	Text Domain: Skt_nurcaptcha
@@ -51,9 +51,9 @@ if (( get_site_option('sktnurc_publkey')== '') or ( get_site_option('sktnurc_pri
 function skt_nurc_bp_include_hook() {
 	define('SKTNURC_BP_ACTIVE',true);
 	add_action('bp_signup_validate', 'skt_nurc_bp_signup_validate'); 
-		// located @ bp-members/bp-members-screens.php line 146 :: BP v 1.6
-	add_action('bp_before_registration_submit_buttons', 'skt_nurc_bp_before_registration_submit_buttons'); 
-		// located @ bp_themes/bp_default/registration/register.php line 236 :: BP v 1.6
+		// located @ bp-members/bp-members-screens.php line 146 :: BP v 1.9.1
+	add_action('bp_signup_profile_fields', 'skt_nurc_bp_signup_profile_fields'); 
+		// located @ bp_themes/bp_default/registration/register.php line 194 :: BP v 1.9.1
 }
 
 function skt_nurc_bp_signup_validate() {
@@ -75,8 +75,8 @@ function skt_nurc_bp_signup_validate() {
 	}	
 	return;
 }
-function skt_nurc_bp_before_registration_submit_buttons() {
-	echo '<div class="register-section"  id="profile-details-section">';
+function skt_nurc_bp_signup_profile_fields() {
+	echo '<div class="register-section" >';
     global $bp; 
 	nurc_recaptcha_challenge();
 	if($temp = $bp->signup->errors['skt_nurc_error'])

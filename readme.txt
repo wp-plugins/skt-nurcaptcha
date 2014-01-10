@@ -1,10 +1,10 @@
 === Skt NURCaptcha ===
 Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
-Tags: security, login form, new user, user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register, anti-spam, defense
+Tags: security, login form, new user, user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register, anti-spam, defence
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 3.1.7
+Stable tag: 3.1.8
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -80,6 +80,8 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 3.1.8 =
+* Fixed: removed duplication of div id in registration form when BuddyPress was active
 = 3.1.7 =
 * Fixed: challenge not displaying on https pages
 = 3.1.6 =
@@ -134,6 +136,8 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 3.1.8 =
+* Fixed: removed duplication of div id in registration form when BuddyPress was active
 = 3.1.7 =
 * Fixed: reCAPTCHA challenge not displaying on https pages
 = 3.1.5 =
