@@ -31,6 +31,7 @@
     
 */
 
+
 global $sktnurclog_db_version; $sktnurclog_db_version = "3.1";
 load_plugin_textdomain('Skt_nurcaptcha', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 add_action('admin_menu', 'skt_nurc_admin_page');
