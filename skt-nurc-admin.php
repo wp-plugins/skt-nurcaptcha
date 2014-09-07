@@ -214,7 +214,9 @@
 			}else{
 				echo '<br /><br />';
 			}
+			//abrir form de eliminação de registros
 			foreach($attemptives as $attemptive){
+				// incluir checkbox com value=$attemptive->id;
 				echo $attemptive->time;
 				echo " &raquo;&ensp; email: &lt;<strong>".$attemptive->email."</strong>&gt;";
 				echo " &rarr; name: <strong>".$attemptive->username."</strong> ";
@@ -222,7 +224,7 @@
 				echo "&ensp;&raquo;&ensp; [".$attemptive->procid."]";
 				echo "<br />";
 			}
-			
+			// fechar form de eliminação de registros com botão "Apagar os registros selecionados"
 			if ( $page_links ) {
 				echo '<div class="tablenav" style="margin-right:70px"><div class="tablenav-pages" style="margin: 1em 0">' . $page_links . '</div></div>';
 			}

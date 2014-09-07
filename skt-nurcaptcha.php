@@ -211,6 +211,7 @@ function skt_nurCaptcha() {
 		wp_redirect( apply_filters( 'wp_signup_location', network_site_url('wp-signup.php') ) );
 		exit();
 	}
+	
 	if ( !get_site_option('users_can_register') ) {
 		wp_redirect( site_url('wp-login.php?registration=disabled') );
 		exit();
@@ -249,8 +250,9 @@ function skt_nurCaptcha() {
 			} 
 		}
 
-	$redirect_to = apply_filters( 'registration_redirect', !empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '' );
+	$redirect_to = apply_filters( 'registration_redirect', $registration_redirect );
 	login_header(__('Registration Form'), '<p class="message register">' . __('Register For This Site') . '</p>', $errors);
+	
 	if (get_site_option('sktnurc_theme')!="clean"){$form_width ='320';}else{$form_width ='448';}
 	
 	if ((!$result->is_valid)and($result->error != '')) {
@@ -263,38 +265,41 @@ function skt_nurCaptcha() {
 	}
 
 	?> 
-<form id="nurc_form" method="post" style="width:<?php echo $form_width; ?>px">
-<p><label><?php _e('Username', 'Skt_nurcaptcha'); ?><?php nurc_username_help(); ?><input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(stripslashes($user_login)); ?>" size="20" tabindex="10" /></label></p>
-<p><label><?php _e('E-mail', 'Skt_nurcaptcha'); ?><?php nurc_email_help(); ?><input type="text" name="user_email" id="user_email" class="input" value="<?php echo esc_attr(stripslashes($user_email)); ?>" size="25" tabindex="20" /></label></p>
+<form id="nurc_form" action="<?php echo esc_url( site_url('wp-login.php?action=register', 'login_post') ); ?>"  method="post" style="width:<?php echo $form_width; ?>px" novalidate>
+	<p>
+        <label><?php _e('Username', 'Skt_nurcaptcha'); ?><?php nurc_username_help(); ?>
+        <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(wp_unslash($user_login)); ?>" size="20" />
+        </label>
+    </p>
+	<p>
+    	<label><?php _e('E-mail', 'Skt_nurcaptcha'); ?><?php nurc_email_help(); ?>
+        <input type="email" name="user_email" id="user_email" class="input" value="<?php echo esc_attr(wp_unslash($user_email)); ?>" size="25" />
+        </label>
+    </p>
 
 	<?php 
-		nurc_recaptcha_challenge(); 
-		do_action('register_form'); 
+	nurc_recaptcha_challenge(); 
+	do_action('register_form'); 
 	?>
     
 	<p id="reg_passmail"><?php _e('A password will be e-mailed to you.', 'Skt_nurcaptcha'); ?></p>
 	<br class="clear" />
 	<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
-	<p class="submit"><input class="button-primary" type="submit" id="wp-submit" value="<?php 
+	<p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php 
 	if (get_site_option('sktnurc_regbutton')==""){
-		_e("Register", 'Skt_nurcaptcha'); 
+		esc_attr_e('Register', 'Skt_nurcaptcha'); 
 	} else {
 		echo get_site_option('sktnurc_regbutton');
 	}
-	?>" tabindex="100" /></p></form>
+	?>" /></p></form>
 
-	<p id="nav">
-		<a href="<?php echo site_url('wp-login.php', 'login'); ?>"><?php _e('Log in', 'Skt_nurcaptcha'); ?></a> |
-		<a href="<?php echo site_url('wp-login.php?action=lostpassword', 'login'); ?>" title="<?php _e('Password Lost and Found', 'Skt_nurcaptcha'); ?>"><?php _e('Lost your password?', 'Skt_nurcaptcha'); ?></a>
-	</p>
+<p id="nav">
+<a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e('Log in', 'Skt_nurcaptcha'); ?></a> |
+<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e('Password Lost and Found', 'Skt_nurcaptcha'); ?>"><?php _e('Lost your password?', 'Skt_nurcaptcha'); ?></a>
+</p>
 <?php
-	login_footer('user_login');
-	$file_dir = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
-?>
-<script src="<?php echo $file_dir; ?>js/sktnurc-fn.js"></script>
-<?php
-
-	exit;
+login_footer('user_login');
+exit;
 
 } 
 /*****
