@@ -218,7 +218,7 @@ msgid ""
 msgstr ""
 "NOTE: Se você registrou anteriormente chaves reCAPTCHA do tipo \"multisite"
 "\", você vai precisar apagar estas chaves e registrar chaves novas para cada "
-"domínio. Tara fazer isso, basta seguir o link indicado na próxima linha."
+"domínio. Para fazer isso, basta seguir o link indicado na próxima linha."
 
 #: skt-nurc-admin.php:301
 msgid ""
