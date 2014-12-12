@@ -34,6 +34,9 @@
 		var refuhop = $('#sktnurc_usrhlp_opt').is(":checked");
 		var refemop = $('#sktnurc_emlhlp_opt').is(":checked");
 		var refrcop = $('#sktnurc_rechlp_opt').is(":checked");
+		var refnewversion = $('#rec_version_new').is(":checked");
+		var refrectype = $('#rec_type_image').is(":checked");
+		var refatlogin = $('#rec_at_login').is(":checked");
 		var refimg = $('#sktnurc_theme').val();
 		var reflang = $('#sktnurc_lang').val();
 		var precustom = $('#sktnurc_lang option:selected').val();
@@ -48,7 +51,8 @@
 		var presimg=refimg;var preskey1=refkey1;var preskey2=refkey2;var preskey3=refkey3;
 		var preslang=reflang;var prescstlang=refcstlang;var presreg=refreg;
 		var presspam0 = refspam0;var presspam1 = refspam1;var presspam2 = refspam2;
-		var presloglimit = refloglimit;
+		var presloglimit = refloglimit; var presnewversion = refnewversion; var presrectype = refrectype;
+		var presatlogin = refatlogin;
 		if((refkey1!='')&&(refkey2!='')){
 			$('#setup_alert').css('display','none');
 		}
@@ -88,6 +92,30 @@
 				$('#sktcstlg').slideUp();
 				$('#save-advert-lang2').fadeIn();
 			}
+			advert_check();
+		});
+		$('#rec_version_new').change(function() {
+			presnewversion = $('#rec_version_new').is(":checked");
+			advert_check();
+		});
+		$('#rec_version_old').change(function() {
+			presnewversion = $('#rec_version_new').is(":checked");
+			advert_check();
+		});
+		$('#rec_type_image').change(function() {
+			presrectype = $('#rec_type_image').is(":checked");
+			advert_check();
+		});
+		$('#rec_type_audio').change(function() {
+			presrectype = $('#rec_type_image').is(":checked");
+			advert_check();
+		});
+		$('#rec_at_login').change(function() {
+			presatlogin = $('#rec_at_login').is(":checked");
+			advert_check();
+		});
+		$('#rec_not_at_login').change(function() {
+			presatlogin = $('#rec_at_login').is(":checked");
 			advert_check();
 		});
 		$('#sktnurc_username_help').keyup( function(){
@@ -219,7 +247,7 @@
 			}
 		}
 		window.advert_check	= function() {
-			if ((presuhop == refuhop) && (presemop==refemop) && (presrcop==refrcop) && (presusrhlp == refusrhlp) && (presemlhlp == refemlhlp) && (presrechlp == refrechlp) && (prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no') && (presloglimit==refloglimit)) {
+			if ((presuhop == refuhop) && (presemop==refemop) && (presrcop==refrcop) && (presusrhlp == refusrhlp) && (presemlhlp == refemlhlp) && (presrechlp == refrechlp) && (prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no') && (presloglimit==refloglimit) && (presnewversion==refnewversion) && (presrectype == refrectype) && (presatlogin == refatlogin)) {
 				$('.save-advert').fadeOut();
 			} else {
 				$('.save-advert').fadeIn();

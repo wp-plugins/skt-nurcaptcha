@@ -3,8 +3,8 @@ Contributors: Sanskritforum
 Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register, anti-spam, defence
 Requires at least: 3.1
-Tested up to: 4.0
-Stable tag: 3.1.8
+Tested up to: 4.0.1
+Stable tag: 3.4.0
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -14,17 +14,21 @@ NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it a
 NURCaptcha stands for *New User Register Captcha*. It has been designed for anyone who wishes to allow 
 free registration of new users for a WP site, but want to keep bots outside. It uses Google's reCAPTCHA 
 tools to give your site an extra protection against those spammer bots, adding security to the WP Register Form.
+With Skt NURCaptcha you may use a reCAPTCHA on your login form, also.
 
 Skt NURCaptcha is easy to install and doesn't slow down your site. It is called into action 
-just at the moment the "Register for This Site" form is requested. It creates a challenge and 
-checks the response given. If it is not valid, new user registration fails. If the response is 
-valid, NURCaptcha leaves the scene and your site runs as if it was not there.
+just at the moment the "Register for This Site" form is requested. It prompts users with a checkbox they click on 
+to prove they are not robots, and creates a challenge whenever needed, and checks the response given. 
+If it is not valid, new user registration fails. If the response is valid, NURCaptcha leaves the scene and 
+your site runs as if it was not there.
 
-Skt NURCaptcha adds (from Version 3 on) extra security by querying trustable databases for known ip, username and email of spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons.
+Skt NURCaptcha adds (from Version 3 on) extra security by querying trustable antispam databases for known ip, username and email of 
+spammers, so you get rid of them even if they break the reCaptcha challenge by solving it as real persons. 
+From version 3.4 on you can enable login form protection, also, as an extra fence against brute force attacks.
 
-NURCaptcha also shows you each blocked attemptive. A Log file may be toggled for you to see data of the 
-last attemptives blocked by the plugin. It shows date/time of trials, as well as usernames and e-mail addresses 
-of those who failed registration and were kept outside. Please note that attemptives in which the spambot 
+NURCaptcha also shows you each blocked attemptive. Log data may be toggled for you to see info on the 
+attemptives blocked by the plugin. It shows date/time of trials, as well as usernames and e-mail addresses 
+of those who failed registration (or login, if enabled) and were kept outside. Please note that attemptives in which the spambot 
 suspends its attack when confronted by the reCAPTCHA challenge can not be logged. So logfile figures will 
 never reflect the whole achievements of the plugin in securing your site.
 
@@ -40,7 +44,7 @@ Works smoothly with **WP Multisites** (Network) and **BuddyPress**.
 
 1. Upload 'skt-nurcaptcha' folder to the '/wp-content/plugins/' directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Don't forget to get the free Public and Private reCAPTCHA keys at [reCAPTCHA API Signup Page](https://www.google.com/recaptcha/admin/create "Get your free keys")
+1. Don't forget to get the free Public and Private reCAPTCHA keys at [reCAPTCHA API Signup Page](https://www.google.com/recaptcha/admin#createsite "Get your free keys")
 1. Go to the 'Settings' menu, locate Skt NURCaptcha Settings Page and drop your keys there.
 1. That's it.
 
@@ -67,11 +71,9 @@ it's up to you to add that user manually or send him an email with directions fo
 The most common problem that keeps good people outside is not due to the reCaptcha, but 
 illegal (non ASCII) characters in usernames. That is why we added a help box to the register form.
 
-= Why there are only four style options for the reCAPTCHA box? =
+= Why there are two versions for the reCAPTCHA? =
 
-The reCAPTCHA form that NURCaptcha inserts in your site is built up on the fly at Google`s reCAPTCHA server. 
-NURCaptcha works, to this moment, with the standard ready-to-use four basic styles. We plan to add 
-customization tools on a future version of the plugin.
+On december, 2014, Google released a new version of reCAPTCHA. This new version is more friendly to the user and far more advanced in technology, if compared to the former version. If you are upgrading from an older version of Skt NURCaptcha, we strongly reccomend you to enable the new version, in the settings page of this plugin. If you have this version of the plugin in a fresh installation, the new version of thr reCAPTCHA is enabled by default. The only reason to keep both versions of reCAPTCHA is to allow old users to prepare for the change. We don't know how long will it take till Google disable the old reCAPTCHA's API, so an automatic (forced) transition to the new version will be provided in future releases of this plugin.
 
 == Screenshots ==
 
@@ -80,6 +82,9 @@ customization tools on a future version of the plugin.
 
 == Changelog ==
 
+= 3.4.0 =
+* Added: Transition to the new version of Google's reCAPTCHA
+* Added: login form captcha
 = 3.1.8 =
 * Fixed: removed duplication of div id in registration form when BuddyPress was active
 = 3.1.7 =
@@ -136,6 +141,8 @@ customization tools on a future version of the plugin.
 
 == Upgrade Notice ==
 
+= 3.4.0 =
+* IMPORTANT UPDATE: Transition to the new version of Google's reCAPTCHA (dec/2014)
 = 3.1.8 =
 * Fixed: removed duplication of div id in registration form when BuddyPress was active
 = 3.1.7 =

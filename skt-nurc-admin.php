@@ -1,51 +1,49 @@
 ﻿<?php
 
-	$sktnurc_ref_strings = array(
-		__('Get a visual challenge','Skt_nurcaptcha'),
-		__('Get an audio challenge','Skt_nurcaptcha'),
-		__('Get a new challenge','Skt_nurcaptcha'),
-		__('Type the two words:','Skt_nurcaptcha'),
-		__('Type the words in the boxes:','Skt_nurcaptcha'),
-		__('Type what you hear:','Skt_nurcaptcha'),
-		__('Help','Skt_nurcaptcha'),
-		__('Play sound again','Skt_nurcaptcha'),
-		__('Download sound as MP3','Skt_nurcaptcha'),
-		__('Incorrect. Try again.','Skt_nurcaptcha'),
-		__('reCAPTCHA challenge image','Skt_nurcaptcha')
-		); 
-
-	include('skt-nurc-recaptcha-locales.php');
-	if (get_site_option('sktnurc_reclocales_lang')=="") {
-		update_site_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
-	}else{
-		$sktnurc_temp_reclocales_strings=get_site_option('sktnurc_reclocales_lang');
-		foreach($sktnurc_reclocales_strings as $lg => $strlg){
-			if($sktnurc_temp_reclocales_strings[$lg]==''){
-				$sktnurc_temp_reclocales_strings[$lg]=$strlg;
-			}
+	// populate new version's data 
+	if(get_site_option('sktnurc_recaptcha_version')==""){
+		if(get_site_option('sktnurc_publkey')!=''){
+			update_site_option('sktnurc_recaptcha_version', "old");
+		}else{
+			update_site_option('sktnurc_recaptcha_version', "new");
 		}
-		update_site_option('sktnurc_reclocales_lang',$sktnurc_temp_reclocales_strings);
-		$sktnurc_reclocales_strings=$sktnurc_temp_reclocales_strings;
 	}
-	$sktnurc_en_strings = $sktnurc_reclocales_strings["en"];
+	if(get_site_option('sktnurc_recaptcha_language')=="") 
+		update_site_option('sktnurc_recaptcha_language','xx');
+	if(get_site_option('sktnurc_data_theme')=="")
+		update_site_option('sktnurc_data_theme', "light");
+	if(get_site_option('sktnurc_data_type')=="")
+		update_site_option('sktnurc_data_type', "image");
+	if(get_site_option('sktnurc_login_recaptcha')=="")
+		update_site_option('sktnurc_login_recaptcha', "false");
+
+
 	// activate StopForumSpan queries by default
 	if (get_site_option('sktnurc_stopforumspam_active')!='false') {
 		update_site_option('sktnurc_stopforumspam_active','true');
 		} 
 
-	if($_POST['sktnurc_hidden'] == 'Y') {
+	if(isset($_POST['sktnurc_hidden'])) { // == 'Y'
 		//Form data sent
 		$sktnurc_pubkey = $_POST['sktnurc_publkey'];
 		update_site_option('sktnurc_publkey', $sktnurc_pubkey);
 
 		$sktnurc_privkey = $_POST['sktnurc_privtkey'];	
 		update_site_option('sktnurc_privtkey', $sktnurc_privkey);
+		$same = true;
+		if(get_site_option('sktnurc_recaptcha_version') != $_POST['sktnurc_recaptcha_version'])
+			$same = false;
+		update_site_option('sktnurc_recaptcha_version', $_POST['sktnurc_recaptcha_version']);
 		
 		// *****  update register form's help messages:	
 		update_site_option('sktnurc_username_help', $_POST['sktnurc_username_help']);
 		update_site_option('sktnurc_email_help', $_POST['sktnurc_email_help']);
-		update_site_option('sktnurc_reCaptcha_help', $_POST['sktnurc_reCaptcha_help']);
-		
+		if((get_site_option('sktnurc_recaptcha_version')=="old") && $same){
+			update_site_option('sktnurc_reCaptcha_help', $_POST['sktnurc_reCaptcha_help']);
+		}
+		if((get_site_option('sktnurc_recaptcha_version')=="new") && $same){
+			update_site_option('sktnurc_v2_reCaptcha_help', $_POST['sktnurc_v2_reCaptcha_help']);
+		}
 		if($_POST['sktnurc_usrhlp_opt'] == 'true'){
 			update_site_option('sktnurc_usrhlp_opt', 'true');
 		}else{
@@ -95,38 +93,51 @@
 		if ($sktnurc_logpage_limit < 5) $sktnurc_logpage_limit = 5;
 		update_site_option('sktnurc_logpage_limit', $sktnurc_logpage_limit);
 		
-		update_site_option('sktnurc_theme', $_POST['sktnurc_theme']);
 		update_site_option('sktnurc_regbutton', $_POST['sktnurc_regbutton']);
-		if('custom'== $_POST['sktnurc_lang_set']) {
-			update_site_option('sktnurc_lang', $_POST['sktnurc_lang_set']);
-		}else{
-			update_site_option('sktnurc_lang', $_POST['sktnurc_lang']);
-		}
-		update_site_option('sktnurc_lang_set', $_POST['sktnurc_lang_set']);
-		if($_POST['sktnurc_lang']==$_POST['sktnurc_hidden_lang']) {
-			$temp = $sktnurc_reclocales_strings[ $_POST['sktnurc_lang']];
-			$sktnurc_cst_strings = array(
-				0 => $_POST['visual_challenge'],
-				1 => $_POST['audio_challenge'],
-				2 => $_POST['refresh_btn'],
-				3 => $_POST['instructions_visual'],
-				4 => $_POST['instructions_context'],
-				5 => $_POST['instructions_audio'],
-				6 => $_POST['help_btn'],
-				7 => $_POST['play_again'],
-				8 => $_POST['cant_hear_this'],
-				9 => $_POST['incorrect_try_again'],
-				10 => $_POST['image_alt_text'],
-				11 => $temp[11]
-				);
-			for ($i=0; $i <= 11; $i++){
-				if ($sktnurc_cst_strings[$i]=='') {
-						$sktnurc_cst_strings[$i]=' ';
-				}
+		
+		if((get_site_option('sktnurc_recaptcha_version')=="old") && $same){
+			// the following data is not needed for the new reCAPTCHA v.2 
+			update_site_option('sktnurc_theme', $_POST['sktnurc_theme']);
+			if('custom'== $_POST['sktnurc_lang_set']) {
+				update_site_option('sktnurc_lang', $_POST['sktnurc_lang_set']);
+			}else{
+				update_site_option('sktnurc_lang', $_POST['sktnurc_lang']);
 			}
-			$sktnurc_reclocales_strings[ $_POST['sktnurc_lang']]=$sktnurc_cst_strings;
-			update_site_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
+			update_site_option('sktnurc_lang_set', $_POST['sktnurc_lang_set']);
+			if($_POST['sktnurc_lang']==$_POST['sktnurc_hidden_lang']) {
+				$temp = $sktnurc_reclocales_strings[ $_POST['sktnurc_lang']];
+				$sktnurc_cst_strings = array(
+					0 => $_POST['visual_challenge'],
+					1 => $_POST['audio_challenge'],
+					2 => $_POST['refresh_btn'],
+					3 => $_POST['instructions_visual'],
+					4 => $_POST['instructions_context'],
+					5 => $_POST['instructions_audio'],
+					6 => $_POST['help_btn'],
+					7 => $_POST['play_again'],
+					8 => $_POST['cant_hear_this'],
+					9 => $_POST['incorrect_try_again'],
+					10 => $_POST['image_alt_text'],
+					11 => $temp[11]
+					);
+				for ($i=0; $i <= 11; $i++){
+					if ($sktnurc_cst_strings[$i]=='') {
+							$sktnurc_cst_strings[$i]=' ';
+					}
+				}
+				$sktnurc_reclocales_strings[ $_POST['sktnurc_lang']]=$sktnurc_cst_strings;
+				update_site_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
+			}
 		}
+		if((get_site_option('sktnurc_recaptcha_version')=="new") && $same){
+		// the following data is updated for new reCaptcha only
+			update_site_option('sktnurc_data_type', $_POST['sktnurc_data_type']);
+			update_site_option('sktnurc_data_theme', $_POST['sktnurc_data_theme']);
+			update_site_option('sktnurc_login_recaptcha', $_POST['sktnurc_login_recaptcha']);
+			update_site_option('sktnurc_recaptcha_language', $_POST['sktnurc_recaptcha_language']);
+		}
+	
+
 		if ($_POST['log_clear']!= 'no') {
 			$clear_log_file = nurc_clear_log_file();
 			if ($clear_log_file !== false) {
@@ -151,16 +162,50 @@
 		$sktnurc_privkey = get_site_option('sktnurc_privtkey');
 		$sktnurc_botscoutkey = get_site_option('sktnurc_botscoutkey');
 	}
+
+	if(get_site_option('sktnurc_recaptcha_version')=="old"){ 
+		// the data below is not needed for the new reCAPTCHA v.2
+		$sktnurc_ref_strings = array(
+			__('Get a visual challenge','Skt_nurcaptcha'),
+			__('Get an audio challenge','Skt_nurcaptcha'),
+			__('Get a new challenge','Skt_nurcaptcha'),
+			__('Type the two words:','Skt_nurcaptcha'),
+			__('Type the words in the boxes:','Skt_nurcaptcha'),
+			__('Type what you hear:','Skt_nurcaptcha'),
+			__('Help','Skt_nurcaptcha'),
+			__('Play sound again','Skt_nurcaptcha'),
+			__('Download sound as MP3','Skt_nurcaptcha'),
+			__('Incorrect. Try again.','Skt_nurcaptcha'),
+			__('reCAPTCHA challenge image','Skt_nurcaptcha')
+			); 
+	
+		include('skt-nurc-recaptcha-locales.php');
+		if (get_site_option('sktnurc_reclocales_lang')=="") {
+			update_site_option('sktnurc_reclocales_lang',$sktnurc_reclocales_strings);
+		}else{
+			$sktnurc_temp_reclocales_strings=get_site_option('sktnurc_reclocales_lang');
+			foreach($sktnurc_reclocales_strings as $lg => $strlg){
+				if($sktnurc_temp_reclocales_strings[$lg]==''){
+					$sktnurc_temp_reclocales_strings[$lg]=$strlg;
+				}
+			}
+			update_site_option('sktnurc_reclocales_lang',$sktnurc_temp_reclocales_strings);
+			$sktnurc_reclocales_strings=$sktnurc_temp_reclocales_strings;
+		}
+		$sktnurc_en_strings = $sktnurc_reclocales_strings["en"];
+	}
+
+
 ?>
 <div class="wrap">
 	<?php 	
 		$nurc_version = nurc_get_version();
-		screen_icon();
-		echo "<p><h2>" . __( 'Skt NURCaptcha Settings', 'Skt_nurcaptcha' ) . "</h2></p>"; 
+		$nurc_icon = plugin_dir_url(dirname(__FILE__).'/skt-nurcaptcha.php')."img/icon.svg";
+		echo "<div style=\"margin-left:24px;\"><h2><img src=\"$nurc_icon\" height=\"42\" width=\"42\" style=\"margin-right:4px;\" >" . __( 'Skt NURCaptcha Settings', 'Skt_nurcaptcha' ) . "</h2></div>"; 
 	?>
 	
 	<div style="width:680px;padding:12px 0 12px 24px">
-		<form name="sktnurc_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+		<form name="sktnurc_form" method="post" action="<?php echo admin_url( "options-general.php?page=".$_GET["page"] ) ?>">
 				<input type="hidden" name="sktnurc_hidden" value="Y" />
 				<input id="log_clear" type="hidden" name="log_clear" value="no" />
 				<input id="confirm_dialog" type="hidden" name="confirm_dialog" value="<?php _e( 'This option cannot be undone. Do you really want to erase all Log Data and restart Log File?', 'Skt_nurcaptcha' ) ?>" />
@@ -175,7 +220,7 @@
 		<?php    echo  __( 'NURCaptcha stands for <strong>New User Register Captcha</strong>.', 'Skt_nurcaptcha' ) . "<br />"; ?>
 		<?php    echo  __( 'It uses Google\'s reCaptcha tools to protect your site against spammer bots, ', 'Skt_nurcaptcha' ) ; ?>
 		<?php    echo  __( 'adding security to the WP Register Form. You can learn more', 'Skt_nurcaptcha' ) ; ?>
-		<?php    echo  '<a href="http://www.google.com/recaptcha/security" target="_blank"> '.__('here','Skt_nurcaptcha').' </a>'.__('about reCAPTCHA Security','Skt_nurcaptcha').'<br />'; ?>
+		<?php    echo  '<a href="https://www.google.com/recaptcha/intro/index.html#advanced-security" target="_blank"> '.__('here','Skt_nurcaptcha').' </a>'.__('about reCAPTCHA Security','Skt_nurcaptcha').'<br />'; ?>
 		<?php    echo "<br />"; ?>
 		<p class="submit" >
 		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
@@ -237,14 +282,39 @@
 		?>
         <div style="clear:both"></div>
 		<?php    echo "<br />"; ?>
-		<?php    echo "<p style=\"padding: .5em; background-color: #666666; color: #fff;\">" . __( 'To enable this plugin\'s functionality, please enter your reCAPTCHA keys here:', 'Skt_nurcaptcha' ) . "</p><br />"; ?>
-		<?php    echo "<small>[". __( 'You can sign up for reCaptcha <strong>free</strong> keys here: ', 'Skt_nurcaptcha' );
-				 echo '<a href="'.nurc_recaptcha_get_signup_url().'"><strong>reCAPTCHA API Signup Page</strong></a>]</small>'; ?>
+		<?php    echo "<p style=\"padding: .5em; background-color: #666666; color: #fff;\">" . __( 'To enable this plugin\'s functionality, please enter your reCAPTCHA keys here:', 'Skt_nurcaptcha' ) . "</p><br />"; // grey section title bar
+		
+		if(get_site_option('sktnurc_recaptcha_version')=="old"){
+		?>
+        <p><strong><?php _e('IMPORTANT NOTICE:', 'Skt_nurcaptcha' ); ?></strong><br /><?php _e('A new version of reCaptcha has been released by Google. This plugin will keep your site protected by the old version reCaptcha until you decide to upgrade. We strongly recommend you to upgrade as soon as possible, as the old reCaptcha API may be set out of operation in a short time. To upgrade to this new version, you must check the "use new version" option below and then click the "Update Options" button', 'Skt_nurcaptcha' ); ?></p>
+        <p><input type="radio" id="rec_version_new" value="new" name="sktnurc_recaptcha_version" <?php 
+				if(get_site_option('sktnurc_recaptcha_version')=="new") echo 'checked';
+				?> /> <?php _e('Use new version of Google reCAPTCHA (dec/2014)','Skt_nurcaptcha'); ?><br />
+        <input type="radio" id="rec_version_old" value="old" name="sktnurc_recaptcha_version" <?php 
+				if(get_site_option('sktnurc_recaptcha_version')=="old") echo 'checked';
+				?> /> <?php _e('Keep using the old version of Google reCAPTCHA, for awhile','Skt_nurcaptcha'); ?><br /></p>
+        <p><?php _e('NOTE: If you have signed up for multisite reCaptcha keys before, you will need to delete these keys and sign up for new ones. To do that, just follow the link on the next line.', 'Skt_nurcaptcha' ); ?></p>
+		<?php
+		
+		}else{ 
+		?>
+        <p><strong><?php _e('IMPORTANT NOTICE:', 'Skt_nurcaptcha' ); ?></strong><br /><?php _e('Skt NURCaptcha works with the new version of reCaptcha, that has been released by Google on december, 2014. If you prefer, for any reason, to set up this plugin to work with the old reCaptcha API, you can force the old format by checking the "force old version" option below.', 'Skt_nurcaptcha' ); ?></p>
+        <p><input type="radio" id="rec_version_new" value="new" name="sktnurc_recaptcha_version" <?php 
+				if(get_site_option('sktnurc_recaptcha_version')=="new") echo 'checked';
+				?> /> <?php _e('Keep using the newer version of Google reCAPTCHA (dec/2014)','Skt_nurcaptcha'); ?><br />
+        <input type="radio" id="rec_version_old" value="old" name="sktnurc_recaptcha_version" <?php 
+				if(get_site_option('sktnurc_recaptcha_version')=="old") echo 'checked';
+				?> /> <?php _e('Force old version of Google reCAPTCHA, for awhile','Skt_nurcaptcha'); ?><br /></p>
+		<?php
+			
+		}
+		 	echo "<small>[". __( 'You can sign up for reCaptcha <strong>free</strong> keys here: ', 'Skt_nurcaptcha' );
+			echo '<a href="'.nurc_recaptcha_get_signup_url().'" target="_blank"><strong>reCAPTCHA API Signup Page</strong></a>]</small>'; ?>
 	</div>	
 	
 	<div style="width:680px;padding:12px 0 12px 24px">
-				<p><?php _e("reCaptcha Public Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_publkey" name="sktnurc_publkey" value="<?php echo $sktnurc_pubkey; ?>" size="46"></p>
-				<p><?php _e("reCaptcha Private Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_privtkey" name="sktnurc_privtkey" value="<?php echo $sktnurc_privkey; ?>" size="46"></p>
+				<p><?php _e("reCaptcha Site Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_publkey" name="sktnurc_publkey" value="<?php echo $sktnurc_pubkey; ?>" size="46"></p>
+				<p><?php _e("reCaptcha Secret Key: ", 'Skt_nurcaptcha' ); ?><input type="text" id="sktnurc_privtkey" name="sktnurc_privtkey" value="<?php echo $sktnurc_privkey; ?>" size="46"></p>
 		<p class="submit" >
 		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
 		<span class="save-advert" style="display:none;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?>&nbsp;&raquo;&nbsp;&raquo;&nbsp;&raquo;&nbsp;</strong></span>
@@ -254,42 +324,78 @@
 	<div style="position:relative;width:680px;padding:12px 0 12px 24px">
 		<p style="padding: .5em; background-color: #666666; color: #fff;"><?php echo __( 'Style your reCaptcha:', 'Skt_nurcaptcha' ) ?></p>
 		<div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
-		<div id="sktth" style="position:relative">
-			<span><?php  _e('reCAPTCHA theme:', 'Skt_nurcaptcha'); ?></span><br />
-			&nbsp;&nbsp;&nbsp;&nbsp;<select id="sktnurc_theme" name="sktnurc_theme">
-				<?php
-				$plugin_img_path = array();
-				$rc_themes = array('red' => 'Red (default)', 'white' => 'White', 'blackglass' => 'Blackglass', 'clean' => 'Clean');
-				foreach( $rc_themes as $k => $v ) {
-					$selected = ( $k == get_site_option('sktnurc_theme') ) ? 'selected="selected"' : '';
-					echo "<option value='$k' $selected>$v</option>";
-					$plugin_img_path[$k] = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
-					$plugin_img_path[$k] .= 'img/'.$k.'.png';
-				}
-				$def_img = ( "" == get_site_option('sktnurc_theme') ) ? 'red' : get_site_option('sktnurc_theme');
-				?>
-			</select><br />
-			<!-- reCAPTCHA images --> 
-			<div class="captcha-img" style="float:left;width:460px; margin:-42px 0 110px 0; padding:0 0 12px 0">
-				<?php
-				foreach ($plugin_img_path as $k => $v) {
-				?>
-				<div id="sktnurc-display-<?php 
-					echo $k; 
-					?>" style="position:absolute;margin-left:232px<?php 
-					if ($k != $def_img) { echo ';display:none';} ?>">
-					<img src="<?php echo $plugin_img_path[$k]; ?>" title="<?php 
-					_e('This is the look of your captcha','Skt_nurcaptcha'); ?>" />
-				</div>
-				<?php
-				}
-				?>
-			</div>
-			<!-- end of reCAPTCHA images --> 
-		</div>
-		<!-- end of reCAPTCHA style block -->
-        </div>
+		<?php if(get_site_option('sktnurc_recaptcha_version')=="old") { ?>
+            <div id="sktth" style="position:relative;">
+                <span><?php  _e('reCAPTCHA theme:', 'Skt_nurcaptcha'); ?></span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<select id="sktnurc_theme" name="sktnurc_theme">
+                    <?php
+                    $plugin_img_path = array();
+                    $rc_themes = array('red' => 'Red (default)', 'white' => 'White', 'blackglass' => 'Blackglass', 'clean' => 'Clean');
+                    foreach( $rc_themes as $k => $v ) {
+                        $selected = ( $k == get_site_option('sktnurc_theme') ) ? 'selected="selected"' : '';
+                        echo "<option value='$k' $selected>$v</option>";
+                        $plugin_img_path[$k] = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+                        $plugin_img_path[$k] .= 'img/'.$k.'.png';
+                    }
+                    $def_img = ( "" == get_site_option('sktnurc_theme') ) ? 'red' : get_site_option('sktnurc_theme');
+                    ?>
+                </select><br />
+                <!-- reCAPTCHA images --> 
+                <div class="captcha-img" style="float:left;width:460px; margin:-42px 0 110px 0; padding:0 0 12px 0">
+                    <?php
+                    foreach ($plugin_img_path as $k => $v) {
+                    ?>
+                    <div id="sktnurc-display-<?php 
+                        echo $k; 
+                        ?>" style="position:absolute;margin-left:232px<?php 
+                        if ($k != $def_img) { echo ';display:none';} ?>">
+                        <img src="<?php echo $plugin_img_path[$k]; ?>" title="<?php 
+                        _e('This is the look of your captcha','Skt_nurcaptcha'); ?>" />
+                    </div>
+                    <?php
+                    }
+                    ?>
+                </div><!-- end of reCAPTCHA images -->
+                 
+            </div><!-- end of reCAPTCHA theme block -->
+        <?php }else{ // theme selector for new version of reCaptcha ?>
+            <div id="sktth" style="position:relative;">
+                <span><?php  _e('reCAPTCHA theme:', 'Skt_nurcaptcha'); ?></span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<select id="sktnurc_theme" name="sktnurc_data_theme">
+                    <?php
+                    $plugin_img_path = array();
+                    $rc_themes = array('light' => 'Light (default)', 'dark' => 'Dark');
+                    foreach( $rc_themes as $k => $v ) {
+                        $selected = ( $k == get_site_option('sktnurc_data_theme') ) ? 'selected="selected"' : '';
+                        echo "<option value='$k' $selected>$v</option>";
+                        $plugin_img_path[$k] = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+                        $plugin_img_path[$k] .= 'img/'.$k.'.png';
+                    }
+                    $def_img = ( "" == get_site_option('sktnurc_data_theme') ) ? 'light' : get_site_option('sktnurc_data_theme');
+                    ?>
+                </select><br />
+                <!-- reCAPTCHA images --> 
+                <div class="captcha-img" style="float:left;width:460px; margin:-42px 0 110px 0; padding:0 0 12px 0">
+                    <?php
+                    foreach ($plugin_img_path as $k => $v) {
+                    ?>
+                    <div id="sktnurc-display-<?php 
+                        echo $k; 
+                        ?>" style="position:absolute;margin-left:232px<?php 
+                        if ($k != $def_img) { echo ';display:none';} ?>">
+                        <img src="<?php echo $plugin_img_path[$k]; ?>" title="<?php 
+                        _e('This is the look of your captcha','Skt_nurcaptcha'); ?>" />
+                    </div>
+                    <?php
+                    }
+                    ?>
+                </div><!-- end of reCAPTCHA images -->
+                 
+            </div><!-- end of reCAPTCHA theme block -->
+        <?php } ?>
+        </div><!-- end of wrapper - theme block -->
 		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div> <!-- separator -->
+		<?php if(get_site_option('sktnurc_recaptcha_version')=="old") { ?>
         <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
         <div style="padding:4px 0 4px 0;">
 				<span><?php _e('reCAPTCHA language:', 'Skt_nurcaptcha') ?></span><br /><br />
@@ -373,8 +479,53 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
             </div> <!--  end of div "sktcstlg"  -->
         </div>
 	</div>
+<?php }else{ ?>
+        <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
+            <div style="padding:4px 0 4px 0;">
+                    <span><?php _e('reCAPTCHA language:', 'Skt_nurcaptcha') ?></span><br /><br />
+					<span><?php _e("If you want to force the widget to render in a specific language, use the selector below. Auto-detects the user's language if unspecified.", 'Skt_nurcaptcha') ?></span><br /><br />
+					<?php  echo skt_get_lang_selector(get_site_option('sktnurc_recaptcha_language')) ?>
+            </div>
+        </div>
+		<div style="clear:both"></div>
 
-		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div>
+		<p class="submit" >
+		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
+		<span class="save-advert" style="display:none;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?>&nbsp;&raquo;&nbsp;&raquo;&nbsp;&raquo;&nbsp;</strong></span>
+		</p>
+		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div> <!-- separator -->
+        <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
+            <div style="padding:4px 0 4px 0;">
+                    
+                    <span><?php _e('reCAPTCHA type:', 'Skt_nurcaptcha') ?></span><br /><br />
+                    <span><?php _e('Once and a while, when needed, reCAPTCHA will present a challenge for the user to solve. By default, this challenge is an image with words or numbers. You can change the challenge to audio type, if you think this is a better fit to your site.', 'Skt_nurcaptcha') ?></span><br /><br />
+                <p><input type="radio" id="rec_type_image" value="image" name="sktnurc_data_type" <?php 
+                        if(get_site_option('sktnurc_data_type')=="image") echo 'checked';
+                        ?> /> <?php _e('Use image challenge, when needed','Skt_nurcaptcha'); ?><br />
+                <input type="radio" id="rec_type_audio" value="audio" name="sktnurc_data_type" <?php 
+                        if(get_site_option('sktnurc_data_type')=="audio") echo 'checked';
+                        ?> /> <?php _e('Use audio challenge, only','Skt_nurcaptcha'); ?><br /></p>
+                    
+			</div>
+        </div>
+
+		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div> <!-- separator -->
+        <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
+            <div style="padding:4px 0 4px 0;">
+                    
+                    <span><?php _e('enable reCAPTCHA on LOGIN form:', 'Skt_nurcaptcha') ?></span><br /><br />
+                    <span><?php _e('This feature adds extra security to your site, by inserting a reCAPTCHA at the end of the login form. Thus, even if a bot comes to guess the right username and password, this extra reCAPTCHA may provide additional strenght to block the invasion.', 'Skt_nurcaptcha') ?></span><br /><br />
+                <p><input type="radio" id="rec_at_login" value="true" name="sktnurc_login_recaptcha" <?php 
+                        if(get_site_option('sktnurc_login_recaptcha')=="true") echo 'checked';
+                        ?> /> <?php _e('Use login reCAPTCHA, for extra protection.','Skt_nurcaptcha'); ?><br />
+                <input type="radio" id="rec_not_at_login" value="false" name="sktnurc_login_recaptcha" <?php 
+                        if(get_site_option('sktnurc_login_recaptcha')=="false") echo 'checked';
+                        ?> /> <?php _e('No, thanks.','Skt_nurcaptcha'); ?><br /></p>
+                    
+			</div>
+        </div>
+<?php } ?>
+		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div> <!-- separator -->
 		<div style="float:left;width:180px;padding-left:24px;margin:12px 0 12px 0;">
 				<p style="position:relative">
 				<?php _e("Customize text to appear in Submit Button (register form): ", 'Skt_nurcaptcha' ); ?>
@@ -470,10 +621,16 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
 	<?php if (get_site_option('sktnurc_emlhlp_opt')=='true') { ?>checked<?php } ?> /> 
 	<?php _e('(Hide this help)','Skt_nurcaptcha'); ?>
 <br /><br />
-<strong><?php _e( 'reCAPTCHA:', 'Skt_nurcaptcha' ) ?></strong><br />
+    <strong><?php _e( 'reCAPTCHA:', 'Skt_nurcaptcha' ) ?></strong><br />
+<?php if(get_site_option('sktnurc_recaptcha_version')=="old"){ ?>
 <textarea id="sktnurc_reCaptcha_help" name="sktnurc_reCaptcha_help" cols="90" rows="5">
 <?php echo $recHelp ?>
 </textarea>
+<?php }else{ ?>
+<textarea id="sktnurc_reCaptcha_help" name="sktnurc_v2_reCaptcha_help" cols="90" rows="5">
+<?php echo $recHelp ?>
+</textarea>
+<?php } ?>
 <input class="sktSpam_check" type="checkbox" name="sktnurc_rechlp_opt" id="sktnurc_rechlp_opt" value="true" 
 	<?php if (get_site_option('sktnurc_rechlp_opt')=='true') { ?>checked<?php } ?> /> 
 	<?php _e('(Hide this help)','Skt_nurcaptcha'); ?>
@@ -511,16 +668,6 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
 </div>	<?php /* end of div.wrap */ ?>
 
 <?php
-/**
- * gets a URL where the user can sign up for reCAPTCHA. If your application
- * has a configuration page where you enter a key, you should provide a link
- * using this function.
- * @param string $domain The domain where the page is hosted
- * @param string $appname The name of your application
- */
-function nurc_recaptcha_get_signup_url ($domain = null, $appname = null) {
-	return "https://www.google.com/recaptcha/admin/create?" .  nurc__recaptcha_qsencode (array ('domains' => $domain, 'app' => $appname));
-}
 
 function nurc_get_version() {
 		$npath = nurc_make_path();
@@ -546,7 +693,7 @@ function nurc_get_version() {
 }
 
 function skt_nurc_verify_botscoutkey($sktnurc_botscoutkey){
-	$test_string = "http://botscout.com/test/?mail=jayzers16@aol.com&key=" . $sktnurc_botscoutkey;
+	$test_string = "http://botscout.com/test/?mail=krasnhello@mail.ru&key=" . $sktnurc_botscoutkey;
 	$returned_data = skt_nurc_get_page($test_string);
 	if(substr($returned_data, 0,1) == '!'){
 		$warning_message = __('Skt NURCaptcha Warning :: BotScout key seems to be incorrect. Retype it and try again.', 'Skt_nurcaptcha' );
@@ -557,4 +704,81 @@ function skt_nurc_verify_botscoutkey($sktnurc_botscoutkey){
 	}
 }
 
-?>
+/*
+* produz array com todos os países cadastrados no Moodle
+*/
+function skt_nurc_lang_array()
+{
+return array(
+'xx' => 'Auto-detect user language',
+'ar' => 'Arabic', 
+'bg' => 'Bulgarian', 
+'ca' => 'Catalan', 
+'zh-CN' => 'Chinese (Simplified)', 
+'zh-TW' => 'Chinese (Traditional)', 
+'hr' => 'Croatian', 
+'cs' => 'Czech', 
+'da' => 'Danish', 
+'nl' => 'Dutch',
+'en-GB' => 'English (UK)',
+'en' => 'English (US)', 
+'fil' => 'Filipino', 
+'fi' => 'Finnish',
+'fr' => 'French',
+'fr-CA' => 'French (Canadian)',
+'de' => 'German',
+'de-AT' => 'German (Austria)',
+'de-CH' => 'German (Switzerland)',
+'el' => 'Greek',
+'iw' => 'Hebrew',
+'hi' => 'Hindi',
+'hu' => 'Hungarian',
+'id' => 'Indonesian',
+'it' => 'Italian',
+'ja' => 'Japanese', 
+'ko' => 'Korean', 
+'lv' => 'Latvian',
+'lt' => 'Lithuanian',
+'no' => 'Norwegian',
+'fa' => 'Persian',
+'pl' => 'Polish',
+'pt' => 'Portuguese',
+'pt-BR' => 'Portuguese (Brazil)',
+'pt-PT' => 'Portuguese (Portugal)', 
+'ro' => 'Romanian', 
+'ru' => 'Russian',
+'sr' => 'Serbian',
+'sk' => 'Slovak',
+'sl' => 'Slovenian',
+'es' => 'Spanish',
+'es-419' => 'Spanish (Latin America)',
+'sv' => 'Swedish',
+'th' => 'Thai', 
+'tr' => 'Turkish', 
+'uk' => 'Ukrainian',
+'vi' => 'Vietnamese'  
+);	
+}
+//
+/* 
+************** produz select com os estados brasileiros  *************
+*/
+function skt_get_lang_selector($selected = 'xx') {
+	$uf_array = skt_nurc_lang_array();
+	$html = '<select id="sktnurc_lang" name="sktnurc_recaptcha_language">';
+	foreach($uf_array as $lg => $lang_name)
+	{
+		if ($lg==$selected){
+			$s = 'selected="selected"';
+		}else{
+			$s = '';
+		}
+		$html .= "<option value=\"$lg\" $s >$lang_name ";
+		if($lg != 'xx') $html .= "[$lg]";
+		$html .= "</option>";
+	}	
+	
+	$html .= '</select>';
+	return $html;
+}
+//
