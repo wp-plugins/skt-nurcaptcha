@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
@@ -168,7 +168,7 @@ msgstr ""
 
 #: skt-nurc-admin.php:289 skt-nurc-admin.php:301
 msgid "IMPORTANT NOTICE:"
-msgstr ""
+msgstr "Avis important : "
 
 #: skt-nurc-admin.php:289
 msgid ""
@@ -179,14 +179,23 @@ msgid ""
 "this new version, you must check the \"use new version\" option below and "
 "then click the \"Update Options\" button"
 msgstr ""
+"Une nouvelle version de reCaptcha a été publiée par Google. Ce plugin va "
+"continuer de protéger votre site avec l'ancienne version de reCaptcha "
+"jusqu'a ce que vous décidiez de le mettre à jour. Nous vous recommandons "
+"vivement de faire la mise à jour dès que possible dans la mesure ou "
+"l'ancienne API reCaptcha peut être mise hors service dans un court laps de "
+"temps. Pour passer à cette nouvelle version vous devez cocher l'option "
+"\"utiliser la nouvelle version\" ci-dessous et cliquer sur le bouton "
+"\"option de mise à jour\""
 
 #: skt-nurc-admin.php:292
 msgid "Use new version of Google reCAPTCHA (dec/2014)"
-msgstr ""
+msgstr "Utiliser la nouvelle version du reCAPTCHA google (Déc. 2014)"
 
 #: skt-nurc-admin.php:295
 msgid "Keep using the old version of Google reCAPTCHA, for awhile"
 msgstr ""
+"Continuer d'utiliser l'ancienne version de reCAPTCHA pendant un certain temps"
 
 #: skt-nurc-admin.php:296
 msgid ""
@@ -194,6 +203,9 @@ msgid ""
 "need to delete these keys and sign up for new ones. To do that, just follow "
 "the link on the next line."
 msgstr ""
+"NOTE : Si vous avez déjà créé des clés reCaptcha pour un multisite, vous "
+"devrez supprimer ces clés et en demander de nouvelles. Pour cela, suivez le "
+"lien ci-dessous."
 
 #: skt-nurc-admin.php:301
 msgid ""
@@ -202,14 +214,19 @@ msgid ""
 "up this plugin to work with the old reCaptcha API, you can force the old "
 "format by checking the \"force old version\" option below."
 msgstr ""
+"Skt NURCaptcha fonctionne avec la nouvelle version de reCatpcha qui a été "
+"publiée par Google en décembre 2014. Si pour quelque raison que ce soit vous "
+"préférez continuer à utiliser l'ancien reCaptcha, vous pouvez forcer "
+"l'ancien format en cochant l'option \"Forcer l'ancienne version\" ci-dessous."
 
 #: skt-nurc-admin.php:304
 msgid "Keep using the newer version of Google reCAPTCHA (dec/2014)"
-msgstr ""
+msgstr "Forcer l'utilisation de la nouvelle version de reCAPTCHA (déc. 2014)"
 
 #: skt-nurc-admin.php:307
 msgid "Force old version of Google reCAPTCHA, for awhile"
 msgstr ""
+"Forcer d'utiliser l'ancienne version de reCAPTCHA pendant un certain temps"
 
 #: skt-nurc-admin.php:311
 msgid "You can sign up for reCaptcha <strong>free</strong> keys here: "
@@ -275,10 +292,12 @@ msgid ""
 "If you want to force the widget to render in a specific language, use the "
 "selector below. Auto-detects the user's language if unspecified."
 msgstr ""
+"Si vous voulez forcer la langue du widget, utilisez la liste ci-dessous. "
+"Détection automatique de la langue de l'utilisateur si non précisé."
 
 #: skt-nurc-admin.php:500
 msgid "reCAPTCHA type:"
-msgstr ""
+msgstr "type de reCAPTCHA"
 
 #: skt-nurc-admin.php:501
 msgid ""
@@ -287,18 +306,22 @@ msgid ""
 "You can change the challenge to audio type, if you think this is a better "
 "fit to your site."
 msgstr ""
+"De temps en temps, si besoin, reCAPTCHA présentera un test à résoudre à "
+"l'utilisateur. Par défaut, le test est une image avec des mots ou des "
+"lettres. Vous pouvez le remplacer par un test sonore si vous pensez que cela "
+"s'adapte mieux à votre site."
 
 #: skt-nurc-admin.php:504
 msgid "Use image challenge, when needed"
-msgstr ""
+msgstr "Utiliser le test image au besoin"
 
 #: skt-nurc-admin.php:507
 msgid "Use audio challenge, only"
-msgstr ""
+msgstr "Utiliser uniquement le test audio"
 
 #: skt-nurc-admin.php:516
 msgid "enable reCAPTCHA on LOGIN form:"
-msgstr ""
+msgstr "Activer le formulaire de connexion reCAPTCHA"
 
 #: skt-nurc-admin.php:517
 msgid ""
@@ -307,14 +330,19 @@ msgid ""
 "username and password, this extra reCAPTCHA may provide additional strenght "
 "to block the invasion."
 msgstr ""
+"Cette fonctionnalité ajoute une sécurité supplémentaire à votre site en "
+"insérant un reCaptcha à la fin du formulaire de connexion. Ainsi, même si un "
+"bot vient à deviner le bon nom d'utilisateur et mot de passe, ce reCaptcha "
+"supplémentaire renforce le blocage contre l'intrusion."
 
 #: skt-nurc-admin.php:520
 msgid "Use login reCAPTCHA, for extra protection."
 msgstr ""
+"Utiliser l'identification reCAPTCHA pour une protection supplémentaire."
 
 #: skt-nurc-admin.php:523
 msgid "No, thanks."
-msgstr ""
+msgstr "Non merci."
 
 #: skt-nurc-admin.php:531
 msgid "Customize text to appear in Submit Button (register form): "
@@ -437,7 +465,7 @@ msgstr ""
 
 #: skt-nurcaptcha.php:95
 msgid "There was an error in your captcha response."
-msgstr ""
+msgstr "Il y avait une erreur dans votre réponse reCaptcha."
 
 #: skt-nurcaptcha.php:160
 msgid "Settings"
@@ -471,11 +499,11 @@ msgstr ""
 
 #: skt-nurcaptcha.php:215
 msgid "reCaptcha ERROR"
-msgstr ""
+msgstr "Erreur reCaptacha"
 
 #: skt-nurcaptcha.php:318
 msgid "username or email missing"
-msgstr ""
+msgstr "Nom d'utilisateur ou email manquant"
 
 #: skt-nurcaptcha.php:352
 msgid "Registration Form"
@@ -549,6 +577,13 @@ msgid ""
 "human being trying to register to this site. We welcome you, but we must "
 "keep out all spambots."
 msgstr ""
+"Pour vous inscrire, il suffit de cliquer sur la case ci-dessous pour "
+"confirmer que vous n'êtes pas un robot de spam. Si après cela vous êtes "
+"soumis à un nouveau test, il vous suffit de retranscrire les mots, nombres "
+"et signes que vous voyez dans la petite zone de texte, quelque soit leur "
+"coté absurde, afin de prouver que vous êtes bien un être humain tentant de "
+"vous inscrire sur ce site. Vous êtes les bienvenus, mais nous devont nous "
+"prémunir des robots de spam."
 
 #: skt-nurcaptcha.php:508 skt-nurcaptcha.php:551
 msgid "Fill the Captcha below"
