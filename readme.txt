@@ -4,7 +4,7 @@ Donate link: http://skt-nurcaptcha.sanskritstore.com/donate/
 Tags: security, login form, new user, user, captcha, spambots, reCAPTCHA, register form, buddypress, wpmu, multisites, bots, spam, form, protection, response, safe, register, anti-spam, defence
 Requires at least: 3.1
 Tested up to: 4.1
-Stable tag: 3.4.0
+Stable tag: 3.4.1
 
 NURCaptcha inserts a reCAPTCHA on the Register Form of your site to protect it against spambots. 
 
@@ -82,6 +82,10 @@ On december, 2014, Google released a new version of reCAPTCHA. This new version 
 
 == Changelog ==
 
+= 3.4.2 =
+* Added: enable reCAPTCHA on selected front pages
+= 3.4.1 =
+* Fixed: small glitch in the code generating PHP warnings
 = 3.4.0 =
 * Added: Transition to the new version of Google's reCAPTCHA
 * Added: login form captcha
@@ -141,6 +145,10 @@ On december, 2014, Google released a new version of reCAPTCHA. This new version 
 
 == Upgrade Notice ==
 
+= 3.4.2 =
+* Added: enable reCAPTCHA on selected front pages
+= 3.4.1 =
+* Fixed: small glitch in the code generating PHP warnings
 = 3.4.0 =
 * IMPORTANT UPDATE: Transition to the new version of Google's reCAPTCHA (dec/2014)
 = 3.1.8 =
