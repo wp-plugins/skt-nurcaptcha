@@ -4,6 +4,7 @@ if(!defined('ABSPATH') && !defined('WP_UNINSTALL_PLUGIN') ) die();
 delete_option('sktnurc_botscout_active');
 delete_option('sktnurc_botscoutkey');
 delete_option('sktnurc_botscoutTestMode');
+delete_option('sktnurc_custom_page_list');
 delete_option('sktnurc_data_theme');
 delete_option('sktnurc_data_type');
 delete_option('sktnurc_email_help');

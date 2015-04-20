@@ -131,6 +131,11 @@
 		}
 		if((get_site_option('sktnurc_recaptcha_version')=="new") && $same){
 		// the following data is updated for new reCaptcha only
+			if (is_array($_POST['sktnurc_custom_page_list'])){
+				update_site_option('sktnurc_custom_page_list', $_POST['sktnurc_custom_page_list']);
+			}else{
+				update_site_option('sktnurc_custom_page_list', NULL);
+			}
 			update_site_option('sktnurc_data_type', $_POST['sktnurc_data_type']);
 			update_site_option('sktnurc_data_theme', $_POST['sktnurc_data_theme']);
 			update_site_option('sktnurc_login_recaptcha', $_POST['sktnurc_login_recaptcha']);
@@ -360,7 +365,7 @@
             </div><!-- end of reCAPTCHA theme block -->
         <?php }else{ // theme selector for new version of reCaptcha ?>
             <div id="sktth" style="position:relative;">
-                <span><?php  _e('reCAPTCHA theme:', 'Skt_nurcaptcha'); ?></span><br />
+                <span><strong><?php  _e('reCAPTCHA theme:', 'Skt_nurcaptcha'); ?></strong></span><br />
                 &nbsp;&nbsp;&nbsp;&nbsp;<select id="sktnurc_theme" name="sktnurc_data_theme">
                     <?php
                     $plugin_img_path = array();
@@ -482,7 +487,7 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
 <?php }else{ ?>
         <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
             <div style="padding:4px 0 4px 0;">
-                    <span><?php _e('reCAPTCHA language:', 'Skt_nurcaptcha') ?></span><br /><br />
+                    <span><strong><?php _e('reCAPTCHA language:', 'Skt_nurcaptcha') ?></strong></span><br /><br />
 					<span><?php _e("If you want to force the widget to render in a specific language, use the selector below. Auto-detects the user's language if unspecified.", 'Skt_nurcaptcha') ?></span><br /><br />
 					<?php  echo skt_get_lang_selector(get_site_option('sktnurc_recaptcha_language')) ?>
             </div>
@@ -497,7 +502,7 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
         <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
             <div style="padding:4px 0 4px 0;">
                     
-                    <span><?php _e('reCAPTCHA type:', 'Skt_nurcaptcha') ?></span><br /><br />
+                    <span><strong><?php _e('reCAPTCHA type:', 'Skt_nurcaptcha') ?></strong></span><br /><br />
                     <span><?php _e('Once and a while, when needed, reCAPTCHA will present a challenge for the user to solve. By default, this challenge is an image with words or numbers. You can change the challenge to audio type, if you think this is a better fit to your site.', 'Skt_nurcaptcha') ?></span><br /><br />
                 <p><input type="radio" id="rec_type_image" value="image" name="sktnurc_data_type" <?php 
                         if(get_site_option('sktnurc_data_type')=="image") echo 'checked';
@@ -513,7 +518,7 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
         <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
             <div style="padding:4px 0 4px 0;">
                     
-                    <span><?php _e('enable reCAPTCHA on LOGIN form:', 'Skt_nurcaptcha') ?></span><br /><br />
+                    <span><strong><?php _e('enable reCAPTCHA on LOGIN form:', 'Skt_nurcaptcha') ?></strong></span><br /><br />
                     <span><?php _e('This feature adds extra security to your site, by inserting a reCAPTCHA at the end of the login form. Thus, even if a bot comes to guess the right username and password, this extra reCAPTCHA may provide additional strenght to block the invasion.', 'Skt_nurcaptcha') ?></span><br /><br />
                 <p><input type="radio" id="rec_at_login" value="true" name="sktnurc_login_recaptcha" <?php 
                         if(get_site_option('sktnurc_login_recaptcha')=="true") echo 'checked';
@@ -522,6 +527,28 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
                         if(get_site_option('sktnurc_login_recaptcha')=="false") echo 'checked';
                         ?> /> <?php _e('No, thanks.','Skt_nurcaptcha'); ?><br /></p>
                     
+			</div>
+        </div>
+		<p class="submit" >
+		<input style="float:right;margin-right:12px; border:1px solid #fff" type="submit" id="submit" class="button-primary" name="submit" value="<?php _e('Update Options', 'Skt_nurcaptcha' ) ?>" />
+		<span class="save-advert" style="display:none;color:#ff2200;float:right;margin-right:8px"><strong><?php _e('Remember to save your changes before leaving this page!','Skt_nurcaptcha'); ?>&nbsp;&raquo;&nbsp;&raquo;&nbsp;&raquo;&nbsp;</strong></span>
+		</p>
+		<div style="clear:both;border-bottom:dotted #ccc 1px;"></div> <!-- separator -->
+        <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
+            <div style="padding:4px 0 4px 0;">
+                    
+                    <span><strong><?php _e('enable reCAPTCHA on selected front pages:', 'Skt_nurcaptcha') ?></strong></span><br /><br />
+                    <span><?php _e('If you have login or register forms located on front-end pages in your site, you must select them at the selector below, so the reCAPTCHA script can be correctly loaded to these pages - ready to be called to action.', 'Skt_nurcaptcha') ?></span><br />
+                    <span><?php _e('Get some more information on how to set up front pages to display the captcha by reading this article:', 'Skt_nurcaptcha') ?></span> <a href="http://skt-nurcaptcha.sanskritstore.com/2014/12/15/recaptcha-anywhere-in-your-theme/" target="_blank">How to implement a reCAPTCHA anywhere in your theme</a>
+                    <br /><br />
+                <p>
+                <span id='custom_pages_button' class="button-primary" style="cursor:pointer;color:#fff;font-weight:bold;background:#4086aa;text-decoration:none;"><?php echo  __('Toggle Selector', 'Skt_nurcaptcha'); ?></span>
+                <br /></p>
+                <div id="debug_output"></div>
+        		<div style="clear:both"></div>
+                <?php echo skt_nurc_pages_checkbox(); ?>
+                <br />
+                  
 			</div>
         </div>
 <?php } ?>

@@ -47,6 +47,16 @@
 		var refspam2 = $('#sktSpam_check2').is(":checked");
 		var refcstlang = $('.sktlg_radio:checked').val();
 		var preslog = 'no';
+		// store initial value of custom pages checkboxes
+		var refcustompagelist = [];var prescustompagelist = [];
+		$('input[name^="sktnurc_custom_page_list"]:checked').each(function(index, elem) {
+			refcustompagelist.push($(elem).val());
+			//refcustompagelist = refcustompagelist + $(elem).val();
+		});
+		//prescustompagelist = refcustompagelist;
+		var refcustring = refcustompagelist.join(', ');
+		var prescustring = refcustring;
+		//
 		var presuhop = refuhop;var presemop=refemop ; var presrcop=refrcop;
 		var presimg=refimg;var preskey1=refkey1;var preskey2=refkey2;var preskey3=refkey3;
 		var preslang=reflang;var prescstlang=refcstlang;var presreg=refreg;
@@ -154,6 +164,14 @@
 			presspam2 = $('#sktSpam_check2').is(":checked");
 			advert_check();
 		});
+		$("input[name^='sktnurc_custom_page_list']").change(function() {
+			prescustompagelist = [];
+			$('input[name^="sktnurc_custom_page_list"]:checked').each(function(index, elem) {
+				prescustompagelist.push($(elem).val());
+			});
+			prescustring = prescustompagelist.join(', ');
+			advert_check();
+		});
 		$('#sktnurc_publkey').keyup( function(){
 			preskey1 = $('#sktnurc_publkey').val();
 			advert_check();
@@ -224,6 +242,9 @@
 			prestring10 = $('#image_alt_text').val();
 			advert_check();
 		});
+ 		$('#custom_pages_button').click( function(){
+			$('#sktnurc_pages_checkbox').slideToggle();
+		}); 
 		$('.log_button').click( function(){
 			$('#log_entries').slideToggle();
 			$('#log_button').fadeToggle();
@@ -247,7 +268,7 @@
 			}
 		}
 		window.advert_check	= function() {
-			if ((presuhop == refuhop) && (presemop==refemop) && (presrcop==refrcop) && (presusrhlp == refusrhlp) && (presemlhlp == refemlhlp) && (presrechlp == refrechlp) && (prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no') && (presloglimit==refloglimit) && (presnewversion==refnewversion) && (presrectype == refrectype) && (presatlogin == refatlogin)) {
+			if ((presuhop == refuhop) && (presemop==refemop) && (presrcop==refrcop) && (presusrhlp == refusrhlp) && (presemlhlp == refemlhlp) && (presrechlp == refrechlp) && (prestring0 == refstring0) && (prestring1 == refstring1) && (prestring2 == refstring2) && (prestring3 == refstring3) && (prestring4 == refstring4) && (prestring5 == refstring5) && (prestring6 == refstring6) && (prestring7 == refstring7) && (prestring8 == refstring8) && (prestring9 == refstring9) && (prestring10 == refstring10) && (preslang == reflang) && (prescstlang==refcstlang) && (presimg == refimg) && ((presreg==refreg)||((presreg==textreg)&&(refreg==''))) && (preskey1==refkey1) && (preskey2==refkey2) && (preskey3==refkey3) && (presspam0==refspam0) && (presspam1==refspam1) && (presspam2==refspam2) && (preslog == 'no') && (presloglimit==refloglimit) && (presnewversion==refnewversion) && (presrectype == refrectype) && (presatlogin == refatlogin) && (prescustring == refcustring)) {
 				$('.save-advert').fadeOut();
 			} else {
 				$('.save-advert').fadeIn();
