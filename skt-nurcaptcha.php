@@ -74,13 +74,17 @@ function skt_nurc_login_init() {
 	}
 }
 function skt_nurc_login_add_recaptcha(){
-	nurc_recaptcha_challenge(false);
+	// check for Google's keys to enable reCAPTCHA on login form
+	if(( get_site_option('sktnurc_publkey')!= '') and ( get_site_option('sktnurc_privtkey')!= '' )) {
+		nurc_recaptcha_challenge(false);
+	}
 }
 //function skt_nurc_login_checkout($user, $password) {
 function skt_nurc_login_checkout($user, $password) {
 	if ( is_wp_error($user) )
            return $user;
 	$privtkey = get_site_option('sktnurc_privtkey');
+	if (($privtkey == '')or(get_site_option('sktnurc_publkey')== '')) return $user; // disable checking if keys are not registered
 	$user_ip_address =  $_SERVER['REMOTE_ADDR'];
 	$response_string = $_POST['g-recaptcha-response'];	
 	$query_url = "https://www.google.com/recaptcha/api/siteverify?secret=$privtkey&response=$response_string&remoteip=$user_ip_address";
