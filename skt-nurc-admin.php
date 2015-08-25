@@ -537,7 +537,7 @@ type="text" id ="image_alt_text" name="image_alt_text" value="<?php echo $sktnur
         <div style="float:left;width:600px;padding-left:24px;margin:12px 0 12px 0">
             <div style="padding:4px 0 4px 0;">
                     
-                    <span><strong><?php _e('enable reCAPTCHA on selected front pages:', 'Skt_nurcaptcha') ?></strong></span><br /><br />
+                    <span><strong><?php _e('enable reCAPTCHA on selected front-end pages:', 'Skt_nurcaptcha') ?></strong></span><br /><br />
                     <span><?php _e('If you have login or register forms located on front-end pages in your site, you must select them at the selector below, so the reCAPTCHA script can be correctly loaded to these pages - ready to be called to action.', 'Skt_nurcaptcha') ?></span><br />
                     <span><?php _e('Get some more information on how to set up front pages to display the captcha by reading this article:', 'Skt_nurcaptcha') ?></span> <a href="http://skt-nurcaptcha.sanskritstore.com/2014/12/15/recaptcha-anywhere-in-your-theme/" target="_blank">How to implement a reCAPTCHA anywhere in your theme</a>
                     <br /><br />
